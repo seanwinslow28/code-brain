@@ -18,14 +18,16 @@
   --ink-wash-3: color-mix(in srgb, var(--ink) 30%, transparent);
   --ink-wash-4: color-mix(in srgb, var(--ink) 48%, transparent);
   --ground-cased: color-mix(in srgb, var(--ground) 88%, transparent);
+  /* verdict buttons and the row's verdict word (DESIGN.md §15, Sean 2026-09-25): pass takes the portfolio's drafting ink, fail a red pencil */
+  --verdict-pass: var(--accent); --verdict-fail: #9E3B2E;
   --font-display: 'Anybody', system-ui, sans-serif;
   --font-body: 'Schibsted Grotesk', system-ui, sans-serif;
   --fs-0: 0.8125rem; --fs-1: 0.9375rem; --fs-2: 1.0625rem; --fs-3: 1.25rem; --fs-4: 1.625rem; --fs-5: 2.375rem;
   --measure: 68ch; --gutter: 1.5rem; --row-x: 0.75rem;
   color-scheme: light;
 }
-:root[data-mode='dark'] { --ground: #191714; --ink: #F2EBDD; --sub: #8F867A; --accent: #6BA3C9; color-scheme: dark; }
-@media (prefers-color-scheme: dark) { :root:not([data-mode='light']) { --ground: #191714; --ink: #F2EBDD; --sub: #8F867A; --accent: #6BA3C9; color-scheme: dark; } }
+:root[data-mode='dark'] { --ground: #191714; --ink: #F2EBDD; --sub: #8F867A; --accent: #6BA3C9; --verdict-fail: #D9857A; color-scheme: dark; }
+@media (prefers-color-scheme: dark) { :root:not([data-mode='light']) { --ground: #191714; --ink: #F2EBDD; --sub: #8F867A; --accent: #6BA3C9; --verdict-fail: #D9857A; color-scheme: dark; } }
 
 html { font-size: 16px; }
 body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font-body); font-size: var(--fs-1); line-height: 1.5;
@@ -222,6 +224,10 @@ p { margin: 0 0 0.75rem; max-width: var(--measure); }
 .pass summary .kind { color: var(--sub); }
 .pass summary .verdict { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; }
 .pass summary .verdict.unl { color: var(--sub); font-weight: 400; }
+.pass summary .verdict.def { color: var(--sub); font-weight: 400; font-style: italic; }
+/* §15 (Sean, 2026-09-25, second ruling): the row's verdict word carries the same color as its button */
+.pass summary .verdict.pass { color: var(--verdict-pass); }
+.pass summary .verdict.fail { color: var(--verdict-fail); }
 .pass summary .crit { color: var(--sub); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pass.v-fail summary .crit { color: var(--ink); }
 .pass summary .hidden-rt { color: var(--sub); font-style: italic; display: inline-flex; gap: 0.35rem; align-items: center; }
@@ -246,6 +252,16 @@ p { margin: 0 0 0.75rem; max-width: var(--measure); }
 .label-form .verdicts .btn { display: inline-flex; gap: 0.35rem; align-items: center; }
 .label-form .verdicts .btn kbd { font-size: 0.75rem; color: var(--sub); border: 1px solid var(--ink-hairline); padding: 0 0.25rem; border-radius: 2px; }
 .label-form .btn[aria-pressed='true'] kbd { color: var(--ground); border-color: var(--ground-cased); }
+/* §15: pass and fail are the two decisions, so they are larger than every other button and carry their color; defer stays ink and ordinary size */
+.verdicts .btn.v-pass, .verdicts .btn.v-fail { padding: 0.5rem 1rem; font-size: var(--fs-1); font-weight: 600; border-width: 1.5px; }
+.verdicts .btn.v-pass { color: var(--verdict-pass); border-color: var(--verdict-pass); }
+.verdicts .btn.v-fail { color: var(--verdict-fail); border-color: var(--verdict-fail); }
+.verdicts .btn.v-pass:hover { background: color-mix(in srgb, var(--verdict-pass) 10%, transparent); }
+.verdicts .btn.v-fail:hover { background: color-mix(in srgb, var(--verdict-fail) 10%, transparent); }
+.verdicts .btn.v-pass[aria-pressed='true'] { background: var(--verdict-pass); border-color: var(--verdict-pass); color: var(--ground); }
+.verdicts .btn.v-fail[aria-pressed='true'] { background: var(--verdict-fail); border-color: var(--verdict-fail); color: var(--ground); }
+.verdicts .btn.v-pass kbd, .verdicts .btn.v-fail kbd { color: inherit; border-color: currentColor; opacity: 0.7; }
+.verdicts .btn.v-defer { align-self: center; }
 .label-form label { display: grid; gap: 0.25rem; color: var(--sub); }
 .label-form select, .label-form textarea { background: transparent; border: 1px solid var(--ink-hairline); padding: 0.35rem 0.5rem; border-radius: 2px; color: var(--ink); }
 .label-form textarea { width: 100%; min-height: 3.6rem; resize: vertical; box-sizing: border-box; }
@@ -304,6 +320,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-check" viewBox="0 0 14 14"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-cross" viewBox="0 0 14 14"><path d="M3 3l8 8M11 3l-8 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-defer" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M4.8 7h4.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
   <symbol id="i-open" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2 2"/></symbol>
   <symbol id="i-eye" viewBox="0 0 14 14"><path d="M1.5 7c1.6-2.6 3.4-3.8 5.5-3.8S10.9 4.4 12.5 7c-1.6 2.6-3.4 3.8-5.5 3.8S3.1 9.6 1.5 7z" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="7" cy="7" r="1.6" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M2.5 11.5l9-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
   <symbol id="i-loop" viewBox="0 0 14 14"><path d="M11 4H5a3 3 0 0 0 0 6h3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M9 2.5L11 4 9 5.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -492,6 +509,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <button class="btn" type="button" data-filter="all" aria-pressed="true">all 25</button>
   <button class="btn" type="button" data-filter="fail" aria-pressed="false">fails 4</button>
   <button class="btn" type="button" data-filter="unlabeled" aria-pressed="false">unlabeled 3</button>
+  <button class="btn" type="button" data-filter="deferred" aria-pressed="false">deferred 0</button>
   <button class="btn" type="button" data-filter="pairs" aria-pressed="false">shadow pairs 1</button>
   <span style="margin-left:auto">Columns: runtime · wall-clock · tokens in+out · verdict · critique. <kbd>j</kbd>/<kbd>k</kbd> walk rows, <kbd>enter</kbd> opens.</span>
 </div>
@@ -543,8 +561,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-01">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -604,8 +623,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-02">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -665,8 +685,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-03">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -726,8 +747,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-04">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -787,8 +809,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-05">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -848,8 +871,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-06">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -909,8 +933,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-07">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -970,8 +995,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-08">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1031,8 +1057,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-09">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1092,8 +1119,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-10">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1153,8 +1181,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-11">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1214,8 +1243,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-12">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1275,8 +1305,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-13">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1336,8 +1367,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-14">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1397,8 +1429,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-15">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1458,8 +1491,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-16">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1519,8 +1553,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-17">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1580,8 +1615,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-18">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1641,8 +1677,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-19">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1702,8 +1739,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-20">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1763,8 +1801,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-21">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1824,8 +1863,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-22">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1885,8 +1925,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-23">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -1946,8 +1987,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-24">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -2007,8 +2049,9 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-25">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="false" title="Not a verdict: mark it to come back to"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-defer"/></svg> defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -2029,8 +2072,8 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div class="slot"><h3>Process notes</h3><p><span class="when">The coordinator's running notes for this engagement</span>, read from the engagement's notes file. What the run did, what was ruled, what to watch next time.</p><ul class="takeaways"><li><b>2026-10-06</b> Synthetic process notes. The stage-3 break is the one to watch: an audit at stage 4 found a hole in the metrics plan, which is exactly the upstream-of-the-pass-read line the viewer is built to show.</li><li><b>2026-10-06</b> The strategy was redrafted in place after the gate, so its first revision is no longer on disk; the pass records keep the history and the checker says so rather than passing it quietly.</li><li><b>2026-10-06</b> The roadmap ran as a shadow pair (pass-16 baseline, pass-18 trial) and both stay blind until each carries a verdict in the labels file.</li></ul><details class="history"><summary>The full dated history, 4 entries</summary><ul class="takeaways"><li><b>2026-10-06</b> Synthetic process notes. The stage-3 break is the one to watch: an audit at stage 4 found a hole in the metrics plan, which is exactly the upstream-of-the-pass-read line the viewer is built to show.</li><li><b>2026-10-06</b> The strategy was redrafted in place after the gate, so its first revision is no longer on disk; the pass records keep the history and the checker says so rather than passing it quietly.</li><li><b>2026-10-06</b> The roadmap ran as a shadow pair (pass-16 baseline, pass-18 trial) and both stay blind until each carries a verdict in the labels file.</li><li><b>2026-10-06</b> Growth and Leadership ran grounding manifest-only: the shelf labels were read, the books were not.</li></ul></details></div>
 </div>
 <footer>
-  <span>Rendered 2026-09-22 from 25 records and 22 label rows. The records are the truth; this page is a view of them.</span>
-  <span>Productcraft · productcraft/trace · kit 0.6.0</span>
+  <span>Rendered 2026-09-25 from 25 records and 22 label rows. The records are the truth; this page is a view of them.</span>
+  <span>Productcraft · productcraft/trace · kit 0.7.0</span>
 </footer>
 </div>
 <dialog id="keys" aria-labelledby="keys-title">
@@ -2039,6 +2082,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
     <dt><kbd>j</kbd> <kbd>k</kbd></dt><dd>next / previous pass — or next / previous case while you are inside guided reading</dd>
     <dt><kbd>enter</kbd></dt><dd>open or fold the current pass</dd>
     <dt><kbd>1</kbd> <kbd>2</kbd></dt><dd>label the current pass pass / fail</dd>
+    <dt><kbd>d</kbd></dt><dd>defer the current pass: come back to it (not a verdict; it still waits)</dd>
     <dt><kbd>f</kbd></dt><dd>first failing stage</dd>
     <dt><kbd>c</kbd></dt><dd>critique</dd>
     <dt><kbd>u</kbd></dt><dd>jump to the next unlabeled pass</dd>
@@ -2077,29 +2121,33 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
     const pid = row.dataset.pass, d = drafts[pid] || {};
     const v = effVerdict(row);
     const cell = $('[data-verdict-cell]', row), word = $('[data-verdict-word]', row);
-    cell.className = 'verdict ' + (v || 'unl');
-    word.textContent = v || 'unlabeled';
-    const ico = $('svg use', cell); ico.setAttribute('href', v === 'pass' ? '#i-check' : v === 'fail' ? '#i-cross' : '#i-open');
-    row.classList.toggle('v-fail', v === 'fail'); row.classList.toggle('v-pass', v === 'pass'); row.classList.toggle('v-unl', !v);
+    cell.className = 'verdict ' + (v === 'defer' ? 'def' : (v || 'unl'));
+    word.textContent = v === 'defer' ? 'deferred' : (v || 'unlabeled');
+    const ico = $('svg use', cell); ico.setAttribute('href', v === 'pass' ? '#i-check' : v === 'fail' ? '#i-cross' : v === 'defer' ? '#i-defer' : '#i-open');
+    row.classList.toggle('v-fail', v === 'fail'); row.classList.toggle('v-pass', v === 'pass'); row.classList.toggle('v-def', v === 'defer'); row.classList.toggle('v-unl', !v);
     $$('[data-set-verdict]', row).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.setVerdict === v)));
     const sel = $('[data-ffs]', row); sel.disabled = v !== 'fail'; if (d.ffs !== undefined) sel.value = d.ffs;
     const ta = $('[data-crit]', row); if (d.crit !== undefined && document.activeElement !== ta) ta.value = d.crit;
     const critCell = $('[data-crit-cell]', row); const crit = d.crit !== undefined ? d.crit : ta.value;
     if (crit) critCell.textContent = crit;
     const st = $('[data-state]', row);
-    st.innerHTML = d.verdict || d.crit !== undefined || d.ffs !== undefined ? '<span class="draft">Drafted here, not yet in the labels file.</span>' : (fileVerdict(row) ? 'In the labels file.' : 'No label row yet.');
+    st.innerHTML = d.verdict || d.crit !== undefined || d.ffs !== undefined
+      ? (d.verdict === 'defer' ? '<span class="draft">Deferred here, to come back to; not yet in the labels file.</span>' : '<span class="draft">Drafted here, not yet in the labels file.</span>')
+      : (fileVerdict(row) === 'defer' ? 'Deferred in the labels file; it still waits for a verdict.' : (fileVerdict(row) ? 'In the labels file.' : 'No label row yet.'));
   }
   function paintBlind() {
     // The hidden runtime is not in this file (DESIGN.md §8): both verdicts drafted here only earn the note.
     rows.forEach(row => { const pair = row.dataset.pair; if (!pair) return;
       const other = document.getElementById(pair); if (!other) return;
-      const both = effVerdict(row) && effVerdict(other);
+      const decided = v => v === 'pass' || v === 'fail';   // a defer never reveals (DESIGN.md §15)
+      const both = decided(effVerdict(row)) && decided(effVerdict(other));
       if (both) $$('.hidden-rt', row).forEach(el => { el.outerHTML = '<span class="sub">revealed on the next render, once both labels are in the file</span>'; });
     });
   }
   function counters() {
-    const fileN = rows.filter(fileVerdict).length;
-    const draftN = rows.filter(r => !fileVerdict(r) && drafts[r.dataset.pass] && drafts[r.dataset.pass].verdict).length;
+    const isDecided = v => v === 'pass' || v === 'fail';
+    const fileN = rows.filter(r => isDecided(fileVerdict(r))).length;
+    const draftN = rows.filter(r => !isDecided(fileVerdict(r)) && drafts[r.dataset.pass] && isDecided(drafts[r.dataset.pass].verdict)).length;
     $('#labeled-n').textContent = fileN;
     $('#draft-note').textContent = draftN ? ` in the file, ${draftN} drafted here` : '';
     const nDraft = Object.keys(drafts).length; $('#draft-count').textContent = nDraft ? `(${nDraft})` : '';
@@ -2132,7 +2180,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
     const f = b.dataset.filter;
     let shown = 0;
     rows.forEach(r => { const v = effVerdict(r);
-      r.hidden = !(f === 'all' || (f === 'fail' && v === 'fail') || (f === 'unlabeled' && !v) || (f === 'pairs' && r.dataset.pair)); if (!r.hidden) shown++; });
+      r.hidden = !(f === 'all' || (f === 'fail' && v === 'fail') || (f === 'unlabeled' && !v) || (f === 'deferred' && v === 'defer') || (f === 'pairs' && r.dataset.pair)); if (!r.hidden) shown++; });
     let empty = $('#no-match'); if (!empty) { empty = document.createElement('p'); empty.id = 'no-match'; empty.className = 'sub'; empty.style.padding = '1rem 0'; empty.textContent = 'No passes match'; $('#passes').appendChild(empty); }
     empty.hidden = shown > 0;
   }));
@@ -2167,6 +2215,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       case 'Enter': if (curRow() && document.activeElement === $('summary', curRow())) { e.preventDefault(); curRow().open = !curRow().open; } break;
       case '1': if (curRow()) setVerdict(curRow(), 'pass'); break;
       case '2': if (curRow()) setVerdict(curRow(), 'fail'); break;
+      case 'd': if (curRow()) setVerdict(curRow(), 'defer'); break;
       case 'f': if (curRow()) { e.preventDefault(); curRow().open = true; $('[data-ffs]', curRow()).focus(); } break;
       case 'c': if (curRow()) { e.preventDefault(); curRow().open = true; $('[data-crit]', curRow()).focus(); } break;
       case 'u': { e.preventDefault(); const next = vis.find((r, i) => i > vi && !effVerdict(r)) || vis.find(r => !effVerdict(r)); if (next) setCur(vis.indexOf(next)); break; }

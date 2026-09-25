@@ -2,7 +2,7 @@
 
 The machine's copy of the trace kit: what a run records, where, and the two commands that close a run. Designed on [#261](https://github.com/seanwinslow28/code-brain/issues/261) (the machine has no trace) jointly with Productcraft's [#272](https://github.com/seanwinslow28/code-brain/issues/272), after a primary-source read of Husain's method ([#289](https://github.com/seanwinslow28/code-brain/issues/289)); built on [#291](https://github.com/seanwinslow28/code-brain/issues/291) (2026-09-22). Husain's order, local by law: log full traces → one expert reads them in a purpose-built viewer → binary pass/fail with a written critique → taxonomy → code checks → judges only for persistent failure modes. Nothing here ships a payload anywhere.
 
-**Shared, not forked.** The code is the Productcraft kit at [`productcraft/trace/`](../../../../productcraft/trace/README.md) — the first copy, kit 0.6.0 — imported through a **studio profile**. This folder holds only what the machine writes for itself:
+**Shared, not forked.** The code is the Productcraft kit at [`productcraft/trace/`](../../../../productcraft/trace/README.md) — the first copy, kit 0.7.0 — imported through a **studio profile**. This folder holds only what the machine writes for itself:
 
 | Piece | File | Who uses it |
 |---|---|---|

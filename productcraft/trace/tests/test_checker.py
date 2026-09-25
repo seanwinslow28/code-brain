@@ -85,6 +85,23 @@ def test_unlabeled_rows_count_as_missing_labels(eng_dir):
     assert c.ok
 
 
+def test_a_deferred_row_still_waits_for_a_verdict(eng_dir):
+    edit(eng_dir / "trace" / "labels.md", "| pass-18 |  |", "| pass-18 | defer |")
+    c = results(eng_dir)["Every pass has a label row"]
+    assert c.ok
+    assert any("wait for a verdict" in n and "pass-18" in n and "1 deferred" in n for n in c.notes)
+
+
+def test_a_defer_does_not_reveal_a_blind_pair(eng_dir):
+    # pass-18 is the trial, pass-16 its baseline; a defer on one is not the verdict the reveal waits for
+    edit(eng_dir / "trace" / "labels.md", "| pass-18 |  |", "| pass-18 | defer |")   # pass-16 already carries a pass
+    (eng_dir / "trace" / "eval.html").write_text(
+        '<html><details class="pass" id="pass-18">ran on codex gpt-5.6-sol high</details>'
+        '<details class="pass" id="pass-16">hidden</details></html>')
+    c = results(eng_dir)["Trials blind-labeled before their runtime is shown"]
+    assert not c.ok and any("pass-18" in f and "not fully labeled" in f for f in c.findings)
+
+
 def test_hash_drift_is_caught_and_names_the_path(eng_dir):
     (eng_dir / "artifacts" / "growth-gtm.md").write_text((eng_dir / "artifacts" / "growth-gtm.md").read_text() + "\nedited after the fact\n")
     c = results(eng_dir)["Input hashes match disk or a recorded prior revision"]

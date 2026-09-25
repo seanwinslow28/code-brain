@@ -42,4 +42,4 @@ forking it; `craftwork` extracts the shared home later.
 """
 
 KIT_NAME = "productcraft/trace"
-KIT_VERSION = "0.6.0"
+KIT_VERSION = "0.7.0"

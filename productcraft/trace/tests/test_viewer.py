@@ -130,11 +130,45 @@ def test_unmeasured_meter_never_reads_zero(html):
     assert ">0<" not in r
 
 
-def test_verdicts_are_glyph_and_word_never_color(html):
+def test_verdict_buttons_and_row_words_carry_color_buttons_carry_size(html):
     r = row(html, "pass-13")
-    assert "#i-cross" in r and ">fail<" in r
+    assert "#i-cross" in r and ">fail<" in r                       # the row's verdict is still glyph + word, now in its color
     css = html.split("<style>")[1].split("</style>")[0]
-    assert not re.search(r"\bred\b|#[cdef][0-9a-f]0000", css, re.I)  # no status color, DESIGN.md §3
+    # DESIGN.md §15 (Sean, 2026-09-25): pass takes the accent blue, fail a red pencil, in both grounds
+    assert "--verdict-pass: var(--accent)" in css
+    assert css.count("--verdict-fail:") >= 3                        # light root, dark root, dark media block
+    assert re.search(r"\.verdicts \.btn\.v-fail\b[^}]*var\(--verdict-fail\)", css)
+    assert re.search(r"\.verdicts \.btn\.v-pass\b[^}]*var\(--verdict-pass\)", css)
+    assert re.search(r"\.pass summary \.verdict\.pass \{[^}]*var\(--verdict-pass\)", css)   # the row word too (§15, second ruling)
+    assert re.search(r"\.pass summary \.verdict\.fail \{[^}]*var\(--verdict-fail\)", css)
+    assert not re.search(r"\.m-[a-z]+[^}]*--verdict-|\.matrix[^}]*--verdict-|\.track[^}]*--verdict-", css)  # train, matrix, track stay ink
+    # size: the two verdict buttons are set larger than the ordinary .btn, and defer is not
+    assert re.search(r"\.verdicts \.btn\.v-pass, \.verdicts \.btn\.v-fail \{[^}]*font-size: var\(--fs-1\)", css)
+    assert 'data-set-verdict="pass" class="btn v-pass"' in r or 'class="btn v-pass"' in r
+    assert 'class="btn v-fail"' in r
+
+
+def test_defer_is_a_third_button_with_its_own_key(html):
+    r = row(html, "pass-13")
+    assert 'data-set-verdict="defer"' in r and "defer <kbd>d</kbd>" in r
+    sheet = html.split('<dialog id="keys"')[1].split("</dialog>")[0]
+    assert "<kbd>d</kbd>" in sheet and "defer" in sheet
+    assert 'data-filter="deferred"' in html
+    assert "case 'd': if (curRow()) setVerdict(curRow(), 'defer'); break;" in html
+
+
+def test_a_deferred_row_reads_as_deferred_and_still_waits(eng_dir, tmp_path):
+    d = copy_of(eng_dir, tmp_path)
+    lab = d / "trace" / "labels.md"
+    lab.write_text(lab.read_text().replace("| pass-18 |  |  |  |  |", "| pass-18 | defer |  | come back to this one |  |"))
+    h = render_html(load_engagement(d), rendered_on="2026-09-25")
+    r = row(h, "pass-18")
+    assert ">deferred<" in r and "#i-defer" in r and 'data-verdict="defer"' in r
+    assert "Deferred in the labels file" in r
+    line = h.split('class="reading"')[1].split("</p>")[0]
+    assert "<strong>22 are labeled</strong>" in line                 # a defer is not a label
+    assert "<strong>3 wait for a verdict.</strong>" in line and "1 of them deferred" in line
+    assert 'data-filter="deferred" aria-pressed="false">deferred 1<' in h
 
 
 def test_fails_list_names_upstream_breaks(html):

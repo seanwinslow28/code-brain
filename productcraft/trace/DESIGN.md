@@ -50,6 +50,8 @@ The portfolio's rule is that the accent appears only in interaction marks, and t
 
 **Status colors are not introduced.** If a future reader needs red for fail, that is a ratified change to this section, not a per-render choice. The ink-only encoding is one of the choices put to Sean on #292.
 
+*Amended 2026-09-25 (§15): the two verdict **buttons** carry color and size, and the row's verdict **word** carries the same color. The matrix, the track and the train stay ink.*
+
 Contrast, measured for the ratification record: ink on ground 13.9:1 light / 15.1:1 dark; sub on ground 5.3:1 / 5.0:1; ink on wash-3 7.6:1 / 6.1:1; sub on wash-1 4.8:1 / 4.3:1, which is why an opened row's sub text switches to ink.
 
 ## 4 · Type
@@ -105,7 +107,7 @@ Three do. Everything else is a number in a row.
 
 **Row summary columns** (fixed widths, in order): pass id · seat with tags · kind · stage · runtime · wall-clock · tokens in+out · verdict · critique. Tags are small hairline-bordered chips after the seat name: a loop glyph and the triggering pass id for a repair or re-gate; `shadow of pass-NN` on a trial; `baseline of pass-NN` on its baseline. Under 900px the runtime, wall-clock, token and critique cells hide; the verdict never does.
 
-**Labeling** (confirmed by Sean, 2026-09-11): the folded row ends with a label form: two toggle buttons **pass** `1` / **fail** `2`, a **first failing stage** select `f` (enabled only on fail), a **critique** textarea `c` with the caption "one to three sentences a new hire could act on", and a state line. Labels drafted on the page live in the browser only (`localStorage`, keyed by engagement id) and never touch the ledger. **Copy label rows** puts every drafted row on the clipboard as a markdown table in the labels file's column order (`pass | verdict | first_failing_stage | critique | failure_code`), critique pipes escaped, for Sean to paste. `failure_code` is always blank until a taxonomy exists, and the state line says so.
+**Labeling** (confirmed by Sean, 2026-09-11; buttons amended 2026-09-25, §15): the folded row ends with a label form: two toggle buttons **pass** `1` / **fail** `2` and a third, **defer** `d`, a **first failing stage** select `f` (enabled only on fail), a **critique** textarea `c` with the caption "one to three sentences a new hire could act on", and a state line. Labels drafted on the page live in the browser only (`localStorage`, keyed by engagement id) and never touch the ledger. **Copy label rows** puts every drafted row on the clipboard as a markdown table in the labels file's column order (`pass | verdict | first_failing_stage | critique | failure_code`), critique pipes escaped, for Sean to paste. `failure_code` is always blank until a taxonomy exists, and the state line says so.
 
 **Three label states, always visible in the state line:** *No label row yet.* · *Drafted here, not yet in the labels file.* · *In the labels file.* The counter distinguishes them: `Labeled 21 of 24 in the file, 2 drafted here`. A draft can be revised or cleared (pressing the selected verdict again clears it) because criteria drift as a reader reads; the file is the commit.
 
@@ -122,6 +124,7 @@ The labeling loop must complete without a pointer. Keys are single letters, show
 | `j` `k` (or ↓ ↑) | next / previous pass; the current row carries the accent underline mark |
 | `enter` | open or fold the current pass |
 | `1` `2` | label the current pass pass / fail |
+| `d` | defer the current pass: come back to it (not a verdict; it still waits, and `u` skips it) |
 | `f` | open the row and focus first failing stage |
 | `c` | open the row and focus the critique |
 | `u` | jump to the next unlabeled pass |
@@ -164,7 +167,7 @@ Every state below has a designed rendering; none is an error message.
 
 ## 13 · Ratified choices (Sean, 2026-09-11, #292)
 
-1. Ink-only verdicts (no red for fail) — §3.
+1. Ink-only verdicts (no red for fail) — §3. *Amended 2026-09-25 by §15: the verdict buttons and the row's verdict word carry color; the train, matrix and track do not.*
 2. The reading line as prose rather than a KPI row — §5.2.
 3. The train as order rather than time — §5.5, §7.
 4. Reveal-on-re-render for blind pairs, never on the page — §8.
@@ -198,3 +201,20 @@ The order becomes: masthead → **what you are judging** → **what happened in 
 - **Audio (plan §7).** One pre-generated clip would be a base64 payload inside every engagement's page, and the plan itself defers the decision until the first is tested. The transcript-shaped alternative is the story, which is already there. Revisit when a case earns it.
 - **The other visuals in plan §6** (before/change/verification sequence, three-column comparison, counts by first failing stage). §7 of this document still governs which charts earn a place; the one-diagram-per-case slot is the only addition, and it is opt-in per case.
 - **A live explanatory chatbot.** Out of scope by the plan's own §9.
+
+## 15 · Ratified 2026-09-25: verdict color and Defer (Sean, from #305)
+
+The legible-evals research ([#305](https://github.com/seanwinslow28/code-brain/issues/305)) found two points where Husain and Shankar's own review-interface spec cuts against §13's first choice: its checklist wants the Pass and Fail buttons "visually distinct (color, size)", and it wants a Defer key for uncertain cases. Sean ruled on both the same day: adopt them, with the portfolio's accent blue for pass and a red that fits the page for fail. Kit **0.7.0**.
+
+**Color, on the two verdict buttons only.** Pass takes the portfolio's drafting ink (`#2F5D7C`, lifted ink `#6BA3C9` at night); it is the existing `--accent`, so the accent still has no new hue on the page. Fail takes a **red pencil**: `#9E3B2E` on cream, `#D9857A` on charcoal. Both are chosen to sit at the same value as their blue partner in each ground (drafting ink and red pencil both read as dark pencil on cream; lifted ink and the lifted red both read as chalk on charcoal), and both clear 6:1 against the ground's text color when filled. An unselected button is its color as text and 1.5px border on the ground; the selected one is filled, with the ground color for its word. The tokens are `--verdict-pass` and `--verdict-fail`, defined on `:root` and redefined in both dark blocks, never inside a media query alone (§11).
+
+**Size.** Pass and fail are the two decisions, so they are set larger than every other button on the page: `--fs-1` at weight 600 with roughly double the padding. Defer stays an ordinary ink `.btn`, so the eye lands on the decision and not on the escape hatch.
+
+**The row's verdict word, too** (second ruling the same day). Each row's summary shows its verdict as glyph + word in the same color as its button: "pass" in drafting ink, "fail" in red pencil, so a scan down the list reads the verdicts without opening a row. "deferred" and "unlabeled" stay in sub. In print the words keep their color (§11: colors print exactly); forced-colors takes over both.
+
+**What stays ink.** The "labeled fail" ring on the train, the matrix, the track, the stage strip and every filter button. The exhaustive accent list in §3 gains two entries, the pass button and the pass word, and nothing else.
+
+**Defer.** A third button, key `d`, glyph a hollow circle with a dash. It is a **recorded non-verdict**: the labels file accepts `defer` in the verdict column so the intent survives a re-render, but a deferred row is never counted as labeled, still reads as waiting in the reading line ("3 wait for a verdict. 1 of them deferred, to come back to."), never reveals a blind pair, and gets its own filter (`deferred N`). Its row word is "deferred" in sub, italic. `u` jumps to the next row with nothing at all on it, so deferring moves the reader on; the filter brings the deferred set back. Pressing `d` on a deferred row clears it, the same toggle as `1` and `2`. The first-failing-stage select stays disabled on a defer.
+
+**Unchanged and worth saying.** Binary judgment is still the law: defer is a place to stand while thinking, not a third verdict, and the registry, the taxonomy and any future judge read only pass and fail.
+
