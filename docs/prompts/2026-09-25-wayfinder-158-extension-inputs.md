@@ -1,7 +1,7 @@
 ---
 title: "Wayfinder #158 extension — inputs for the Pencil & Prompt re-scope"
 type: prompt
-status: ready-to-paste
+status: ready-to-paste (rulings filled 2026-09-25)
 created: 2026-09-25
 tags: [wayfinder, content-machine, pencil-and-prompt, re-scope]
 ai-context: "Paste-ready inputs for Sean to run /wayfinder 158. Extends the Content Machine map with the 2026-09-24 re-scope: niche, Drop/Rig series, private pencil-and-prompt repo, and a writing-first curriculum. Decisions come from a creative-partner session whose sidecar is local-only; never quote it."
@@ -52,13 +52,37 @@ Sean rules each open ticket on the sweep page: https://claude.ai/artifact/N3ULJL
 - **Park:** leave open, move it to Not yet specified as "revisit after the library grows," and unassign it.
 - **Cut** or **Move out:** close, with one line under Out of scope.
 
-**Rulings (filled in after Sean rules):**
+**Rulings (Sean, 2026-09-25; read back from the sweep page's db, all 16 ruled):**
 
-<!-- RULINGS-PLACEHOLDER: Claude fills this from the sweep page before Sean runs /wayfinder -->
+**Keep (4)**
+- **The big X writing session (#263):** keep, and reshape it into new ticket C, the first writing workshop. It *becomes* C: don't create C as a separate issue. Rewrite #263's body to C's question.
+- **Run a Pencil & Prompt piece through the full chain (#303):** keep, and point it at the first **Rig** episode. The finding that 36 voice rules made drafts worse, while samples alone made them better, is the craft piece. Block it by D so it runs from the new repo.
+- **One interview, several X posts (#233):** keep as is. It's the "squeeze every topic" experiment.
+- **Rewrite the About page through the machine (#234):** keep, which **overrides the Park suggestion**. Sean's reason: the portfolio page isn't Pencil & Prompt, but it tests the voice library on writing *outside* social posts. Low priority, but on the list. No blocking edges.
+
+**Fold (2)**
+- **The X register is 1.5%… (#262):** fold into #263 (ticket C). Close it with a pointer.
+- **Give the Oracle's news lane an X leg (#252):** fold into new ticket I (Oracle refocus). Close it with a pointer.
+
+**Park (2)**
+- **Frame-generated candidates for X (#228):** park. Unassign it, and add "revisit after the library grows" to Not yet specified.
+- **Run the next deck through the trace (#302):** park, but Sean was explicit that it **comes back**. He wants traces and evals on the Oracle or the content machine, and learning evals matters to him. But the current trace kit is hard to read, with its labels and code names. Leave #302 open and **block it by new ticket K** (legible evals), so it re-enters the frontier as K's test bed.
+
+**Cut (5):** close each, with one line under Out of scope.
+- **Stage 3 still requires a Voice Decision Record the shaper cannot produce (#235):** cut. Sean's note turns into new ticket L: remove every mechanic instruction left in the machine, not just this one.
+- **The retirement scan reports clean while retired vocabulary sits in scanned files (#236):** cut.
+- **The hand-rewrite survival number is meaningless at tweet length (#257):** cut.
+- **Register-gap watch: does the sentence-length undershoot persist (#220):** cut.
+- **Console defect: the ranking stage has no way to re-read a draft (#225):** cut.
+
+**Move out (3):** close each on this map, with one line under Out of scope. The Professional lane (cover letters) stays in Code-Brain as job-hunt work, and these tickets live on there.
+- **Rewrite the cover-letter contract from evidence (#243).**
+- **Story banks with provenance: retire the Professional-lane interview (#244).**
+- **origin_check.py blocks every cover letter forever, on the signature line (#245).** A small, real bug, and worth fixing in a job-hunt session.
 
 ## 4. New tickets
 
-The types are wayfinder's. "Blocked by" means native GitHub blocking, wired in a second pass. The first three are on the frontier right away.
+The types are wayfinder's. "Blocked by" means native GitHub blocking, wired in a second pass. **Eleven new issues:** A, B, D, E, F, G, H, I, J, K and L. C is not new: it reshapes the big X writing session (#263). Section 7 shows which are on the frontier right away.
 
 ### A. Drop episode 1: Opus 5.5 · `task` (HITL) · frontier
 **Question:** Freeze the exact wording of the five Drop briefs, run them on Opus 5.5 plus one earlier model as the side-by-side baseline, and decide what gets published. Timely: Opus 5.5 launched 2026-09-22, so this is worth doing within days. The wording is frozen by Sean's approval. Also rule on whether the brief text is published or kept private, with only outputs going public: a public gallery of frozen briefs and answers may become training data for later models. Runs from `code-brain` for now; outputs move to `pencil-and-prompt` once it exists.
@@ -74,10 +98,12 @@ The types are wayfinder's. "Blocked by" means native GitHub blocking, wired in a
 - **Rules:** read only. Change nothing. Flag anything whose move would break a running Code-Brain agent.
 
 ### C. First writing workshop: the topic list · `grilling` (HITL) · frontier
-**Question:** Run the first coached workshop on Sean's current X topic list, using the new method. Plain questions come first, then options, opinions and examples. Draw on Elbow's loop writing and the formats in the exercises note. The goal is volume: stance samples, story samples and short posts from each topic that lands, and skip anything he has nothing for. Samples go to the private corpus, never into an issue.
-- **Merge note:** if Sean rules the big X writing session (#263) as Keep, reshape it into this ticket instead of creating a duplicate.
+**Not a new issue:** this *is* the big X writing session (#263), reshaped per the sweep. Rewrite #263's body to this question, and have every edge below that names C point at #263.
 
-### D. Scaffold pencil-and-prompt and run the migration · `task` (AFK + HITL) · blocked by B
+**Question:** Run the first coached workshop on Sean's current X topic list, using the new method. Plain questions come first, then options, opinions and examples. Draw on Elbow's loop writing and the formats in the exercises note. The goal is volume: stance samples, story samples and short posts from each topic that lands, and skip anything he has nothing for. Samples go to the private corpus, never into an issue.
+- **Keeps #263's original aim:** fill the short-form X gap (the corpus has almost no posts of Sean starting a conversation), which is also the answer to the folded 1.5% ticket (#262).
+
+### D. Scaffold pencil-and-prompt and run the migration · `task` (AFK + HITL) · blocked by B, L
 **Question:** Create the private `pencil-and-prompt` GitHub repo as a sibling of `code-brain`, make it an Obsidian vault, and carry out the migration table from B in small, verified batches.
 - **Verification:** the corpus checksums match, every copied skill loads, and nothing in `code-brain` breaks. Re-run `python3 scripts/validate.py` and the agents-sdk tests after any move.
 - **Pace:** Sean wants this slow and careful, not fast.
@@ -114,15 +140,59 @@ The types are wayfinder's. "Blocked by" means native GitHub blocking, wired in a
 - **Sean reads blind** and answers two questions: "Which one did I write?" (tests style) and "Does any version say something I wouldn't?" (tests viewpoint).
 - **Output:** the answer decides the library mix going forward.
 
+### K. Legible evals: how to make a trace and eval readable · `research` (AFK) · frontier
+**Question:** How do you make an eval of a writing machine easy for its owner to read and understand at a glance? Sean wants to learn evals and eventually run traces and evals on the Oracle or the content machine. But the current trace kit (#291) is hard to follow, because of its labels, code names and codes.
+- **Research:** how practitioners present eval results to the person doing the labeling. Plain-language failure names instead of codes. Pass/fail with a one-line critique. Side-by-side views of the draft next to what went wrong. The smallest useful set of labels.
+- **Anchor source:** Hamel Husain's published posts on evals (hand-read first, binary pass/fail with critiques, judges only after 30–50 labels per class, a local store and a rendered HTML viewer, no hosted eval tools). Cite his posts directly.
+- **Deliverable:** a short recommendation for what a legible eval page for this machine shows and names.
+- **Then:** the parked trace-deck ticket (#302) is re-scoped to test that recommendation on one real Oracle deck or content-machine run. Wire #302 as **blocked by K**.
+
+### L. Strip the leftover mechanic instructions from the machine · `task` (AFK + HITL) · frontier
+**Question:** Which instructions in the live content machine still demand mechanics that the samples-over-rules re-founding made obsolete, and what's left once they're removed? This is Sean's note on the Voice Decision Record ticket (#235): remove *all* such instructions, not just that one.
+- **Audit:** `content-machine/SKILL.md`, the stage files, the medium contracts, and the gate chain (`writing-critique`, `writing-humanity-pass`, `writing-voice-modes`) for instructions that require move rosters, licensing checks, decision records, mode or dial settings, metric bands, or anything else a stage must comply with rather than induce from samples. Examples: the Voice Decision Record line, and move-licensing reads that have no runtime reader.
+- **Protocol:** before changing live behavior, follow the **Runtime-impact rulings** protocol in `content-machine/SKILL.md`, including the human consumer inventory.
+- **Sign-off:** Sean approves the removal list before anything is deleted.
+- **Why it blocks D:** it runs before the migration, so what moves into `pencil-and-prompt` is already clean.
+
 ## 5. Not yet specified (add)
 
 - **Where Drop and Rig outputs live publicly:** X video, a Substack post, a running gallery page, or a mix. This sharpens after episode 1.
 - **A third episode type, "craft reps":** Sean learns one craft skill with AI as tutor and without it. Parked until Drop and Rig have run a few times.
 - **Posting cadence and the timely vs. timeless mix** (Cole's value-horizon lens). This sharpens after the curriculum (F).
-- **Whether the professional lane (cover letters) keeps its own machine in Code-Brain after the move.** This depends on the sweep rulings for the cover-letter tickets (#243–#245).
+- **Frame-generated candidates for X (#228, parked):** revisit after the library grows.
 
 ## 6. Out of scope (add)
 
 - **Fleet and incident-log content** that fails the one-line filter (e.g. "the nightly critic that has produced nothing in twenty days"). Ruled out on 2026-09-24 as off-niche.
 - **New rule-based voice mechanics**: added guides, gates, metrics or checkers aimed at prose. They're superseded by the samples-over-rules preference, and they return only if Sean explicitly asks.
-- Plus one line per ticket ruled **Cut** or **Move out** on the sweep page.
+- **Measurement and plumbing tickets cut on 2026-09-25:**
+  - the Voice Decision Record (#235), whose broader cleanup is ticket L
+  - retirement-scan coverage (#236)
+  - hand-rewrite survival at tweet length (#257)
+  - the sentence-length register watch (#220)
+  - the spread-run console ranking defect (#225)
+
+  They're superseded by samples over rules, and none of them measures what the re-scope cares about.
+- **The Professional lane (cover letters), moved out on 2026-09-25:** the cover-letter contract (#243), story banks with provenance (#244) and the origin-check signature bug (#245). This is job-hunt work that stays in Code-Brain outside this map.
+
+## 7. Frontier and edge summary
+
+- **Frontier on day one:**
+  - A: Drop episode 1 on Opus 5.5 (time-sensitive)
+  - B: the migration audit
+  - C: the first workshop (#263 reshaped)
+  - G: the Ship 30 decision (due before 2026-10-05)
+  - K: legible evals
+  - L: strip the leftover mechanics
+  - #233
+  - #234 (low priority)
+- **Blocked:**
+  - D by B and L
+  - E by D and C
+  - F by C
+  - H by D
+  - I by D
+  - J by C
+  - #303 by D
+  - #302 by K
+- **Suggested order** for the frontier: A (the clock is running), G (a deadline), C (writing starts), L and B (they unblock the migration), K, #233, then #234.
