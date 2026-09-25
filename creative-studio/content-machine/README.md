@@ -48,3 +48,11 @@ actually wrote. It is personal material and it stays on local disk.
 
 This split is deliberate and it mirrors `systemcraft/`: the method is worth sharing, the material
 it was tuned on is not.
+
+## Where the brain lives now
+
+Since 2026-09-25 the brain lives in `pencil-and-prompt`, a separate private repo, with the Pencil &
+Prompt publication and the expressive lane's copies of these skills ([#308](https://github.com/seanwinslow28/code-brain/issues/308)).
+On the author's machine each private path above is a git-ignored symlink into that repo, so the
+Professional lane here still reads the one live brain. The ignore rules stay: a stray copy landing
+here would arrive as real files, and it must never be staged.

@@ -47,17 +47,10 @@ path = "vault/20_projects/substack-studio/CLAUDE.md"
 line_contains = "`substack-value-engine` → `storytelling-architecture` → `writing-voice-modes` (Sean Mode)"
 reason = "This line is retained only as the explicitly labelled historical order immediately above it."
 
-[[retirement]]
-id = "quarantined-exercise-prose"
-name = "Quarantined Full Exercise Passages"
-source = "https://github.com/seanwinslow28/code-brain/issues/224"
-scan_paths = [
-  ".claude/skills/writing-voice-modes/references/voice-samples.md",
-]
-
-[[retirement.pattern]]
-literal = "Full Exercise Passages"
-reason = "The unlabelled machine-written bodies were removed from the calibration authority."
+# Retired from this registry 2026-09-25 (#308 batch 6): "quarantined-exercise-prose"
+# (#224) scanned voice-samples.md, which moved to the private pencil-and-prompt repo.
+# The path here is now a symlink out of the repo, which the scanner rightly refuses.
+# The rule travels as a line in pencil-and-prompt's CLAUDE.md.
 
 [[retirement]]
 id = "polysyndeton-protection"
