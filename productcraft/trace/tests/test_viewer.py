@@ -130,16 +130,18 @@ def test_unmeasured_meter_never_reads_zero(html):
     assert ">0<" not in r
 
 
-def test_verdict_buttons_carry_color_and_size_the_row_word_does_not(html):
+def test_verdict_buttons_and_row_words_carry_color_buttons_carry_size(html):
     r = row(html, "pass-13")
-    assert "#i-cross" in r and ">fail<" in r                       # the row's verdict is still glyph + word in ink
+    assert "#i-cross" in r and ">fail<" in r                       # the row's verdict is still glyph + word, now in its color
     css = html.split("<style>")[1].split("</style>")[0]
     # DESIGN.md §15 (Sean, 2026-09-25): pass takes the accent blue, fail a red pencil, in both grounds
     assert "--verdict-pass: var(--accent)" in css
     assert css.count("--verdict-fail:") >= 3                        # light root, dark root, dark media block
     assert re.search(r"\.verdicts \.btn\.v-fail\b[^}]*var\(--verdict-fail\)", css)
     assert re.search(r"\.verdicts \.btn\.v-pass\b[^}]*var\(--verdict-pass\)", css)
-    assert not re.search(r"\.verdict\.pass[^}]*--verdict-pass|\.verdict\.fail[^}]*--verdict-fail", css)
+    assert re.search(r"\.pass summary \.verdict\.pass \{[^}]*var\(--verdict-pass\)", css)   # the row word too (§15, second ruling)
+    assert re.search(r"\.pass summary \.verdict\.fail \{[^}]*var\(--verdict-fail\)", css)
+    assert not re.search(r"\.m-[a-z]+[^}]*--verdict-|\.matrix[^}]*--verdict-|\.track[^}]*--verdict-", css)  # train, matrix, track stay ink
     # size: the two verdict buttons are set larger than the ordinary .btn, and defer is not
     assert re.search(r"\.verdicts \.btn\.v-pass, \.verdicts \.btn\.v-fail \{[^}]*font-size: var\(--fs-1\)", css)
     assert 'data-set-verdict="pass" class="btn v-pass"' in r or 'class="btn v-pass"' in r

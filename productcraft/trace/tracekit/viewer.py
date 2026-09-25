@@ -1104,7 +1104,7 @@ CSS = r"""
   --ink-wash-3: color-mix(in srgb, var(--ink) 30%, transparent);
   --ink-wash-4: color-mix(in srgb, var(--ink) 48%, transparent);
   --ground-cased: color-mix(in srgb, var(--ground) 88%, transparent);
-  /* verdict buttons only (DESIGN.md §15, Sean 2026-09-25): pass takes the portfolio's drafting ink, fail a red pencil */
+  /* verdict buttons and the row's verdict word (DESIGN.md §15, Sean 2026-09-25): pass takes the portfolio's drafting ink, fail a red pencil */
   --verdict-pass: var(--accent); --verdict-fail: #9E3B2E;
   --font-display: 'Anybody', system-ui, sans-serif;
   --font-body: 'Schibsted Grotesk', system-ui, sans-serif;
@@ -1311,6 +1311,9 @@ p { margin: 0 0 0.75rem; max-width: var(--measure); }
 .pass summary .verdict { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; }
 .pass summary .verdict.unl { color: var(--sub); font-weight: 400; }
 .pass summary .verdict.def { color: var(--sub); font-weight: 400; font-style: italic; }
+/* §15 (Sean, 2026-09-25, second ruling): the row's verdict word carries the same color as its button */
+.pass summary .verdict.pass { color: var(--verdict-pass); }
+.pass summary .verdict.fail { color: var(--verdict-fail); }
 .pass summary .crit { color: var(--sub); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pass.v-fail summary .crit { color: var(--ink); }
 .pass summary .hidden-rt { color: var(--sub); font-style: italic; display: inline-flex; gap: 0.35rem; align-items: center; }

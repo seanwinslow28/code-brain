@@ -50,7 +50,7 @@ The portfolio's rule is that the accent appears only in interaction marks, and t
 
 **Status colors are not introduced.** If a future reader needs red for fail, that is a ratified change to this section, not a per-render choice. The ink-only encoding is one of the choices put to Sean on #292.
 
-*Amended 2026-09-25 (§15): the two verdict **buttons** now carry color and size. Nothing else in this section changed: the row's verdict word, the matrix, the track and the train stay ink.*
+*Amended 2026-09-25 (§15): the two verdict **buttons** carry color and size, and the row's verdict **word** carries the same color. The matrix, the track and the train stay ink.*
 
 Contrast, measured for the ratification record: ink on ground 13.9:1 light / 15.1:1 dark; sub on ground 5.3:1 / 5.0:1; ink on wash-3 7.6:1 / 6.1:1; sub on wash-1 4.8:1 / 4.3:1, which is why an opened row's sub text switches to ink.
 
@@ -167,7 +167,7 @@ Every state below has a designed rendering; none is an error message.
 
 ## 13 · Ratified choices (Sean, 2026-09-11, #292)
 
-1. Ink-only verdicts (no red for fail) — §3. *Amended 2026-09-25 by §15: the verdict buttons carry color; the row's verdict word does not.*
+1. Ink-only verdicts (no red for fail) — §3. *Amended 2026-09-25 by §15: the verdict buttons and the row's verdict word carry color; the train, matrix and track do not.*
 2. The reading line as prose rather than a KPI row — §5.2.
 3. The train as order rather than time — §5.5, §7.
 4. Reveal-on-re-render for blind pairs, never on the page — §8.
@@ -210,7 +210,9 @@ The legible-evals research ([#305](https://github.com/seanwinslow28/code-brain/i
 
 **Size.** Pass and fail are the two decisions, so they are set larger than every other button on the page: `--fs-1` at weight 600 with roughly double the padding. Defer stays an ordinary ink `.btn`, so the eye lands on the decision and not on the escape hatch.
 
-**What stays ink.** The row's verdict word and glyph, the "labeled fail" ring on the train, the matrix, the track, the stage strip and every filter button. Print and forced-colors are unchanged, since the buttons hide in print. The exhaustive accent list in §3 gains one entry, the pass button, and nothing else.
+**The row's verdict word, too** (second ruling the same day). Each row's summary shows its verdict as glyph + word in the same color as its button: "pass" in drafting ink, "fail" in red pencil, so a scan down the list reads the verdicts without opening a row. "deferred" and "unlabeled" stay in sub. In print the words keep their color (§11: colors print exactly); forced-colors takes over both.
+
+**What stays ink.** The "labeled fail" ring on the train, the matrix, the track, the stage strip and every filter button. The exhaustive accent list in §3 gains two entries, the pass button and the pass word, and nothing else.
 
 **Defer.** A third button, key `d`, glyph a hollow circle with a dash. It is a **recorded non-verdict**: the labels file accepts `defer` in the verdict column so the intent survives a re-render, but a deferred row is never counted as labeled, still reads as waiting in the reading line ("3 wait for a verdict. 1 of them deferred, to come back to."), never reveals a blind pair, and gets its own filter (`deferred N`). Its row word is "deferred" in sub, italic. `u` jumps to the next row with nothing at all on it, so deferring moves the reader on; the filter brings the deferred set back. Pressing `d` on a deferred row clears it, the same toggle as `1` and `2`. The first-failing-stage select stays disabled on a defer.
 
