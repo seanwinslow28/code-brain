@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Pencil & Prompt moves to its own private repo (2026-09-25)
+
+Resolves [#308](https://github.com/seanwinslow28/code-brain/issues/308) on the Pencil & Prompt map ([#158](https://github.com/seanwinslow28/code-brain/issues/158)), in seven verified batches. The publication, the writing machine's private brain, the expressive lane's skills and the content Oracle now live in `pencil-and-prompt`, a separate private repo that commits its brain under normal version control. Every copy was SHA-256 matched before anything here changed.
+
+**What changed in code-brain:**
+- The brain paths under `creative-studio/content-machine/` and `writing-voice-modes/references/voice-samples.md` are git-ignored symlinks into the new repo on the MacBook Pro. The Professional lane still reads the one live brain. `.gitignore` gains slashless twins for the brain's directory rules, because a `dir/` rule doesn't match a symlink.
+- `content-oracle/` is a "moved" stub; its scripts and tests are gone. The Sunday probation reminder stays here and now says where to run the Oracle.
+- `vault/20_projects/substack-studio/` keeps `CLAUDE.md` and `playbook/tool-shipping-playbook.md` as pointer stubs, plus `research/`, `continuation-prompts/`, `_archive/` and the two trimmed image folders. The rest moved.
+- The retirement registry drops `quarantined-exercise-prose` (13 retirements). Its one scan path left the repo, and the rule travels as a line in the new repo's CLAUDE.md.
+- `writing-critique`'s rewrite-band builder is dark here. The finals moved, and the band is rebuilt in the new repo.
+
+**What stays in code-brain:** the Professional lane and its contracts, frozen copies of the ten writing skills (Knowledge Lint scans them), the registry and its checker, the agents-sdk tools the Oracle borrows (`audit_dr_citations.py`, `doc_to_audio.py`), the trace kit (imported via `$TRACEKIT_DIR`), and the research notes the knowledge graph cites.
+
 ### Content machine — leftover rulebook mechanics stripped (2026-09-25)
 
 Resolves [#306](https://github.com/seanwinslow28/code-brain/issues/306) on Sean's sixteen rulings, under the Pencil & Prompt re-scope's samples-over-rules preference. **Removed:** the Voice Decision Record line, the move-licensing matrix and its generator (`contracts/move-licensing.md`, `contracts/build_licensing.py`, no runtime reader per #222), every contract's licensed-move lists and heat/room budgets, X's per-move aiming notes, the lessons loop's licensing counter, the analyzer from the post-draft chain, the rewrite-band registration step, and Substack's restated "Hard mechanics". **Reworded:** contracts carry form only and state their register in plain words; how-he-writes lessons route to `voice-samples.md` as samples, never rules; `writing-critique`'s Voice dimension reads against the samples, and inside the machine critique hands findings to Sean rather than revising through `writing-voice-modes`. **Kept:** the standalone `writing-voice-modes` workflow and the humanity pass's move allowlist. New retirement entry `leftover-mechanics`; the scan is clean.
