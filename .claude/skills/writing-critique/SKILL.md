@@ -369,7 +369,11 @@ the baseline pipeline are new additions, not ports.
   hand-rewrites, by series, with an n≥3 floor below which pieces print as points.
   Aggregates and labels only, same discipline as the baseline.
 - `references/build_rewrite_band.py`: rebuilds it from the registered finals.
-  `--check` verifies the committed band still matches.
+  `--check` verifies the committed band still matches. **In code-brain this
+  builder is dark since 2026-09-25:** the finals moved with the studio to the
+  private `pencil-and-prompt` repo ([#308](https://github.com/seanwinslow28/code-brain/issues/308)),
+  where the band is rebuilt and checked. The JSON here is the last snapshot, and
+  `--check` here reports the finals missing.
 
 ## Success Criteria
 

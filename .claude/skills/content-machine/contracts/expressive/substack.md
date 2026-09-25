@@ -22,7 +22,7 @@ Where it is silent, the publication's own law governs — do not invent a rule h
 5. This contract — what the machine does differently because the medium is Substack. It may narrow
    anything in `LANE.md`; it may not delete it.
 
-For Pencil & Prompt those live under `vault/20_projects/substack-studio/`. Read them before the
+For Pencil & Prompt those live in the private `pencil-and-prompt` repo, under `studio/` (moved 2026-09-25, #308). Read them before the
 interview. A machine that reads the house rules after drafting has already wasted the interview.
 
 ## What a post has to deliver
