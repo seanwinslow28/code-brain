@@ -40,15 +40,16 @@ PROBATION_START = date(2026, 8, 30)
 PROBATION_WEEKS = 6
 
 BODY = """\
-Run the Oracle.
+Run the Oracle, from the pencil-and-prompt repo (it moved there 2026-09-25):
 
+    cd ~/Code-Brain/pencil-and-prompt
     /content-oracle
 
 It sweeps the last 7 days of your own systems (git, closed issues, dailies,
 partner-session sidecars, fleet manifests), pulls the week's AI news, runs four
 lenses over both for experiments you could go run, anchors with last30days, and
 hands you two decks: worth a piece this week, worth posting. Pick; the rest bank
-to creative-studio/content-machine/ideas-bank.md.
+to brain/ideas-bank.md in pencil-and-prompt.
 
 {probation}
 
