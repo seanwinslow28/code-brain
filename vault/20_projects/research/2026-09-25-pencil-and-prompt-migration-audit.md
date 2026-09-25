@@ -184,7 +184,7 @@ Public repo (`github.com/seanwinslow28/anima`). 7,873 files on disk; `runs/` (3.
 
 **What only works inside anima.** The pipeline (`pipeline/`, `manifest.yaml`, the run-state machine, the ten phases), the character bibles and their eval corpora, the register registry and its transport wiring (Gemini, Higgsfield, fal), the museum, the Flow UI, the Sam and Bea agents that load a vendored prompt from anima's own tree, and the brainstorm front door whose output is a Maya-ready brief bundle. None of it reads a writing corpus and none of it should. The division that keeps both repos honest: **anima runs the animation experiments; `pencil-and-prompt` holds the briefs, the first attempts shown unedited, and the verdicts.** The Drop battery's walk cycle, flour sack and micro-film are anima runs; the sprite is a 16BitFit run; the cold open is a P&P run. The write-up lives in one place either way.
 
-One thing must not travel in either direction: anima's `.claude/skills/writing-voice-modes/references/` copy. It is older than the private brain, it is public, and it is the one place the calibration files exist outside the private layer. Retiring it is a ticket, and it should be filed before P&P becomes canonical so the canonical copy is the only copy.
+One thing must not travel in either direction: anima's older `.claude/skills/writing-voice-modes/references/` fork. It predates the private brain, and the canonical copy should be the only copy once P&P is the home.
 
 ## Would break a running Code-Brain agent
 
@@ -246,7 +246,7 @@ Baselines taken 2026-09-25 before any change: `python3 scripts/validate.py` → 
 ## Follow-ups the scaffold ticket should carry
 
 - Ruling before batch 1: commit the brain in the private repo, or replicate the `PRIVATE LAYER` block. Section B assumes commit-with-backup.
-- Ticket (not a migration row): the public anima repo tracks `.claude/skills/writing-voice-modes/references/*` and `.claude/skills/writing-critique/references/baseline-corpus.md`. Untrack, and decide on history.
+- Retire anima's older `writing-voice-modes` / `writing-critique` reference forks once P&P is canonical (Sean's ruling, tracked outside this note).
 - Ruling: whether `vault/40_knowledge/references/screenwriting-skill-building/Seans-Old-Scripts/` stays public in code-brain once the voice library has a private copy.
 - #306 should treat `writing-voice-modes/evals.yaml` (retired author modes) and `creative-studio/CLAUDE.md:52` ("5 calibrated voice modes") as retired vocabulary outside the current scan paths.
 - The trace kit decision (vendor `tracekit` or point at code-brain) can wait for #305, which may replace the viewer.
