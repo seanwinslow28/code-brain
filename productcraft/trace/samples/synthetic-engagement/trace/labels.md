@@ -5,7 +5,7 @@ labeler: Sean
 
 # Labels — pc-eng-000 Callboard (synthetic)
 
-One row per pass. `verdict` is pass or fail, nothing between. `first_failing_stage` is set on a fail and may be upstream of the pass read. `critique`: one to three sentences a new hire could act on. `failure_code` stays blank until the taxonomy exists.
+One row per pass. `verdict` is pass or fail, nothing between (or defer, to come back to it). `first_failing_stage` is set on a fail and may be upstream of the pass read. `critique`: one to three sentences a new hire could act on. `failure_code` stays blank until the taxonomy exists.
 
 | pass | verdict | first_failing_stage | critique | failure_code |
 |---|---|---|---|---|

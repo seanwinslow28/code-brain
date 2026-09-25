@@ -13,6 +13,7 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from .labels import decided
 from .engagement import (
     FIXED_AUDITORS, METER_SOURCES, REPO_PREFIXES as _REPO_PREFIXES, REQUIRED_COSIGNS, STAGE_SEATS,
     Engagement, Record, normalize_meter, sha256_path,
@@ -171,9 +172,11 @@ def _every_pass_has_a_label(eng: Engagement) -> Check:
     for pid in eng.labels:
         if pid not in have:
             c.findings.append(f"labels.md has a row for {pid}, which has no record")
-    unlabeled = [r.pass_id for r in eng.records if r.pass_id in eng.labels and eng.labels[r.pass_id].verdict is None]
+    unlabeled = [r.pass_id for r in eng.records if r.pass_id in eng.labels and not decided(eng.labels[r.pass_id].verdict)]
     if unlabeled:
-        c.notes.append(f"{len(unlabeled)} row(s) still wait for a verdict: {', '.join(unlabeled)}")
+        deferred = sum(1 for pid in unlabeled if eng.labels[pid].verdict == "defer")
+        tail = f" ({deferred} deferred)" if deferred else ""
+        c.notes.append(f"{len(unlabeled)} row(s) still wait for a verdict{tail}: {', '.join(unlabeled)}")
     return c
 
 
@@ -615,7 +618,7 @@ def _blind(eng: Engagement) -> Check:
         if sorted((i.path, i.sha256) for i in r.inputs) != sorted((i.path, i.sha256) for i in base.inputs):
             c.findings.append(f"{r.pass_id}: a trial fires on identical inputs, but its inputs differ from {base.pass_id}'s")
             ok = False
-        labeled = all(eng.labels.get(p) is not None and eng.labels[p].verdict for p in (r.pass_id, base.pass_id))
+        labeled = all(eng.labels.get(p) is not None and decided(eng.labels[p].verdict) for p in (r.pass_id, base.pass_id))
         if not labeled and html is not None:
             # gates may share a runtime with the trial, so the test is scoped to the pair's own rows
             for rec in (r, base):

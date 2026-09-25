@@ -19,6 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from tracekit.checker import run_checks  # noqa: E402
 from tracekit.engagement import load_engagement  # noqa: E402
+from tracekit.labels import decided  # noqa: E402
 from tracekit.viewer import render_html  # noqa: E402
 
 
@@ -38,7 +39,7 @@ def main(argv: list[str] | None = None) -> int:
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(render_html(eng, checks=checks), encoding="utf-8")
     failing = sum(1 for c in checks if not c.ok)
-    labeled = sum(1 for l in eng.labels.values() if l.verdict)
+    labeled = sum(1 for l in eng.labels.values() if decided(l.verdict))
     status = "rung 0 clean" if not failing else f"{failing} of {len(checks)} checks failing (see check.py)"
     print(f"wrote {target} ({target.stat().st_size // 1024} KB) · {len(eng.records)} passes, {labeled} labeled · {status}")
     return 0

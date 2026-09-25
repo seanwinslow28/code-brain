@@ -2,7 +2,10 @@
 
 One file per engagement, one markdown table, rows keyed by pass id. The
 viewer's *Copy label rows* exports rows in exactly this column order, so a
-pasted block is a valid file body. `verdict` is pass or fail, nothing between.
+pasted block is a valid file body. `verdict` is pass or fail, nothing between —
+except `defer` (ratified 2026-09-25, DESIGN.md §15): a recorded "come back to
+this", which is not a verdict. A deferred row still waits, never reveals a blind
+pair, and is never counted as labeled.
 """
 from __future__ import annotations
 
@@ -10,9 +13,15 @@ import re
 from dataclasses import dataclass
 from typing import Optional
 
-__all__ = ["COLUMNS", "Label", "LabelsError", "parse_labels", "format_rows"]
+__all__ = ["COLUMNS", "DECIDED", "Label", "LabelsError", "parse_labels", "format_rows", "decided"]
 
 COLUMNS = ("pass", "verdict", "first_failing_stage", "critique", "failure_code")
+DECIDED = ("pass", "fail")   # the two verdicts; "defer" is a recorded non-verdict
+
+
+def decided(verdict: Optional[str]) -> bool:
+    """True only for a pass or a fail. A defer or an empty cell is a row that still waits."""
+    return verdict in DECIDED
 
 
 class LabelsError(ValueError):
@@ -22,7 +31,7 @@ class LabelsError(ValueError):
 @dataclass(frozen=True)
 class Label:
     pass_id: str
-    verdict: Optional[str]              # "pass" | "fail" | None (row present, no verdict yet)
+    verdict: Optional[str]              # "pass" | "fail" | "defer" (come back to it) | None (row present, no verdict yet)
     first_failing_stage: Optional[int]  # set on a fail; may be upstream of the pass read
     critique: str
     failure_code: str
@@ -72,8 +81,8 @@ def parse_labels(text: str, stages: Optional[list[int]] = None) -> dict[str, Lab
                 if pid in out:
                     raise LabelsError(f"pass {pid} appears twice in the labels file")
                 v: Optional[str] = verdict.lower() or None
-                if v not in (None, "pass", "fail"):
-                    raise LabelsError(f"{pid}: verdict must be pass or fail, nothing between; got {verdict!r}")
+                if v not in (None, "pass", "fail", "defer"):
+                    raise LabelsError(f"{pid}: verdict must be pass or fail (or defer, to come back to it), nothing between; got {verdict!r}")
                 stage: Optional[int] = None
                 if ffs:
                     if not re.fullmatch(r"-?\d+", ffs) or int(ffs) not in allowed:

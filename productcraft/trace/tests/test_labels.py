@@ -5,7 +5,7 @@ pass | verdict | first_failing_stage | critique | failure_code
 """
 import pytest
 
-from tracekit.labels import LabelsError, Label, parse_labels
+from tracekit.labels import LabelsError, Label, format_rows, parse_labels
 
 HEADER = "| pass | verdict | first_failing_stage | critique | failure_code |\n|---|---|---|---|---|\n"
 
@@ -28,6 +28,13 @@ def test_escaped_pipe_in_critique_is_unescaped():
 def test_empty_verdict_is_an_unlabeled_row():
     labels = parse_labels(doc("| pass-17 | | | | |\n"))
     assert labels["pass-17"].verdict is None
+
+
+def test_defer_is_a_recorded_non_verdict():
+    labels = parse_labels(doc("| pass-17 | defer | | come back: not sure the split is honest | |\n"))
+    assert labels["pass-17"].verdict == "defer"
+    assert labels["pass-17"].first_failing_stage is None  # a defer needs no stage
+    assert "defer" in format_rows([labels["pass-17"]])
 
 
 def test_unknown_verdict_raises():

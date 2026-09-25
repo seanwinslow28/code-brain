@@ -23,6 +23,7 @@ from typing import Optional
 from . import KIT_NAME, KIT_VERSION
 from .cases import ASSIST_BLURB, Case, CasesDoc, Source, load_cases
 from .checker import Check, run_checks
+from .labels import decided
 from .engagement import Engagement, Record, load_engagement, normalize_meter
 from .studio import PRODUCTCRAFT, PRODUCTCRAFT_CHECK_IMPLICATIONS, Studio
 from .taxonomy import Taxonomy, load_taxonomy
@@ -247,9 +248,10 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
         l = labels.get(pid)
         return (l.failure_code or "") if l else ""
 
-    labeled = [r.pass_id for r in P if verdict(r.pass_id)]
+    labeled = [r.pass_id for r in P if decided(verdict(r.pass_id))]   # a defer is not a label (DESIGN.md §15)
     n_pass = sum(1 for pid in labeled if verdict(pid) == "pass")
     n_fail = sum(1 for pid in labeled if verdict(pid) == "fail")
+    n_defer = sum(1 for r in P if verdict(r.pass_id) == "defer")
     n_unl = total - len(labeled)
     n_checks = len(checks)
     clean = sum(1 for c in checks if c.ok)
@@ -306,7 +308,9 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
         break_sentence = s
     reading = (
         f"Of <strong>{total} passes</strong>, <strong>{len(labeled)} are labeled</strong>: {n_pass} pass, {n_fail} fail. "
-        f"<strong>{n_unl} wait for a verdict.</strong> {break_sentence} Rung 0 is clean on {clean} of {n_checks} checks."
+        f"<strong>{n_unl} wait for a verdict.</strong> "
+        + (f"{n_defer} of them deferred, to come back to. " if n_defer else "")
+        + f"{break_sentence} Rung 0 is clean on {clean} of {n_checks} checks."
     )
 
     out: list[str] = []
@@ -472,6 +476,7 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
   <button class="btn" type="button" data-filter="all" aria-pressed="true">all {total}</button>
   <button class="btn" type="button" data-filter="fail" aria-pressed="false">fails {n_fail}</button>
   <button class="btn" type="button" data-filter="unlabeled" aria-pressed="false">unlabeled {n_unl}</button>
+  <button class="btn" type="button" data-filter="deferred" aria-pressed="false">deferred {n_defer}</button>
   <button class="btn" type="button" data-filter="pairs" aria-pressed="false">shadow pairs {n_pairs}</button>
   <span style="margin-left:auto">Columns: runtime · wall-clock · tokens in+out · verdict · critique. <kbd>j</kbd>/<kbd>k</kbd> walk rows, <kbd>enter</kbd> opens.</span>
 </div>
@@ -497,6 +502,7 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
     <dt><kbd>j</kbd> <kbd>k</kbd></dt><dd>next / previous pass — or next / previous case while you are inside guided reading</dd>
     <dt><kbd>enter</kbd></dt><dd>open or fold the current pass</dd>
     <dt><kbd>1</kbd> <kbd>2</kbd></dt><dd>label the current pass pass / fail</dd>
+    <dt><kbd>d</kbd></dt><dd>defer the current pass: come back to it (not a verdict; it still waits)</dd>
     <dt><kbd>f</kbd></dt><dd>first failing stage</dd>
     <dt><kbd>c</kbd></dt><dd>critique</dd>
     <dt><kbd>u</kbd></dt><dd>jump to the next unlabeled pass</dd>
@@ -928,9 +934,9 @@ def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit:
     S = eng.studio
     pid = esc(p.pass_id)
     rt_html = f"<span class='hidden-rt'>{icon('eye')} hidden</span>" if blind else esc(p.runtime or "—")
-    vcls = "unl" if not v else v
-    vlabel = {"pass": "pass", "fail": "fail"}.get(v or "", "unlabeled")
-    vicon = icon("check") if v == "pass" else (icon("cross") if v == "fail" else icon("open"))
+    vcls = "unl" if not v else ("def" if v == "defer" else v)
+    vlabel = {"pass": "pass", "fail": "fail", "defer": "deferred"}.get(v or "", "unlabeled")
+    vicon = icon("check") if v == "pass" else (icon("cross") if v == "fail" else (icon("defer") if v == "defer" else icon("open")))
     tags = ""
     if p.triggered_by:
         tags += f"<span class='tag'>{icon('loop')} {esc(p.triggered_by)}</span>"
@@ -971,8 +977,9 @@ def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit:
   <div>
     <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for {pid}">
-      <button class="btn" type="button" data-set-verdict="pass" aria-pressed="{'true' if v == 'pass' else 'false'}">{icon('check')} pass <kbd>1</kbd></button>
-      <button class="btn" type="button" data-set-verdict="fail" aria-pressed="{'true' if v == 'fail' else 'false'}">{icon('cross')} fail <kbd>2</kbd></button>
+      <button class="btn v-pass" type="button" data-set-verdict="pass" aria-pressed="{'true' if v == 'pass' else 'false'}">{icon('check')} pass <kbd>1</kbd></button>
+      <button class="btn v-fail" type="button" data-set-verdict="fail" aria-pressed="{'true' if v == 'fail' else 'false'}">{icon('cross')} fail <kbd>2</kbd></button>
+      <button class="btn v-defer" type="button" data-set-verdict="defer" aria-pressed="{'true' if v == 'defer' else 'false'}" title="Not a verdict: mark it to come back to">{icon('defer')} defer <kbd>d</kbd></button>
     </div>
   </div>
   <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
@@ -982,7 +989,7 @@ def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit:
     <textarea data-crit rows="2">{esc(crit)}</textarea>
   </label>
   {blind_note}
-  <div class="state"><span data-state>{'In the labels file.' if v else 'No label row yet.'}</span><span class="sub">{_code_state_html(code, tax)}</span></div>
+  <div class="state"><span data-state>{'Deferred in the labels file; it still waits for a verdict.' if v == 'defer' else ('In the labels file.' if v else 'No label row yet.')}</span><span class="sub">{_code_state_html(code, tax)}</span></div>
 </div>"""
     detail = f"""
 <div class="detail">
@@ -1081,6 +1088,7 @@ SYMBOLS = """
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-check" viewBox="0 0 14 14"><path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-cross" viewBox="0 0 14 14"><path d="M3 3l8 8M11 3l-8 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-defer" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M4.8 7h4.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
   <symbol id="i-open" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2 2"/></symbol>
   <symbol id="i-eye" viewBox="0 0 14 14"><path d="M1.5 7c1.6-2.6 3.4-3.8 5.5-3.8S10.9 4.4 12.5 7c-1.6 2.6-3.4 3.8-5.5 3.8S3.1 9.6 1.5 7z" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="7" cy="7" r="1.6" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M2.5 11.5l9-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
   <symbol id="i-loop" viewBox="0 0 14 14"><path d="M11 4H5a3 3 0 0 0 0 6h3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M9 2.5L11 4 9 5.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -1096,14 +1104,16 @@ CSS = r"""
   --ink-wash-3: color-mix(in srgb, var(--ink) 30%, transparent);
   --ink-wash-4: color-mix(in srgb, var(--ink) 48%, transparent);
   --ground-cased: color-mix(in srgb, var(--ground) 88%, transparent);
+  /* verdict buttons only (DESIGN.md §15, Sean 2026-09-25): pass takes the portfolio's drafting ink, fail a red pencil */
+  --verdict-pass: var(--accent); --verdict-fail: #9E3B2E;
   --font-display: 'Anybody', system-ui, sans-serif;
   --font-body: 'Schibsted Grotesk', system-ui, sans-serif;
   --fs-0: 0.8125rem; --fs-1: 0.9375rem; --fs-2: 1.0625rem; --fs-3: 1.25rem; --fs-4: 1.625rem; --fs-5: 2.375rem;
   --measure: 68ch; --gutter: 1.5rem; --row-x: 0.75rem;
   color-scheme: light;
 }
-:root[data-mode='dark'] { --ground: #191714; --ink: #F2EBDD; --sub: #8F867A; --accent: #6BA3C9; color-scheme: dark; }
-@media (prefers-color-scheme: dark) { :root:not([data-mode='light']) { --ground: #191714; --ink: #F2EBDD; --sub: #8F867A; --accent: #6BA3C9; color-scheme: dark; } }
+:root[data-mode='dark'] { --ground: #191714; --ink: #F2EBDD; --sub: #8F867A; --accent: #6BA3C9; --verdict-fail: #D9857A; color-scheme: dark; }
+@media (prefers-color-scheme: dark) { :root:not([data-mode='light']) { --ground: #191714; --ink: #F2EBDD; --sub: #8F867A; --accent: #6BA3C9; --verdict-fail: #D9857A; color-scheme: dark; } }
 
 html { font-size: 16px; }
 body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font-body); font-size: var(--fs-1); line-height: 1.5;
@@ -1300,6 +1310,7 @@ p { margin: 0 0 0.75rem; max-width: var(--measure); }
 .pass summary .kind { color: var(--sub); }
 .pass summary .verdict { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; }
 .pass summary .verdict.unl { color: var(--sub); font-weight: 400; }
+.pass summary .verdict.def { color: var(--sub); font-weight: 400; font-style: italic; }
 .pass summary .crit { color: var(--sub); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pass.v-fail summary .crit { color: var(--ink); }
 .pass summary .hidden-rt { color: var(--sub); font-style: italic; display: inline-flex; gap: 0.35rem; align-items: center; }
@@ -1324,6 +1335,16 @@ p { margin: 0 0 0.75rem; max-width: var(--measure); }
 .label-form .verdicts .btn { display: inline-flex; gap: 0.35rem; align-items: center; }
 .label-form .verdicts .btn kbd { font-size: 0.75rem; color: var(--sub); border: 1px solid var(--ink-hairline); padding: 0 0.25rem; border-radius: 2px; }
 .label-form .btn[aria-pressed='true'] kbd { color: var(--ground); border-color: var(--ground-cased); }
+/* §15: pass and fail are the two decisions, so they are larger than every other button and carry their color; defer stays ink and ordinary size */
+.verdicts .btn.v-pass, .verdicts .btn.v-fail { padding: 0.5rem 1rem; font-size: var(--fs-1); font-weight: 600; border-width: 1.5px; }
+.verdicts .btn.v-pass { color: var(--verdict-pass); border-color: var(--verdict-pass); }
+.verdicts .btn.v-fail { color: var(--verdict-fail); border-color: var(--verdict-fail); }
+.verdicts .btn.v-pass:hover { background: color-mix(in srgb, var(--verdict-pass) 10%, transparent); }
+.verdicts .btn.v-fail:hover { background: color-mix(in srgb, var(--verdict-fail) 10%, transparent); }
+.verdicts .btn.v-pass[aria-pressed='true'] { background: var(--verdict-pass); border-color: var(--verdict-pass); color: var(--ground); }
+.verdicts .btn.v-fail[aria-pressed='true'] { background: var(--verdict-fail); border-color: var(--verdict-fail); color: var(--ground); }
+.verdicts .btn.v-pass kbd, .verdicts .btn.v-fail kbd { color: inherit; border-color: currentColor; opacity: 0.7; }
+.verdicts .btn.v-defer { align-self: center; }
 .label-form label { display: grid; gap: 0.25rem; color: var(--sub); }
 .label-form select, .label-form textarea { background: transparent; border: 1px solid var(--ink-hairline); padding: 0.35rem 0.5rem; border-radius: 2px; color: var(--ink); }
 .label-form textarea { width: 100%; min-height: 3.6rem; resize: vertical; box-sizing: border-box; }
@@ -1406,29 +1427,33 @@ JS = r"""
     const pid = row.dataset.pass, d = drafts[pid] || {};
     const v = effVerdict(row);
     const cell = $('[data-verdict-cell]', row), word = $('[data-verdict-word]', row);
-    cell.className = 'verdict ' + (v || 'unl');
-    word.textContent = v || 'unlabeled';
-    const ico = $('svg use', cell); ico.setAttribute('href', v === 'pass' ? '#i-check' : v === 'fail' ? '#i-cross' : '#i-open');
-    row.classList.toggle('v-fail', v === 'fail'); row.classList.toggle('v-pass', v === 'pass'); row.classList.toggle('v-unl', !v);
+    cell.className = 'verdict ' + (v === 'defer' ? 'def' : (v || 'unl'));
+    word.textContent = v === 'defer' ? 'deferred' : (v || 'unlabeled');
+    const ico = $('svg use', cell); ico.setAttribute('href', v === 'pass' ? '#i-check' : v === 'fail' ? '#i-cross' : v === 'defer' ? '#i-defer' : '#i-open');
+    row.classList.toggle('v-fail', v === 'fail'); row.classList.toggle('v-pass', v === 'pass'); row.classList.toggle('v-def', v === 'defer'); row.classList.toggle('v-unl', !v);
     $$('[data-set-verdict]', row).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.setVerdict === v)));
     const sel = $('[data-ffs]', row); sel.disabled = v !== 'fail'; if (d.ffs !== undefined) sel.value = d.ffs;
     const ta = $('[data-crit]', row); if (d.crit !== undefined && document.activeElement !== ta) ta.value = d.crit;
     const critCell = $('[data-crit-cell]', row); const crit = d.crit !== undefined ? d.crit : ta.value;
     if (crit) critCell.textContent = crit;
     const st = $('[data-state]', row);
-    st.innerHTML = d.verdict || d.crit !== undefined || d.ffs !== undefined ? '<span class="draft">Drafted here, not yet in the labels file.</span>' : (fileVerdict(row) ? 'In the labels file.' : 'No label row yet.');
+    st.innerHTML = d.verdict || d.crit !== undefined || d.ffs !== undefined
+      ? (d.verdict === 'defer' ? '<span class="draft">Deferred here, to come back to; not yet in the labels file.</span>' : '<span class="draft">Drafted here, not yet in the labels file.</span>')
+      : (fileVerdict(row) === 'defer' ? 'Deferred in the labels file; it still waits for a verdict.' : (fileVerdict(row) ? 'In the labels file.' : 'No label row yet.'));
   }
   function paintBlind() {
     // The hidden runtime is not in this file (DESIGN.md §8): both verdicts drafted here only earn the note.
     rows.forEach(row => { const pair = row.dataset.pair; if (!pair) return;
       const other = document.getElementById(pair); if (!other) return;
-      const both = effVerdict(row) && effVerdict(other);
+      const decided = v => v === 'pass' || v === 'fail';   // a defer never reveals (DESIGN.md §15)
+      const both = decided(effVerdict(row)) && decided(effVerdict(other));
       if (both) $$('.hidden-rt', row).forEach(el => { el.outerHTML = '<span class="sub">revealed on the next render, once both labels are in the file</span>'; });
     });
   }
   function counters() {
-    const fileN = rows.filter(fileVerdict).length;
-    const draftN = rows.filter(r => !fileVerdict(r) && drafts[r.dataset.pass] && drafts[r.dataset.pass].verdict).length;
+    const isDecided = v => v === 'pass' || v === 'fail';
+    const fileN = rows.filter(r => isDecided(fileVerdict(r))).length;
+    const draftN = rows.filter(r => !isDecided(fileVerdict(r)) && drafts[r.dataset.pass] && isDecided(drafts[r.dataset.pass].verdict)).length;
     $('#labeled-n').textContent = fileN;
     $('#draft-note').textContent = draftN ? ` in the file, ${draftN} drafted here` : '';
     const nDraft = Object.keys(drafts).length; $('#draft-count').textContent = nDraft ? `(${nDraft})` : '';
@@ -1461,7 +1486,7 @@ JS = r"""
     const f = b.dataset.filter;
     let shown = 0;
     rows.forEach(r => { const v = effVerdict(r);
-      r.hidden = !(f === 'all' || (f === 'fail' && v === 'fail') || (f === 'unlabeled' && !v) || (f === 'pairs' && r.dataset.pair)); if (!r.hidden) shown++; });
+      r.hidden = !(f === 'all' || (f === 'fail' && v === 'fail') || (f === 'unlabeled' && !v) || (f === 'deferred' && v === 'defer') || (f === 'pairs' && r.dataset.pair)); if (!r.hidden) shown++; });
     let empty = $('#no-match'); if (!empty) { empty = document.createElement('p'); empty.id = 'no-match'; empty.className = 'sub'; empty.style.padding = '1rem 0'; empty.textContent = 'No passes match'; $('#passes').appendChild(empty); }
     empty.hidden = shown > 0;
   }));
@@ -1496,6 +1521,7 @@ JS = r"""
       case 'Enter': if (curRow() && document.activeElement === $('summary', curRow())) { e.preventDefault(); curRow().open = !curRow().open; } break;
       case '1': if (curRow()) setVerdict(curRow(), 'pass'); break;
       case '2': if (curRow()) setVerdict(curRow(), 'fail'); break;
+      case 'd': if (curRow()) setVerdict(curRow(), 'defer'); break;
       case 'f': if (curRow()) { e.preventDefault(); curRow().open = true; $('[data-ffs]', curRow()).focus(); } break;
       case 'c': if (curRow()) { e.preventDefault(); curRow().open = true; $('[data-crit]', curRow()).focus(); } break;
       case 'u': { e.preventDefault(); const next = vis.find((r, i) => i > vi && !effVerdict(r)) || vis.find(r => !effVerdict(r)); if (next) setCur(vis.indexOf(next)); break; }
