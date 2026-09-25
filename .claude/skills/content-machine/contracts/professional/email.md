@@ -15,8 +15,7 @@ facts-only law governs the draft either way; the lens only shapes the interview.
 ## Governing documents, in precedence order
 
 1. [`LANE.md`](LANE.md) — Professional-lane law.
-2. [`../move-licensing.md`](../move-licensing.md) — the shared matrix.
-3. This contract.
+2. This contract.
 
 ## What this medium is
 
@@ -28,19 +27,12 @@ The property that decides everything below: **the recipient did not ask for it, 
 the whole cost.** A cover letter is read by someone whose job is to read it. An email is read by
 someone doing something else.
 
-## Licensed moves: six
+## Register: plain, structural, no jokes
 
-Budget heat 1, room 2. The same six as the cover letter and the questionnaire:
-
-**Expectation / Instead** · **Then / Now Narrator** · **Short Declarative Drop** ·
-**Anaphoric Stack** · **Blunt-Literal Description** · **Rhetorical Catechism**
-
-All structural, none a joke. Heat 2 and above is banned.
-
-**Practical narrowing: room 2 rarely fits.** A body of five to eight lines gives most two-beat moves
-nowhere to turn. Short Declarative Drop and Blunt-Literal Description do the real work here; the
-other four are available and usually the wrong tool for the length. That is a fact about the form,
-not a further ban — a longer email that has earned its length may use them.
+The same register as the cover letter and the questionnaire: structural, never funny. In a body of
+five to eight lines there is rarely room for a two-beat turn, so a short flat sentence and a thing
+described plainly do the real work here. That is a fact about the form: a longer email that has
+earned its length has more room.
 
 ## Length is the message
 
@@ -122,7 +114,7 @@ An email is read with its parent, in a client that shows both.
 ## Gates, in order
 
 Post-draft as of 2026-08-31, in the machine's current order: **origin (claims tier) →
-do-not-promote + coined-lines sweep → humanity scrub → critique / analyzer**. Professional lane:
+do-not-promote + coined-lines sweep → humanity scrub → critique**. Professional lane:
 **origin blocks delivery** while any claim is untraced (`origin_check.py` exits 1). In this medium a
 warmth line is a claim.
 

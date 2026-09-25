@@ -106,7 +106,7 @@ The shaper gets the law's one substance rule, stated positively, the sentence "t
 style rules to follow," and **the medium's deliverable form only** — the format bounds from the
 contract's delivery spec (a title and length for an essay; the typed fields and word caps for a
 portfolio write-up), never its register notes, roster, or move guidance. Form is task, not style. **Banned from the shaping context:** this file, `writing-voice-modes/SKILL.md`,
-the anti-pattern table, the licensing matrix, the medium contracts, the gate chain, and the
+the anti-pattern table, the medium contracts, the gate chain, and the
 lessons ledger. Voice is induced from the samples, not complied into. Rationale: instruction-count
 compliance collapse plus three measured runs — see the research note. Ratified lessons reach the
 shaper only when Sean routes one into the corpus or samples, or when a lesson's rider is short
@@ -194,7 +194,7 @@ any count; a score is banned at any count.
 | 1 | **Topic + value gate** — one piece, one lane, one medium, named before anything else; the publication's value gate clears here as a **hard block**, never post-draft | this skill + `substack-value-engine` | live |
 | 2 | **Interview** — one lens, one question at a time, read-back at the close. **X's reactive route runs no interview**: its stage 2 is a stimulus block written by `x/stimulus.py` ([#249](https://github.com/seanwinslow28/code-brain/issues/249), built [#250](https://github.com/seanwinslow28/code-brain/issues/250)) | `interview/`, `x/` | live, seven lenses |
 | 3 | **Shape** — clean-context draft (see The shaping context) | fresh subagent, this skill orchestrates | live, re-scoped 2026-08-31 |
-| 4 | **Gates** — post-draft, advisory: origin (claims tier), do-not-promote + coined-lines sweep, humanity scrub, critique + the analyzer **dashboard** (no metric flags since #219) | `gates/` + chain skills as reference | live, all post-draft as of 2026-08-31 |
+| 4 | **Gates** — post-draft, advisory: origin (claims tier), do-not-promote + coined-lines sweep, humanity scrub, critique, read against the samples (analyzer retired from the machine 2026-09-25, #306) | `gates/` + chain skills as reference | live, all post-draft as of 2026-08-31 |
 | 5 | **Ship** — the author hand-rewrites (mandatory), a mechanical proofread runs on his final, he publishes | the author + one proofread pass | live, proofread added 2026-08-31 |
 | 6 | **Lessons** — his corrections become rules, with his consent | `lessons/` + `ledger/` | live |
 
@@ -253,10 +253,11 @@ gap-fill the law exists to prevent.
 
 ### Stage 3 → DRAFT + ORIGIN LEDGER
 
-The draft ships with two attachments, and since #291 a third. The Voice Decision Record is
-`writing-voice-modes`' own (mode, dial, moves deployed, sweeps run). The Origin Ledger is this
-machine's; the `## Moves` section is the trace kit's, elicited from the shaper after the draft
-(see The shaping context) and read by rung 0 of [the trace](#the-trace):
+The draft ships with two attachments. The Origin Ledger is this machine's; the `## Moves` section is the trace kit's, elicited from the shaper after the draft
+(see The shaping context) and read by rung 0 of [the trace](#the-trace). There is no Voice
+Decision Record: the shaper never reads `writing-voice-modes`, so it has no mode, dial or roster to
+report (retired 2026-09-25, [#306](https://github.com/seanwinslow28/code-brain/issues/306)).
+
 
 ```
 ORIGIN LEDGER
@@ -402,8 +403,8 @@ about what would draw a reply, binding on nothing (`contracts/expressive/LANE.md
    `contracts/<lane>/<medium>.md` and the lane law (`contracts/<lane>/LANE.md`) for what the piece
    has to deliver — length, structural labels, the first-screen test, the reply-hook memo. Those
    requirements inform the TOPIC CARD, the interview's reach, and the post-draft check. **They are
-   never loaded into the shaping context** (2026-08-31): the licensing matrix and per-move rules
-   are retired from drafting entirely. The lane's **first-screen test** stays an interview
+   never loaded into the shaping context** (2026-08-31), and since 2026-09-25 (#306) they carry
+   form only — no move lists, no licensing, no prose rulebook. The lane's **first-screen test** stays an interview
    instruction: if no beat in the transcript can carry the first screen, the interview did not
    reach far enough.
 3. Interview with one lens. One question at a time. Never answer for him, never offer him a menu of
@@ -415,8 +416,8 @@ about what would draw a reply, binding on nothing (`contracts/expressive/LANE.md
 
    **There is no gate runner, and the chain is the contract's, not this file's.** No script
    orchestrates stage 4 for any medium — the orchestrator runs each gate itself, in the order the
-   medium contract states, and a contract may **trim** the chain. X drops the analyzer entirely and
-   scopes critique to false authority (#249); its origin and coined-lines calls take `--stimulus`.
+   medium contract states, and a contract may **trim** the chain. X scopes critique to
+   false authority (#249); its origin and coined-lines calls take `--stimulus`.
    The chain listed in the stage table is the default, not a floor. Whatever ran goes in the GATE
    RECORD, including what did not and why — a gate that could not run says so.
 5. He rewrites by hand — mandatory, not remedial: three of four runs put his best new material
@@ -426,12 +427,10 @@ about what would draw a reply, binding on nothing (`contracts/expressive/LANE.md
    Typos, doubled words, spacing, apostrophes/escapes, punctuation only — flag each fix, change no
    phrasing, no word choice, no rhythm. His eye skips his own typos ("self depreciating" survived
    two of his finals); the pass exists to catch those, never to edit him.
-7. **Register the final in the rewrite band** (added 2026-09-01, #219). One line in `SERIES` in
-   `.claude/skills/writing-critique/references/build_rewrite_band.py`, under the piece's series,
-   then rerun it. That band is the analyzer dashboard's second column — his rewrites, as opposed
-   to his prose written outside the machine — and "recomputes on every ship" is this step. It is
-   maintenance, not a ruling. The corpus band never takes a hand-rewrite; promoting prose into the
-   corpus or `voice-samples.md` is a separate act and the only one that changes what gets written.
+7. **Promotion is a separate act.** Shipping never moves prose into the corpus or
+   `voice-samples.md` on its own; promoting a final there is a ruling Sean makes, and it is the only
+   act that changes what gets written. (The rewrite-band registration step that stood here was
+   retired with the analyzer on 2026-09-25, [#306](https://github.com/seanwinslow28/code-brain/issues/306).)
 8. **Close the trace** (added 2026-09-22, [#291](https://github.com/seanwinslow28/code-brain/issues/291)).
    Records were written as each stage fired (see The trace, below); at deck close or ship, run the
    rung-0 checker and the viewer, then Sean sweeps the labels so every pass has a row:
@@ -495,7 +494,7 @@ markers and smart quotes are normalized away so formatting never registers as an
 
 | Lesson is about | Home |
 |---|---|
-| How he writes | the voice guide |
+| How he writes | **a sample, never a rule**: his rewritten passage goes into `writing-voice-modes/references/voice-samples.md` or the corpus, with his consent |
 | How a story is built | `storytelling-architecture` |
 | How this medium works | `contracts/<lane>/<medium>.md` |
 | Something never to say again | `cheese-bank/cheese-bank.md` |
@@ -504,6 +503,11 @@ The structure home was added on the first ratification (2026-08-25), when three 
 turned out to be about beat order and none of the original three homes fit. A but/therefore rule
 filed in the voice guide is filed where nobody will look for it.
 
+**How-he-writes lessons become samples, not rules** (ruled 2026-09-25,
+[#306](https://github.com/seanwinslow28/code-brain/issues/306)). The home used to be the voice guide,
+which the shaper is banned from reading, so a lesson filed there never reached a draft; it only grew
+the rulebook. The shaper learns from what it reads, so the lesson travels as his own passage.
+
 **A ratified lesson is not automatically a new rule.** On that same run, the lesson Sean cared most
 about turned out to already exist in two skills, and the draft had broken it anyway. The honest
 routing was to promote the existing rule and record that a self-run gate had missed it, not to add
@@ -511,12 +515,6 @@ a duplicate. Check whether the rule already exists before writing one.
 
 Write the ledger entry first, then make the edit, then record the amended file back in the entry.
 Ledger-first means a failed edit still leaves a record of what he ratified.
-
-**One count rides on this route.** The move-licensing matrix is advisory in all nine mediums and
-nothing enforces it ([#222](https://github.com/seanwinslow28/code-brain/issues/222)). It earns the
-enforcement question back on **two ratified permanent lessons routed to a medium contract whose
-reason is that a move was wrong for the room** — one is noise, two is a pattern. When the second
-lands, file a fresh ticket; do not arm anything before it.
 
 **Rejected candidates stay in the ledger.** A rejection is the more useful of the two records: it
 stops the machine proposing the same wrong lesson next week. Deleting rejections means re-learning

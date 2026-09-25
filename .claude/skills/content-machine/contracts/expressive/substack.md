@@ -59,18 +59,7 @@ summary. The closer is the strongest line in the piece.
 
 Length is bounded by padding, not word count: long enough to tell it, then stop.
 
-## Licensed moves
-
-**Licensing is not this contract's call.** [`move-licensing.md`](../move-licensing.md) is the shared
-matrix ([#162](https://github.com/seanwinslow28/code-brain/issues/162)); this contract inherits it and
-may narrow it, never widen it. Substack's budget is **heat 3, room 4** — the widest in the set, which
-is right: it is the medium the roster was calibrated on. **34 of 36 moves licensed.**
-
-The two it does not get:
-
-- **Equation / Formula Defamiliarizer** — banned, short-form only.
-- **Screenwriting Cut-To** — **conditional**. The juxtaposition is licensed; the literal screenplay
-  notation is not. Write the hard turn in prose, never with `HARD CUT TO:` or a bare italic *cut to*.
+## References
 
 **References are rationed: two to three woven references per piece, maximum, most paragraphs zero.**
 Sourced from `reference-universe.md` or the piece's own subject. Never invented. A reference that
@@ -93,19 +82,9 @@ Routed here by the lessons loop. Reasons live in the gitignored ledger.
   admits the breakage is inevitable and shows the thing that keeps it survivable. It never resolves
   into a tidy win.
 
-## Hard mechanics
-
-Inherited from `writing-voice-modes` G1–G5, restated because Substack drafts break them most:
-
-- No em dashes. Anywhere. And no colon substituted in when one is dropped.
-- Contract everything.
-- Colons and semicolons rare or absent.
-- No word that isn't working.
-- Adjacent beats must turn. If "and then" fits better than "but" or "therefore", the beat is dead.
-
 ## Gates, in order
 
-**Post-draft and advisory as of 2026-08-31** (the rules-off re-scope: nothing below is a drafting-time constraint any more). Order: **origin (claims tier) → do-not-promote + coined-lines sweep → humanity scrub → critique / analyzer**.
+**Post-draft and advisory as of 2026-08-31** (the rules-off re-scope: nothing below is a drafting-time constraint any more). Order: **origin (claims tier) → do-not-promote + coined-lines sweep → humanity scrub → critique**.
 The **structure read** also runs here, post-draft and advisory, rather than as a stage the draft must pass through first.
 
 **The value gate is the exception, and it runs BEFORE the interview** (corrected 2026-09-02, [#224](https://github.com/seanwinslow28/code-brain/issues/224)). This line previously swept it in with the rest. The 2026-08-31 re-scope retired the *drafting* chain to post-draft advisory; `substack-value-engine` was never a drafting stage, it is the publication's pre-writing hard block (substack-studio CLAUDE.md §3: *"Before a post is worth writing... If there is no real artifact, the gate blocks and the angle waits until Sean has done the work."*). A value gate run post-draft is not a gate — the interview and the draft have already been paid for by the time it answers. It clears at stage 1, and the Oracle's card bar is the same test one stage earlier still ([#227](https://github.com/seanwinslow28/code-brain/issues/227)).

@@ -21,11 +21,11 @@ far it has to reach, and supplies the post-draft check. **It is never loaded int
 context** — the drafting subagent gets the transcript, the corpus, the voice samples, the reference
 universe and the do-not-promote list, and nothing else (`SKILL.md`, "The shaping context").
 
-So a contract's **licensed-move roster is a statement of the register this medium lands in**, and its
-reader is the orchestrator at contract-authoring time ([#222](https://github.com/seanwinslow28/code-brain/issues/222)).
-It is not a checklist handed to a drafter, it is not a compliance target, and **nothing post-draft
-reads it** — the roster is advisory in all nine mediums and no gate checks a move against it. Nothing here is a drafting-time constraint any more; the deliverables, the format
-bounds and the negative specimens are what the orchestrator and the reader hold the piece against.
+A contract therefore carries **form only** (ruled 2026-09-25,
+[#306](https://github.com/seanwinslow28/code-brain/issues/306)): the deliverables, the format bounds,
+the first screen and the negative specimens. It carries no move list, no licensing budget and no prose
+rulebook. Voice is induced from Sean's samples, and when output is wrong the first remedy is more of
+his writing, never a new rule. The orchestrator and the reader hold the piece against the form.
 
 ## The first-screen test
 

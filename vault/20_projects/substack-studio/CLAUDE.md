@@ -69,7 +69,7 @@ This folder rides **code-brain's public repo.** Treat everything tracked here as
 | Structure read — post-draft, advisory | `storytelling-architecture` |
 | Red-team the draft — post-draft, advisory | `writing-critique` |
 | Final scrub (kills em dashes + AI tells) — post-draft | `writing-humanity-pass` |
-| Move roster + register law (**never loaded into drafting**) | `writing-voice-modes` |
+| Voice samples + register law for the post-draft gates | `writing-voice-modes` |
 | High-variance critique (optional) | `llm-council` |
 | Hero image (pencil-test house style, on the Mac) | `openai-image-gen` (primary), `gemini-image-gen` |
 
@@ -93,11 +93,11 @@ The reliable loop for any Pencil & Prompt piece, page or post. Use it by default
 
 Capture the pre-flight findings (with sources) at the top of the piece's working doc, so the draft is built on them. Then the writing loop:
 
-1. **Brainstorm the shape first** (`superpowers:brainstorming`): one question at a time, lock a short skeleton (structure, length, tone dial, the opening line, the closer) BEFORE drafting. No draft until Sean approves the shape.
+1. **Brainstorm the shape first** (`superpowers:brainstorming`): one question at a time, lock a short skeleton (structure, length, the opening line, the closer) BEFORE drafting. No draft until Sean approves the shape.
 2. **Run the content machine** to write it (`content-machine`): the value gate clears first (§3, a hard block *before* the interview), then interview → clean-context shaper → post-draft gates. **The sequential voice chain was retired 2026-08-31** (§1) — do not reintroduce the rule stack into the drafting context; voice is induced from `voice-samples.md`, never complied into from a rulebook. The retired order, for the archaeology: `substack-value-engine` → `storytelling-architecture` → `writing-voice-modes` → `writing-critique` → `writing-humanity-pass`.
 3. **Sean hand-rewrites.** The Content Machine draft is a strong starting point, never the ship. Sean's edits are the real voice (on Start Here and About, his rewrites were the decisive lift).
    **Why it stays mandatory under the Content Machine (amended 2026-08-25, ticket #173; law re-scoped 2026-08-31).** The machine now locks every fact, event, name, number and claim to the interview transcript while permitting fresh texture, so this rule is no longer the primary net for invented claims; the origin gate is that. It stays because the rewrite is the *calibration input*. On the first machine-run piece Sean left 38 of 59 sentences untouched and still retitled it, rebuilt the closer, cut a line and added two beats, and those nine edits became the first nine ratified lessons. The rewrite is where the machine learns, which makes it the most valuable step in the machine rather than a remedial one. Re-evaluate the rule after several pieces, never on one.
-4. **Run the lessons loop and register the final in the rewrite band.** Every shipped hand-rewrite updates the analyzer's record of writing through the machine. Promotion into the corpus or `voice-samples.md` is a separate, consented ruling — never an automatic consequence of shipping.
+4. **Run the lessons loop.** Promotion into the corpus or `voice-samples.md` is a separate, consented ruling — never an automatic consequence of shipping. (The rewrite-band registration that stood here was retired with the analyzer on 2026-09-25, #306.)
 5. **Mechanical proofread only** on the final (apostrophes, escapes, em dashes); prose untouched.
 
 Optional, for a high-variance take: the **LLM Council** can write parallel blind versions and a chairman synthesizes (premium profile), then the synthesis runs through the same Content Machine path. Keep council and superseded drafts in `pages/_council/` + git history; never clobber the canonical file.

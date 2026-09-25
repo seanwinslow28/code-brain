@@ -15,22 +15,18 @@ written.
 ## Governing documents, in precedence order
 
 1. [`LANE.md`](LANE.md) — Professional-lane law. The seam, the origin block, borrow-structure-never-strings.
-2. [`../move-licensing.md`](../move-licensing.md) — the shared matrix.
-3. This contract.
+2. This contract.
 
 The current resume and its source material live at
 `vault/20_projects/prj-job-hunt-2026-REVAMP/latest-resume/` — **local only, git-ignored**. Read it
 before drafting. Nothing from it is ever quoted into a tracked file or an issue.
 
-## Licensed moves: none
-
-**Budget heat 0, room 1. Zero of thirty-six moves are licensed, and that is the ruling rather than a
-gap** ([#162](https://github.com/seanwinslow28/code-brain/issues/162)).
+## Register: no voice
 
 This is the one document in the machine with no voice layer at all. Everything that makes Sean's
-prose his — the deflation, the specificity that reaches for a named substance, the self-implication —
-is banned here. What survives is the thing underneath the voice: **what he actually did, stated
-plainly, in numbers a stranger can check.**
+prose his (the deflation, the specificity that reaches for a named substance, the self-implication)
+stays out. What survives is the thing underneath the voice: **what he actually did, stated plainly,
+in numbers a stranger can check.**
 
 A resume that shows personality is not brave. It is a candidate telling a hiring manager he does not
 know what this document is for.
@@ -75,7 +71,7 @@ know what this document is for.
 
 ## Gates, in order
 
-**Post-draft and advisory as of 2026-08-31** (the rules-off re-scope: nothing below is a drafting-time constraint any more). Order: **origin (claims tier) → do-not-promote + coined-lines sweep → humanity scrub → critique / analyzer**. Professional lane: **origin blocks delivery** while any claim is untraced.
+**Post-draft and advisory as of 2026-08-31** (the rules-off re-scope: nothing below is a drafting-time constraint any more). Order: **origin (claims tier) → do-not-promote + coined-lines sweep → humanity scrub → critique**. Professional lane: **origin blocks delivery** while any claim is untraced.
 
 `writing-humanity-pass` runs its **FULL** scrub here, not voice-safe: plain neutral register is the
 correct human voice for this document, and there are no signature moves to protect.

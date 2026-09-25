@@ -5,7 +5,7 @@ Wave 3 ([#172](https://github.com/seanwinslow28/code-brain/issues/172)). The las
 **Lens: long form — the Substack assignment for the series the video belongs to (Storyteller →
 Stakes for a story, Technical Peer → Skeptic for a spine piece). Short form — Stakes → Cold Reader.**
 A long video is a post read aloud, so it needs the same transcript the post would need. A sixty-second
-cut has room 2 and about 150 spoken words: there is no space to build, so the interview has to arrive
+cut has about 150 spoken words: there is no space to build, so the interview has to arrive
 with the consequence already found, and a listener cannot scroll back over an undefined noun.
 
 **Status: unproven.** No channel exists — the only trace of one in the publication is a line in
@@ -20,25 +20,20 @@ gap.** It hardens on the first real video, the way `substack.md` hardened on the
    & Prompt video, the masthead and house law win, exactly as they do for a post.
 2. [`LANE.md`](LANE.md) — Expressive-lane law (the first-screen test, the outside-fact rule, the
    reply-hook memo).
-3. [`../move-licensing.md`](../move-licensing.md) — the shared matrix.
-4. This contract.
+3. This contract.
 
 ---
 
 ## The two forms
 
-The matrix rules **YouTube / Reels as one budget** (heat 3, room 4, twin to Substack) and recorded
-that as known coarseness, with the remedy named at the time: *a medium that must differ narrows in
-its own contract.* This is that medium, and this is that narrowing.
-
-A sixty-second Reel does not have room 4. It has X's problem — **the move that would carry the
+A sixty-second Reel has X's problem — **the move that would carry the
 ending is not available** — while a long YouTube piece genuinely is a Substack post read aloud. One
 contract, two declared forms:
 
-| Form | Surface | Clock | Room |
+| Form | Surface | Clock | Room to build |
 |---|---|---|---|
-| **Short** | Reels, Shorts, vertical | **≤ 60 seconds** | **2** (narrowed) |
-| **Long** | YouTube, horizontal | bounded by padding, not by minutes | 4 (as ruled) |
+| **Short** | Reels, Shorts, vertical | **≤ 60 seconds** | **one beat** |
+| **Long** | YouTube, horizontal | bounded by padding, not by minutes | a whole-piece arc |
 
 **The clock is spent at a fixed rate, and that is the whole difference from prose.** Measured
 narration runs roughly 150 words per minute, so sixty seconds is about **150 spoken words** — less
@@ -49,46 +44,18 @@ pipeline measures the real duration with `ffprobe` after synthesis, and the meas
 hands off to `/general-video`. That is a production fact worth knowing before the interview, because
 it decides which pipeline the script is written for.
 
-## Licensed moves
+## Two spoken-form rules
 
-Licensing is not this contract's call; the matrix is. This contract **narrows** it for short form and
-inherits it unchanged for long form.
+**Nobody says a cut out loud.** In a script the cut finally has a legitimate place, **the scene
+boundary in the scene table**, and it stays out of the narration line. The turn is carried by the
+scene break and the words on either side of it.
 
-**Long form: 34 licensed, 1 conditional, 1 banned.** The widest roster in the set alongside
-Substack.
+**Caps belong to performed narration only.** All-caps in a scene heading or a production field is
+format convention, not emphasis. And in narration, caps are a note to a performer, not a guarantee
+(see the flat-read rule below).
 
-**Short form: 23 licensed, 1 conditional.** Room 2 drops eleven moves, and it is worth naming them
-rather than letting a drafter discover the gap:
-
-- **Whole-piece (room 4), five:** Mid-Action Open · Callback Closer · Self-Deprecation as Structure ·
-  Inverted Refrain · Sincerity Punished by the World
-- **Runway (room 3), six:** Breath-Mark Rhythm · Jewel Center · Sensory Cascade · Sensory Before
-  Numbers · Humor as Trojan Horse · Buried Rotten Beat
-
-What survives into short form: **Funniest Word Last · Unsignposted Pivot · Tool-as-Character ·
-Expectation / Instead · Then / Now Narrator · Flat Collision · Short Declarative Drop · Anaphoric
-Stack · Hard Cut / Deflation · Rule of Three + Emotional Pivot · Pop Culture Anchoring ·
-Hyper-Specific Anecdote · Screenwriting Cut-To · Blunt-Literal Description · Reader-Dismissal ·
-Borrowed Canon Line · Faux-Ignorance Aside · Affectionate-Insult Epithet · Comic Under-Reaction ·
-Fumbled Idiom · Zeugma Paint · Character-Intro Verdict · Rhetorical Catechism**, plus Shout-Caps
-under both conditions below.
-
-**Equation / Formula Defamiliarizer is banned in both forms.** Its restriction is short-form and
-[#175](https://github.com/seanwinslow28/code-brain/issues/175) ruled that a spoken script is not
-short-form in the sense that matters: the move is read off a page in one glance, and a listener
-cannot glance.
-
-**Screenwriting Cut-To is licensed here and this is its only home** — banned on X, conditional on
-Substack. And the notation question that
-[#162](https://github.com/seanwinslow28/code-brain/issues/162) said would recur, recurs one layer
-down: in a script the notation finally has a legitimate place, **the scene boundary in the scene
-table**, and it is still banned from the narration line. Nobody says a cut out loud. The turn is
-carried by the scene break and the words on either side of it.
-
-**Shout-Caps carries two conditions here, not one.** The matrix condition stands: licensed in
-narration the voice performs, banned in scene headings and any production field, because all-caps
-there is format convention and not the move. This contract adds the second, from the rule below:
-**caps are a note to a performer, not a guarantee.**
+(The move lists and budgets that stood here were retired 2026-09-25,
+[#306](https://github.com/seanwinslow28/code-brain/issues/306).)
 
 ---
 
@@ -259,7 +226,7 @@ too.** Without that clause the cut rule covers the half of this medium that was 
 ## Gates, in order
 
 Post-draft and advisory, in the machine's current order: **origin (claims tier) → do-not-promote +
-coined-lines sweep → humanity scrub → critique / analyzer**. Expressive lane advises and never blocks.
+coined-lines sweep → humanity scrub → critique**. Expressive lane advises and never blocks.
 
 **One thing runs differently here.** The origin check runs over **the narration and the `onScreen`
 fields together**, as one text. That is the entire mechanism by which the law reaches the picture:

@@ -271,7 +271,7 @@ reason = "Observer's depth is one question plus post-draft ASK LIST follow-ups; 
 
 [[retirement.pattern]]
 literal = "critique / analyzer"
-reason = "The analyzer does not run on X: both its bands are essay bands, X has no series in either, and it fired a monotony flag on a 51-word draft its own docs promise to exempt (#249). The literal stays live in the seven contracts that do run it."
+reason = "The analyzer does not run on X: both its bands are essay bands, X has no series in either, and it fired a monotony flag on a 51-word draft its own docs promise to exempt (#249). Since #306 it runs in no contract; see the leftover-mechanics entry."
 
 [[retirement]]
 id = "x-routes-ruled-and-unbuilt"
@@ -289,3 +289,62 @@ reason = "Route 1 is built and smoke-tested (#250): x/stimulus.py runs the sweep
 [[retirement.pattern]]
 literal = "until it lands X cannot run at all"
 reason = "Superseded by the #250 build. What is still missing is the query set and deck size (#251), which makes a run need hand-supplied queries -- not a medium that cannot run."
+
+[[retirement]]
+id = "leftover-mechanics"
+name = "Rulebook mechanics the samples-over-rules re-founding made obsolete"
+source = "https://github.com/seanwinslow28/code-brain/issues/306"
+scan_paths = [
+  ".claude/skills/content-machine/SKILL.md",
+  ".claude/skills/content-machine/contracts",
+  ".claude/skills/writing-voice-modes/SKILL.md",
+  "vault/20_projects/substack-studio/CLAUDE.md",
+]
+
+[[retirement.pattern]]
+literal = "The Voice Decision Record is"
+reason = "The shaper never reads writing-voice-modes, so a draft cannot carry its decision record. Drafts ship with the Origin Ledger and the trace kit's Moves section only."
+
+[[retirement.pattern]]
+literal = "move-licensing.md"
+reason = "The matrix had no runtime reader (#222) and was deleted. Contracts carry form only."
+
+[[retirement.pattern]]
+literal = "build_licensing"
+reason = "The generator was deleted with the matrix it built."
+
+[[retirement.pattern]]
+literal = "roster of record"
+reason = "Nothing builds from the move roster any more; writing-voice-modes hosts the samples and the register law."
+
+[[retirement.pattern]]
+literal = "## Licensed moves"
+reason = "Move lists and heat/room budgets were retired from every contract; each states its register in plain words."
+
+[[retirement.pattern]]
+literal = "critique / analyzer"
+reason = "The analyzer left the machine's post-draft chain (#219 found it at chance against what Sean kept). It stays in writing-critique for standalone use."
+
+[[retirement.pattern]]
+literal = "Register the final in the rewrite band"
+reason = "The rewrite band only fed the analyzer, which no longer runs in the machine."
+
+[[retirement.pattern]]
+literal = "register the final in the rewrite band"
+reason = "The rewrite band only fed the analyzer, which no longer runs in the machine."
+
+[[retirement.pattern]]
+literal = "One count rides on this route"
+reason = "The counter for re-arming licensing enforcement is gone; the remedy for a wrong move is more of Sean's writing, not enforcement."
+
+[[retirement.pattern]]
+literal = "| How he writes | the voice guide |"
+reason = "The shaper never reads the voice guide; how-he-writes lessons travel as samples, never as rules."
+
+[[retirement.pattern]]
+literal = "## Hard mechanics"
+reason = "Substack's restated G1-G5 rulebook was retired; the em-dash ban lives in the humanity pass, beat turns in storytelling-architecture."
+
+[[retirement.pattern]]
+literal = "tone dial"
+reason = "A dial setting before drafting is a mode setting; the shape skeleton is structure, length, opener and closer."

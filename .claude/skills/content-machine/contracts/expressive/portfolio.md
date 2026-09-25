@@ -22,8 +22,7 @@ that governs it lands with that ticket.
    not typecheck is not a write-up.
 2. [`LANE.md`](LANE.md) — Expressive-lane law (the first-screen test, the outside-fact rule, the
    reply-hook memo).
-3. [`../move-licensing.md`](../move-licensing.md) — the shared matrix.
-4. This contract.
+3. This contract.
 
 ## What a portfolio write-up actually is
 
@@ -41,30 +40,6 @@ fields**, and the form is the constraint:
 **The cap wins; the essay goes in the vault.** That is Sean's 2026-08-24 call, written into the test
 file, and it is the single most useful thing to know before drafting: there is no room to build to a
 point. Every panel arrives already at it.
-
-## Licensed moves: twenty, minus what the form physically defeats
-
-Budget heat 2, room 2. Twenty of thirty-six:
-
-**Funniest Word Last** · **Unsignposted Pivot** · **Tool-as-Character** · **Expectation / Instead** ·
-**Then / Now Narrator** · **Flat Collision** · **Short Declarative Drop** · **Hard Cut / Deflation** ·
-**Rule of Three + Emotional Pivot** · **Pop Culture Anchoring** · **Blunt-Literal Description** ·
-**Reader-Dismissal** · **Equation / Formula Defamiliarizer** · **Borrowed Canon Line** ·
-**Faux-Ignorance Aside** · **Comic Under-Reaction** · **Fumbled Idiom** · **Zeugma Paint** ·
-**Rhetorical Catechism** · ~~Anaphoric Stack~~
-
-**The beat is the panel, not the `support` string.** Ten of the twenty are room 2, and thirty words
-cannot hold a two-beat move on their own. They land across the panel's parts — the number, the date,
-the sentence, and the art are one unit — or across an adjacent pair in the kicker arc. Stating the
-unit is a narrowing, not a widening: the medium still gets a beat and never a runway.
-
-**Anaphoric Stack is narrowed to banned.** It needs three or more repeated openings and the form
-gives it nowhere to repeat: the `support` strings are thirty words apart and the kickers are a fixed
-enum it cannot borrow. Nineteen licensed here in practice.
-
-**Equation / Formula Defamiliarizer finds its second home.** [#175](https://github.com/seanwinslow28/code-brain/issues/175)
-restricted it to short-form and banned it in Substack for exactly that reason. A thirty-word panel is
-short-form. After X, this is where it works.
 
 ## The two rules this medium exists under
 
@@ -115,8 +90,8 @@ none. Say so in the ship packet rather than emitting an empty one.
 
 ## Format
 
-- `description` is one sentence and it names the thing, not the category. It may carry a licensed
-  move; most of the good ones close on the concrete half.
+- `description` is one sentence and it names the thing, not the category. It may carry one of his
+  moves; most of the good ones close on the concrete half.
 - `support` is at most two sentences and never more than thirty words. Under, not at.
 - Every `number` is verbatim as measured. Never rounded to look tidy, never restated in prettier
   units.
@@ -146,7 +121,7 @@ none. Say so in the ship packet rather than emitting an empty one.
 ## Gates, in order
 
 Post-draft and advisory as of 2026-08-31, in the machine's current order: **origin (claims tier) →
-do-not-promote + coined-lines sweep → humanity scrub → critique / analyzer**.
+do-not-promote + coined-lines sweep → humanity scrub → critique**.
 
 **One narrowing, and it is this contract's own ruling.** The Expressive lane advises on untraced
 claims. Here, **the origin gate blocks on `number` and `date`** and advises on `support` prose. A

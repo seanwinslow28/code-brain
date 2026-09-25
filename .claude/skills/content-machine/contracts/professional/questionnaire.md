@@ -15,8 +15,7 @@ shape appearing twice gets caught.
 ## Governing documents, in precedence order
 
 1. [`LANE.md`](LANE.md) — Professional-lane law.
-2. [`../move-licensing.md`](../move-licensing.md) — the shared matrix.
-3. This contract.
+2. This contract.
 
 ## What this medium is
 
@@ -32,20 +31,13 @@ decides what it is about; this one is told.
 **The set is read as one document, by one person, in one sitting.** No other Professional document
 has four siblings on the same screen.
 
-## Licensed moves: six, and the shape they make is the point
+## Register: structural, never funny
 
-Budget heat 1, room 2. Six of thirty-six, the same six the cover letter gets:
+The cover letter's register: a narrative where one helps, and no humour. No pop culture, no
+self-deprecation as structure, no under-reaction, no canon line.
 
-**Expectation / Instead** · **Then / Now Narrator** · **Short Declarative Drop** ·
-**Anaphoric Stack** · **Blunt-Literal Description** · **Rhetorical Catechism**
-
-All six are structural. Not one is a joke. Everything at heat 2 or above is banned — no pop culture,
-no self-deprecation as structure, no under-reaction, no canon line.
-
-**One narrowing, from the second property above: Anaphoric Stack is rationed to one box in the set.**
-The move works by repetition, and a reader meeting it in three of five answers is not meeting a
-voice, they are meeting a template. This is the only medium where a licensed move can be spent by
-being used correctly twice.
+**One repetition limit across the set: a repeated-opening pattern appears in one box at most.** A
+reader meeting it in three of five answers is not meeting a voice, they are meeting a template.
 
 ## Answer the question that was asked
 
@@ -115,12 +107,12 @@ answered. An answer that ends by asking for the role has changed documents mid-f
 ## Gates, in order
 
 Post-draft as of 2026-08-31, in the machine's current order: **origin (claims tier) →
-do-not-promote + coined-lines sweep → humanity scrub → critique / analyzer**. Professional lane:
+do-not-promote + coined-lines sweep → humanity scrub → critique**. Professional lane:
 **origin blocks delivery** while any claim is untraced (`origin_check.py` exits 1).
 
-`writing-humanity-pass` runs **FULL** scrub, as in the rest of this lane below LinkedIn. The six
-licensed moves are structural rather than voice-bearing, so there is no signature-move layer to
-protect — but a licensed move is a deliberate choice and is not a tell.
+`writing-humanity-pass` runs **FULL** scrub, as in the rest of this lane below LinkedIn. The
+register is structural rather than voice-bearing, so there is no signature-move layer to protect —
+but a deliberate move is still not a tell.
 
 Coined lines run `gates/coined_lines.py --lane professional`, across the **whole set at once**. A
 line reused between two boxes of the same application is the cheapest possible instance of the

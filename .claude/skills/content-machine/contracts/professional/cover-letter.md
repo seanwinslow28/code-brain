@@ -13,27 +13,14 @@ is the first piece through it.
 ## Governing documents, in precedence order
 
 1. [`LANE.md`](LANE.md) — Professional-lane law.
-2. [`../move-licensing.md`](../move-licensing.md) — the shared matrix.
-3. This contract.
+2. This contract.
 
-## Licensed moves: six, and the shape they make is the point
+## Register: a narrative, and no humour
 
-Budget heat 1, room 2. Six of thirty-six:
-
-**Expectation / Instead** · **Then / Now Narrator** · **Short Declarative Drop** ·
-**Anaphoric Stack** · **Blunt-Literal Description** · **Rhetorical Catechism**
-
-Read that list for what it is rather than as a leftover. Every one of them is **structural** — a
-two-beat hinge, a past-self and a present-self, a rhythm break, a repeated opening, a thing described
-flat, a question answered immediately. Not one of them is a joke.
-
-**So the cover letter is the one Professional document that gets a narrative and no humour.** It can
+**The cover letter is the one Professional document that gets a narrative and no humour.** It can
 tell the story of a decision. It cannot be funny while it does. That is the register: a person who
 has done the work, telling you what he learned, in his own sentence rhythms, without performing.
-
-Everything at heat 2 or above is banned. No pop culture, no self-deprecation as structure, no
-under-reaction, no canon line. The moves that make a Substack post his are exactly the ones that
-make a cover letter read as a candidate who does not know where he is.
+No pop culture, no self-deprecation as structure, no under-reaction, no canon line.
 
 ## The exception that keeps the chain from mangling this document
 
@@ -118,11 +105,10 @@ revise request that makes the document worse.
 
 ## Gates, in order
 
-**Post-draft and advisory as of 2026-08-31** (the rules-off re-scope: nothing below is a drafting-time constraint any more). Order: **origin (claims tier) → do-not-promote + coined-lines sweep → humanity scrub → critique / analyzer**. Professional lane: **origin blocks delivery** while any claim is untraced.
+**Post-draft and advisory as of 2026-08-31** (the rules-off re-scope: nothing below is a drafting-time constraint any more). Order: **origin (claims tier) → do-not-promote + coined-lines sweep → humanity scrub → critique**. Professional lane: **origin blocks delivery** while any claim is untraced.
 
-`writing-humanity-pass` runs **FULL** scrub. The six licensed moves are structural rather than
-voice-bearing, so there is no signature-move layer to protect — but a licensed move is still a
-deliberate choice and is not a tell.
+`writing-humanity-pass` runs **FULL** scrub. The register is structural rather than voice-bearing,
+so there is no signature-move layer to protect — but a deliberate move is still not a tell.
 
 ## Delivery
 

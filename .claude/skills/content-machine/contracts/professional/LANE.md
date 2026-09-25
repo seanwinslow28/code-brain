@@ -18,11 +18,11 @@ far it has to reach, and supplies the post-draft check. **It is never loaded int
 context** — the drafting subagent gets the transcript, the corpus, the voice samples, the reference
 universe and the do-not-promote list, and nothing else (`SKILL.md`, "The shaping context").
 
-So a contract's **licensed-move roster is a statement of the register this medium lands in**, and its
-reader is the orchestrator at contract-authoring time ([#222](https://github.com/seanwinslow28/code-brain/issues/222)).
-It is not a checklist handed to a drafter, it is not a compliance target, and **nothing post-draft
-reads it** — the roster is advisory in all nine mediums and no gate checks a move against it. Nothing here is a drafting-time constraint any more; the deliverables, the format
-bounds and the negative specimens are what the orchestrator and the reader hold the piece against.
+A contract therefore carries **form only** (ruled 2026-09-25,
+[#306](https://github.com/seanwinslow28/code-brain/issues/306)): the deliverables, the format bounds,
+the first screen and the negative specimens. It carries no move list, no licensing budget and no prose
+rulebook. Voice is induced from Sean's samples, and when output is wrong the first remedy is more of
+his writing, never a new rule. The orchestrator and the reader hold the piece against the form.
 
 ## The seam this lane exists to hold
 
@@ -73,19 +73,16 @@ claim the gate would catch into a claim it cannot, and it makes the document wea
 place it needed to be strong. An untraced claim gets **asked about or struck**. It never gets blurred.
 The **ASK LIST** is mandatory in this lane, not optional.
 
-## Voice enters only where the matrix licenses it
+## Register, in plain words
 
-[`move-licensing.md`](../move-licensing.md) governs. Professional budgets run heat 0 to 2, so most of
-the 36-move roster is banned in most of this lane, and one medium licenses nothing at all. That is
-the design, not an oversight.
+Each contract states its register in a sentence or two. There is no move list or licensing budget
+behind it (retired 2026-09-25, [#306](https://github.com/seanwinslow28/code-brain/issues/306)).
 
-**A banned move is banned even when it would be good.** The move that would land beautifully in a
-Substack post is the exact move that reads as a candidate who does not know where he is.
+**The voice that lands in a Substack post is exactly what reads, here, as a candidate who does not
+know where he is.** That sentence is the lane.
 
-That is a statement of the register, not an enforced rule. No gate checks a draft against the matrix
-in this lane or any other ([#222](https://github.com/seanwinslow28/code-brain/issues/222)); what
-guards a Professional document is the origin gate, which **blocks** on any untraced claim, and
-`writing-critique`'s Voice dimension, which owns register drift.
+What guards a Professional document is the origin gate, which **blocks** on any untraced claim, and
+`writing-critique`'s Voice dimension, which reads register drift against Sean's samples.
 
 ## Where this lane's artifacts live
 

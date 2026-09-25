@@ -64,6 +64,11 @@ can answer a prompt in a launchd run). Then:
 4. Always non-destructive. Emit the machine-readable verdict block as a trailing
    HTML comment (see the rubric's "Headless verdict block").
 
+**Inside the Content Machine** (ruled 2026-09-25, #306): critique hands its
+findings to Sean with the draft. It never routes a revise through
+`writing-voice-modes` and never runs the analyzer. The chain-gate mode above stays
+as written for the headless Substack-Drafter agent, outside the machine.
+
 **One revise pass, grounded.** The cap is a proxy for the real lever: the single
 pass must be anchored to an external target (a specific finding + Sean's voice
 baseline), never "make it better." Un-anchored self-judged iteration degrades
@@ -85,8 +90,10 @@ premise.
    minutes). When the named **Value Gate verdict** is present, re-check each slot
    actually landed in the voiced draft (especially that the Transfer's artifact is
    really there) — verify, do not re-run the gate.
-3. **Voice** → defers to `writing-voice-modes` (signature moves present vs
-   generic narrator; register drift).
+3. **Voice** → read against `writing-voice-modes/references/voice-samples.md`
+   and the corpus: does it sound like him, or like a generic narrator? Register
+   drift is judged against the samples, not the move roster (ruled 2026-09-25,
+   #306).
 4. **Prose / line** → rhythm, sentence variety, repetition, clarity, AI-flatness.
    **The analyzer plugs in here.**
 5. **Hiring signal** (Sean-specific) → defers to `substack-value-engine`

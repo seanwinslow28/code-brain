@@ -17,8 +17,7 @@ and that contract's lens.
 ## Governing documents, in precedence order
 
 1. [`LANE.md`](LANE.md) — Professional-lane law.
-2. [`../move-licensing.md`](../move-licensing.md) — the shared matrix.
-3. This contract.
+2. This contract.
 
 ## LinkedIn is a syndication target, never a composition surface
 
@@ -35,27 +34,15 @@ against the source's transcript, not against nothing.
 If the cut wants a claim the source lacks, that is not a cut. It is a new piece, and it goes back to
 stage 1.
 
-## Licensed moves: twenty, the most of any Professional medium
+## Register: the one Professional medium that allows a joke
 
-Budget heat 2, room 2. Twenty of thirty-six:
+**This is the only Professional medium where a joke is allowed.** It shares that register with the
+portfolio write-up. The difference between them is who reads: one is read by a recruiter searching,
+the other by a visitor already looking.
 
-**Funniest Word Last** · **Unsignposted Pivot** · **Tool-as-Character** · **Expectation / Instead** ·
-**Then / Now Narrator** · **Flat Collision** · **Short Declarative Drop** · **Anaphoric Stack** ·
-**Hard Cut / Deflation** · **Rule of Three + Emotional Pivot** · **Pop Culture Anchoring** ·
-**Blunt-Literal Description** · **Reader-Dismissal** · **Equation / Formula Defamiliarizer** ·
-**Borrowed Canon Line** · **Faux-Ignorance Aside** · **Comic Under-Reaction** · **Fumbled Idiom** ·
-**Zeugma Paint** · **Rhetorical Catechism**
-
-**This is the only Professional medium that licenses a joke.** It shares its budget and therefore its
-roster with the portfolio write-up, which the matrix records as known coarseness. The difference
-between them is not the roster; it is that one is read by a recruiter searching and one is read by a
-visitor already looking.
-
-**Room 2 and the mic drop agree, which is worth noticing.** The verified post anatomy ends on a
-contrast, and every move that builds a contrast — Flat Collision, Hard Cut / Deflation,
-Expectation / Instead — is room 2 and licensed. The moves that would carry an ending by *return*
-instead — Callback Closer, Inverted Refrain, Sincerity Punished by the World — are room 4 and banned.
-The form and the matrix reached the same place independently.
+**The verified post anatomy ends on a contrast, not a return.** A post that lands closes on a flat
+turn against what came before it; an ending that works by calling back to the opening needs more room
+than the feed gives it.
 
 ## The two surfaces have opposite flare budgets
 
@@ -215,12 +202,13 @@ deletes nothing. It ships with every post and binds nothing.
 ## Gates, in order
 
 Post-draft as of 2026-08-31, in the machine's current order: **origin (claims tier) →
-do-not-promote + coined-lines sweep → humanity scrub → critique / analyzer**. Professional lane:
+do-not-promote + coined-lines sweep → humanity scrub → critique**. Professional lane:
 **origin blocks delivery** while any claim is untraced (`origin_check.py` exits 1), run against the
 **source artifact's transcript**.
 
 `writing-humanity-pass` runs the **voice-aware** scrub here, not the full neutral one — this is the
-only medium in the lane with a twenty-move roster to protect. A licensed move is not a tell.
+only medium in the lane that allows a joke, so there is voice to protect. A deliberate move is not a
+tell.
 
 **Coined lines carry one wrinkle, and it matters.** A cut reuses lines from its source by design, so
 it runs with the **source artifact's** slug:

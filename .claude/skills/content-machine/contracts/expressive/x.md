@@ -11,8 +11,8 @@ landed claim with no arc to soften it. The run proved the pairing incoherent. Sk
 as designed — a narrow claim, a sample, a retraction condition — and the post came out as evidence.
 Sean's verdict: *"That looks more like a Resume bullet point than a funny observational tweet."*
 
-The tell was in this file the whole time: **all thirteen moves below are comic**, and an evidence
-transcript makes none of them reachable. The lens was pulling against its own roster. It also reached
+The tell was in this file the whole time: **all thirteen moves this contract then licensed were comic**, and an evidence
+transcript makes none of them reachable. The lens was pulling against its own medium. It also reached
 past the sentences — because Skeptic needs measured evidence, it filtered which of his week's
 material was even eligible to become a post.
 
@@ -294,50 +294,28 @@ skips it the machine still ships a draft — that is the machine doing its job.
 ## Governing documents, in precedence order
 
 1. [`LANE.md`](LANE.md) — Expressive-lane law (the first-screen test, the reply-hook memo).
-2. [`../move-licensing.md`](../move-licensing.md) — the shared matrix.
-3. This contract.
+2. This contract.
 
-## Licensed moves: thirteen, all of them sentence-sized
+## Register
 
-Budget heat 3, room 1. X keeps the full register and gives up all the space:
+**X keeps the full register, and the reason is the audience, not the manners.** No recruiter is
+reading. A joke that would end a cover letter is fine here. Sean, 2026-09-06: *"I'm not dealing with
+recruiters, so I don't have to worry about professional language and being buttoned up. I'm not going
+to write a poop joke on a cover letter. But poop jokes and cursing are perfectly acceptable in X. I
+just don't want to be a dickhead to people."* The bodily and profane register stays in full.
 
-**Funniest Word Last** · **Shout-Caps** · **Rule of Three + Emotional Pivot** ·
-**Pop Culture Anchoring** · **Blunt-Literal Description** · **Reader-Dismissal** ·
-**Equation / Formula Defamiliarizer** · **Borrowed Canon Line** · **Faux-Ignorance Aside** ·
-**Affectionate-Insult Epithet** · **Fumbled Idiom** · **Zeugma Paint** · **Character-Intro Verdict**
+That quote is the whole ruling in one breath, and its last sentence is `## Stance and aim` below.
+**Loudness and aim are separate.** How loud a post gets is free; where a negative line points is not.
+The proof is his own: the loudest specimen in the corpus is a benchmark table swapped for his own
+bodily failings, at full volume, with every ounce of the negative landing on himself.
 
-Two things follow, and both are worth stating plainly.
+**An X post has no room for an arc.** A post is one landed sentence, not a small essay. Nothing that
+needs a setup and a return across several beats fits, so **the move that would have carried the
+ending is not available**, which is the real constraint of the medium and the reason most people's
+posts read as amputated blog paragraphs.
 
-**X is the only Expressive medium that keeps heat 3, and the reason is the audience, not the
-manners.** No recruiter is reading. A joke that would end a cover letter is fine here, and that is
-exactly what heat measures — Sean, 2026-09-06: *"I'm not dealing with recruiters, so I don't have to
-worry about professional language and being buttoned up. I'm not going to write a poop joke on a
-cover letter. But poop jokes and cursing are perfectly acceptable in X. I just don't want to be a
-dickhead to people."* The bodily and profane register stays licensed in full.
-
-That quote is the whole ruling in one breath, and the last sentence is the half this contract had
-never written down.
-
-**Heat is volume. Aim is a separate axis**, ruled 2026-09-06 in `## Stance and aim` below. The
-previous version of this line said *nothing about the medium asks him to behave*, which conflated the
-two and is now wrong in a specific way: the medium does not ask, and he ruled anyway. The *insulting*
-third of the register is aimed from now on, not free. The proof that the axes are independent is his
-own: the loudest specimen in the corpus is a benchmark table swapped for his own bodily failings —
-heat 3 at full volume, with every ounce of the negative landing on himself.
-
-**X gets no whole-piece moves, so a post has no arc.** Everything that needs a beat or more is banned
-by room: no Mid-Action Open, no Callback Closer, no Self-Deprecation as Structure, no Inverted
-Refrain, no Sincerity Punished by the World, no Comic Under-Reaction. A post is one landed sentence,
-not a small essay. **The move that would have carried the ending is not available**, which is the
-real constraint of the medium and the reason most people's posts read as amputated blog paragraphs.
-
-**Equation / Formula Defamiliarizer is licensed here and almost nowhere else** — its restriction is
-short-form, and this is short-form ([#175](https://github.com/seanwinslow28/code-brain/issues/175)).
-X is its home.
-
-**Screenwriting Cut-To is banned**, ruled against the axes: a single post has no room to establish
-the stated intent before turning on it, so the notation ends up doing work the setup should have done
-([#162](https://github.com/seanwinslow28/code-brain/issues/162)).
+(The move list, the budget and the per-move rulings that stood here were retired 2026-09-25,
+[#306](https://github.com/seanwinslow28/code-brain/issues/306).)
 
 ## Stance and aim
 
@@ -386,28 +364,6 @@ standalone post has no post to stand with.
 
 **Rule 2 binds all of X.** It has nothing to do with how the post was sourced.
 
-### Aiming notes on two moves
-
-No move was delicensed. Nothing in the roster caused the four cuts, the two obvious suspects were
-never reached in sixteen cold reps ([#248](https://github.com/seanwinslow28/code-brain/issues/248)'s
-coverage note), and nothing reads the matrix at runtime anyway
-([#222](https://github.com/seanwinslow28/code-brain/issues/222)) — so a ban would have cut moves the
-failures did not use and left the failures legal. Two moves get an aiming note instead, because the
-reply surface changes their mechanism:
-
-- **Reader-Dismissal** — the move contradicts the reader's assumption. In an essay the reader is a
-  stranger; **in a reply the reader is the person being answered**, so the move collides with rule 1
-  by construction. It only lands when the objection belongs to a third party — a lurker, not the
-  addressee. This is a *form* problem, the same class as "X gets no whole-piece moves," not a heat
-  problem.
-- **Affectionate-Insult Epithet** — the vocative points anywhere except the person being replied to.
-  The construction is fine about a third party and is rule 2 when aimed at the addressee. This
-  sharpens the `## Format` note that the same epithet reads as banter in a reply and a pile-on in a
-  quote-post.
-
-**Reopen trigger.** A deck failure that a delicensing would have caught and an aiming note did not.
-One specimen, not a hunch.
-
 ### On watch, not ruled
 
 All four picks were replies and **both quote-posts in the deck were cut**. Both also broke rule 1
@@ -416,12 +372,11 @@ few decks before anyone writes a rule about the button.
 
 ## Threads, and the honest limit
 
-A thread is the obvious way to buy room, and **this contract cannot grant it.** The matrix is a
-shared reference that contracts may narrow and never widen; lifting X to room 2 would license a
-dozen beat-sized moves across every piece of machinery that reads the matrix. If threads should
-unlock those moves, that is a **budget change on the matrix, ruled by Sean**, not a line in this file.
+A thread is the obvious way to buy room, and **this contract does not grant it.** Whether a thread
+earns its own form is an open question on the map (X threading), ruled by Sean, not a line in this
+file.
 
-Until then: a thread is a sequence of posts each obeying room 1. That is a real constraint and it is
+Until then: a thread is a sequence of posts, each one landing on its own. That is a real constraint and it is
 probably the right one — a thread whose beats only work in sequence is a blog post that has been
 chopped up, which is the anti-pattern below.
 
@@ -583,7 +538,7 @@ not want them. One specimen, not a hunch.
 - **Quote-post when the line should travel; reply when you actually want the conversation.** This is
   the one format rule that is about the button rather than the words, and it exists because the
   asymmetry above is large and invisible. It is not a rule to always quote-post: a reply is a remark
-  *to* a person, a quote-post is a remark *about* them in front of an audience, and at heat 3 that
+  *to* a person, a quote-post is a remark *about* them in front of an audience, and at full volume that
   distinction has teeth. An Affectionate-Insult Epithet lands as banter in a reply and can land as
   a pile-on when broadcast. Pick the surface for what the line is doing, then know what it costs.
 - **The craft survives the switch.** A quote-post still displays the post it answers, so the
@@ -675,7 +630,7 @@ The reading pass for recombination still runs. Expressive lane advises and never
 ### The rest of the chain
 
 - **Do-not-promote + coined-lines** — X needs these *most*. Its own negative specimens name the
-  recycled line as the medium's signature temptation, and a heat-3 six-word post is exactly where a
+  recycled line as the medium's signature temptation, and a full-volume six-word post is exactly where a
   suppressed topic slips out. Coined-lines does two jobs here: the one-artifact rule and the stimulus
   overlap above.
 
@@ -690,12 +645,6 @@ The reading pass for recombination still runs. Expressive lane advises and never
 - **Critique — false authority / operator credibility only.** Structure and hiring signal mean nothing
   at six words. False authority means a great deal: *the lecture* is this contract's named failure,
   cheapest to commit here and most expensive to be caught at.
-- **The analyzer does not run on X.** Both its bands are built from essays and X has no series in
-  either, so it cannot produce a meaningful reading of a six-word post — and the #232 run showed it
-  firing `[FLAG: monotonous, CV < 0.45]` on a 51-word draft, the exact case its own docs promise to
-  suppress for insufficient length. It returns when X has shipped enough posts to build a band. (The
-  underlying length-guard bug in `references/analyze.py` still bites short drafts in other mediums and
-  stays on the #232 defect list.)
 
 ## Delivery
 

@@ -9,9 +9,9 @@ detail that the writing has something to build a joke out of.
 Earned on the first X run ([#232](https://github.com/seanwinslow28/code-brain/issues/232)), where
 the contract's named lens was Skeptic. Skeptic did its job — a narrow claim, a sample, a retraction
 condition — and the post came out as evidence. His verdict: *"That looks more like a Resume bullet
-point than a funny observational tweet."* The contract's own thirteen licensed moves are all comic
+point than a funny observational tweet."* The thirteen moves the contract licensed then were all comic
 (Funniest Word Last, Fumbled Idiom, Affectionate-Insult Epithet, Faux-Ignorance Aside), and not one
-of them was reachable from an evidence transcript. The lens was pulling against the roster.
+of them was reachable from an evidence transcript. The lens was pulling against the medium's own register.
 
 ## What it probes for
 
