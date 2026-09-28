@@ -1,7 +1,7 @@
 ---
 lane: insights
 seat: insights-analytics
-updated: 2026-09-13
+updated: 2026-09-28
 ---
 # Lane manifest — Insights & Analytics
 
@@ -81,13 +81,13 @@ Corpus states are as of the `updated:` date in the header.
 | # | Title | Read this when | Format | Audio | Corpus |
 |---|---|---|---|---|---|
 | 1 | Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* (2020) | before you sign off on any experiment design | Apple Books | — none | ingested |
-| 2 | Knaflic, *Storytelling with Data* | when a metrics plan has to be read by people who did not build it | listen | Cole Nussbaumer Knaflic · 5:43 | not in corpus |
-| 3 | Bland & Osterwalder, *Testing Business Ideas* | — read on the discovery path | | | |
-| 4 | Ellis & Brown, *Hacking Growth* | — read on the growth path | | | |
-| 5 | Rumelt, *Good Strategy Bad Strategy* | — read on the strategy path | | | |
+| 2 | Hubbard, *How to Measure Anything* (3rd ed., 2014) | before you read a pilot too small for any controlled test | Apple Books | not checked | pending |
+| 3 | Knaflic, *Storytelling with Data* | when a metrics plan has to be read by people who did not build it | listen | Cole Nussbaumer Knaflic · 5:43 | not in corpus |
+| 4 | Bland & Osterwalder, *Testing Business Ideas* | — read on the discovery path | | | |
+| 5 | Ellis & Brown, *Hacking Growth* | — read on the growth path | | | |
+| 6 | Rumelt, *Good Strategy Bad Strategy* | — read on the strategy path | | | |
 
 ### Next
 
 - Rodrigues, *Product Analytics* (2020) — metric design to causal inference end-to-end, in R; the deepest analytics text after Kohavi.
-- Hubbard, *How to Measure Anything* — calibrated estimation and value of information; broader than product.
-- Croll & Yoskovitz, *Lean Analytics* — six models by five stages with benchmarks; the benchmarks are 2013-stale, the frameworks hold.
+- Croll & Yoskovitz, *Lean Analytics* — six models by five stages with benchmarks; the benchmarks are 2013-stale, the frameworks hold. Held on 2026-09-28: its app model assumes installs and in-app revenue, so it does not reach a pre-revenue cost case.

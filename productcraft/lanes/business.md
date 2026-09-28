@@ -1,7 +1,7 @@
 ---
 lane: business
 seat: business-economics
-updated: 2026-09-13
+updated: 2026-09-28
 ---
 # Lane manifest — Business & Economics
 
@@ -78,11 +78,14 @@ Corpus states are as of the `updated:` date in the header.
 | # | Title | Read this when | Format | Audio | Corpus |
 |---|---|---|---|---|---|
 | 1 | Ramanujam & Tacke, *Monetizing Innovation* (2016) | before an engagement where price is still an open question | Apple Books | Darren Stephens · 7:28 | ingested |
-| 2 | Bryar & Carr, *Working Backwards* | — read on the leadership path | | | |
-| 3 | Grove, *High Output Management* | — read on the leadership path | | | |
+| 2 | Maurya, *Running Lean* (3rd ed., 2022) | before a cost case with no price, revenue or retention curve yet | EPUB | not checked | pending |
+| 3 | Bryar & Carr, *Working Backwards* | — read on the leadership path | | | |
+| 4 | Grove, *High Output Management* | — read on the leadership path | | | |
 
 ### Next
 
 - Simon, *Confessions of the Pricing Man* — forty years of pricing cases carrying the profit math; overlaps Monetizing Innovation.
 - Lehrskov-Schmidt, *The Pricing Roadmap* — a step-by-step B2B SaaS packaging build; buy when a pricing page is on the table.
-- Croll & Yoskovitz, *Lean Analytics* — shared with the insights and growth lanes.
+- Croll & Yoskovitz, *Lean Analytics* — shared with the insights and growth lanes; held 2026-09-28 (see insights).
+- Walling, *Start Small, Stay Small* — the one book whose reader is a founder with no employees; mostly niche and launch, so held while *Running Lean* carries the pre-revenue case.
+- Walling, *The SaaS Playbook* — written for companies already near $10–20k a month; buy when an engagement has revenue.

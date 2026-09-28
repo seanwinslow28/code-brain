@@ -1,7 +1,7 @@
 ---
 lane: growth
 seat: growth-distribution
-updated: 2026-09-13
+updated: 2026-09-28
 ---
 # Lane manifest — Growth & Distribution
 
@@ -83,14 +83,14 @@ Corpus states are as of the `updated:` date in the header.
 | # | Title | Read this when | Format | Audio | Corpus |
 |---|---|---|---|---|---|
 | 1 | Ellis & Brown, *Hacking Growth* (2017) | before your first Growth engagement | Apple Books | Sean Ellis & Morgan Brown · 10:43 | ingested |
-| 2 | Dunford, *Obviously Awesome* | — read on the strategy path | | | |
-| 3 | Ramanujam & Tacke, *Monetizing Innovation* | — read on the business path | | | |
-| 4 | Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* | — read on the insights path | | | |
-| 5 | Fitzpatrick, *The Mom Test* | — read on the discovery path | | | |
+| 2 | Weinberg & Mares, *Traction* (2015) | before an engagement that has no channel yet and must pick which to test first | Apple Books | not checked | pending |
+| 3 | Dunford, *Obviously Awesome* | — read on the strategy path | | | |
+| 4 | Ramanujam & Tacke, *Monetizing Innovation* | — read on the business path | | | |
+| 5 | Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* | — read on the insights path | | | |
+| 6 | Fitzpatrick, *The Mom Test* | — read on the discovery path | | | |
 
 ### Next
 
 - Chen, *The Cold Start Problem* — network-effect mechanics; buy when an engagement has a network to bootstrap.
-- Weinberg & Mares, *Traction* — nineteen-channel enumeration with the Bullseye discipline; tactics aged, method did not.
 - Lauchengco, *Loved* — launch tiering and product marketing's four fundamentals.
 - Croll & Yoskovitz, *Lean Analytics* — shared with the insights and business lanes.

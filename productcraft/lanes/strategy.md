@@ -1,7 +1,7 @@
 ---
 lane: strategy
 seat: product-strategist
-updated: 2026-09-13
+updated: 2026-09-28
 ---
 # Lane manifest — Strategy
 
@@ -63,14 +63,14 @@ Corpus states are as of the `updated:` date in the header.
 | 1 | Cagan, *INSPIRED* (2nd ed.) | first, before any lane — the studio's opening listen | listen | Marty Cagan · 8:46 | not in corpus |
 | 2 | Rumelt, *Good Strategy Bad Strategy* (2011) | before your first Strategist engagement | Apple Books | Sean Runnette · 11:49 | ingested |
 | 3 | Dunford, *Obviously Awesome* (2nd ed. 2026) | before an engagement whose positioning is unsettled or contested | Apple Books | April Dunford · 2:49 | ingested |
-| 4 | Cagan & Jones, *EMPOWERED* | — read on the leadership path | | | |
-| 5 | Lombardo et al., *Product Roadmaps Relaunched* | — read on the delivery path | | | |
-| 6 | Patton, *User Story Mapping* | — read on the delivery path | | | |
+| 4 | Helmer, *7 Powers* (2016) | before a strategy has to argue why its advantage will last | Apple Books | not checked | pending |
+| 5 | Cagan & Jones, *EMPOWERED* | — read on the leadership path | | | |
+| 6 | Lombardo et al., *Product Roadmaps Relaunched* | — read on the delivery path | | | |
+| 7 | Patton, *User Story Mapping* | — read on the delivery path | | | |
 
 ### Next
 
 - Lafley & Martin, *Playing to Win* — the five-question cascade is a clean scaffold, but Rumelt covers the same ground first.
-- Helmer, *7 Powers* — a defensibility checklist; buy when a strategy needs a moat argument.
 - Rumelt, *The Crux* — same author; the Strategy Foundry workshop format is the reason to add it.
 - Perri, *Escaping the Build Trap* — scores across four seats and anchors none; the best learner's book in the set, so it may enter as Sean's reading before it enters the corpus.
-- Dikkers, *Creativity Machine* — contingent hold: the only candidate covering creative option generation; revisit if the Strategist's option generation feels thin after a couple of engagements.
+- Dikkers, *Creativity Machine* — contingent hold: the only candidate covering creative option generation; revisit if the Strategist's option generation feels thin after a couple of engagements. Not raised on the first train (2026-09-28), a revisit whose prior work narrowed the options; the next non-revisit train is the real test.

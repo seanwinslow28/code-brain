@@ -1,7 +1,7 @@
 ---
 lane: delivery
 seat: delivery-execution
-updated: 2026-09-13
+updated: 2026-09-28
 ---
 # Lane manifest — Delivery & Execution
 
@@ -93,14 +93,15 @@ Corpus states are as of the `updated:` date in the header.
 | 1 | Singer, *Shape Up* (2019) | first on this path — short, free, and the cheapest way to see the whole shape of the lane | PDF | — none | ingested |
 | 2 | Patton, *User Story Mapping* (2014) | before you slice a backlog into releases | EPUB | Roy McCrerey · 8:19 | ingested |
 | 3 | Lombardo et al., *Product Roadmaps Relaunched* (2017) | before your first outcome roadmap | EPUB | Theodore O'Brien · 6:41 | ingested |
-| 4 | Doerr, *Measure What Matters* | when you want the provenance behind the OKR translation, not the method | listen | narrator not captured · 7:56 | not in corpus |
-| 5 | Bryar & Carr, *Working Backwards* | — read on the leadership path | | | |
-| 6 | Grove, *High Output Management* | — read on the leadership path | | | |
-| 7 | Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* | — read on the insights path | | | |
-| 8 | Hughes Johnson, *Scaling People* | — read on the leadership path | | | |
-| 9 | Bland & Osterwalder, *Testing Business Ideas* | — read on the discovery path | | | |
-| 10 | Ellis & Brown, *Hacking Growth* | — read on the growth path | | | |
-| 11 | Cagan & Jones, *EMPOWERED* | — read on the leadership path | | | |
+| 4 | Maurya, *Running Lean* | — read on the business path | | | |
+| 5 | Doerr, *Measure What Matters* | when you want the provenance behind the OKR translation, not the method | listen | narrator not captured · 7:56 | not in corpus |
+| 6 | Bryar & Carr, *Working Backwards* | — read on the leadership path | | | |
+| 7 | Grove, *High Output Management* | — read on the leadership path | | | |
+| 8 | Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* | — read on the insights path | | | |
+| 9 | Hughes Johnson, *Scaling People* | — read on the leadership path | | | |
+| 10 | Bland & Osterwalder, *Testing Business Ideas* | — read on the discovery path | | | |
+| 11 | Ellis & Brown, *Hacking Growth* | — read on the growth path | | | |
+| 12 | Cagan & Jones, *EMPOWERED* | — read on the leadership path | | | |
 
 ### Next
 
