@@ -37,9 +37,15 @@ from the engagement. `PRODUCTCRAFT` is the default profile, so nothing that
 called the kit before changes meaning; the content machine's profile lives
 beside the machine and imports `tracekit` from here.
 
+0.8.0 checks the runtime against the transcript (#321): the Agent tool's `opus` and
+`sonnet` aliases moved to the 5.5 generation after the first train closed, and a
+record written from the alias names a model that never ran. An eleventh rung-0
+line reads each Claude pass's raw log for its model stamps and fails a record
+whose `runtime:` disagrees; a pass with no log or no stamp is unverifiable, named.
+
 First copy. The content machine's kit (#291) shares this code rather than
 forking it; `craftwork` extracts the shared home later.
 """
 
 KIT_NAME = "productcraft/trace"
-KIT_VERSION = "0.7.0"
+KIT_VERSION = "0.8.0"

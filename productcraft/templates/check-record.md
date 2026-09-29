@@ -13,7 +13,7 @@ seat: insights-analytics           # the checking seat
 kind: cosign                       # cosign | audit
 stance: first-sight                # first-sight | verify — a verify pass is round two, see below
 stage: 2                           # the checked artifact's stage
-model: claude-opus-5
+model: claude-opus-5-5
 grounding: full
 checked: pc-eng-001.discovery      # artifact id and revision checked
 checked_revision: 1

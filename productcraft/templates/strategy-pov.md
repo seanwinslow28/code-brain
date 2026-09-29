@@ -11,7 +11,7 @@ engagement: pc-eng-001-16bitfit-revisit
 date: 2026-09-20
 seat: product-strategist
 stage: 1
-model: claude-opus-5
+model: claude-opus-5-5
 grounding: full
 thin_lane: []
 adjacent_lanes: []

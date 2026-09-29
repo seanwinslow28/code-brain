@@ -3,7 +3,7 @@
 ```yaml
 name: business-economics
 seat: 5 of 7
-model: claude-sonnet-5      # structured quantitative work, Systemcraft's Ops analogue; the lane is tool-poor by ruling, so the thin-lane trigger may fire at Route — that is the ladder working, not a defect (#267)
+model: claude-sonnet-5-5      # structured quantitative work, Systemcraft's Ops analogue; the lane is tool-poor by ruling, so the thin-lane trigger may fire at Route — that is the ladder working, not a defect (#267)
 produces: Business case — pricing & packaging and the unit-economics model as required sections   # template: ../templates/business-case.md · id <eng>.business
 lane: ../lanes/business.md
 audits: Outcome roadmap (Delivery & Execution Lead)

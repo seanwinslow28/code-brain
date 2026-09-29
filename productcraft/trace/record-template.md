@@ -12,7 +12,7 @@ pass: pass-01                          # pass-NN, two digits, launch order; the 
 seat: product-strategist               # seat slug per templates/artifact-header.md; coordinator | red-team-gate
 kind: draft                            # draft | audit | co-sign | gate | repair | trial | open | readout | close
 stage: 1                               # fixed train numbering 1–7; 0 for open, readout, close, the breakdown, a one-off
-runtime: claude-opus-5                 # the model that actually ran, as its registry row's `runtime:` string (templates/runtime-registry.md) — a trial's real runtime too (the viewer hides it, the record never does)
+runtime: claude-opus-5-5                 # the model that actually ran, as its registry row's `runtime:` string (templates/runtime-registry.md) — a trial's real runtime too (the viewer hides it, the record never does)
 launch: "Agent tool, fresh context"    # verbatim launch form: the registry row's form with this pass's values
 effort: high
 launched: 2026-10-06T08:12:00-04:00    # exact instant, written before the seat fires

@@ -15,7 +15,7 @@ engagement: pc-eng-001-16bitfit-revisit
 date: 2026-09-20
 seat: discovery-lead                 # the owner; `coordinator` for the coordinator's own decisions
 artifact: artifacts/discovery-packet.md   # the artifact this decision shaped
-model: claude-opus-5                 # the runtime that actually ran, plus any deviation: "claude-opus-5 → codex gpt-5.6-sol high: gate FAIL"
+model: claude-opus-5-5                 # the runtime that actually ran, plus any deviation: "claude-opus-5-5 → codex gpt-5.6-sol high: gate FAIL"
 grounding: full                      # full | manifest-only | none  (see the degradation ladder below)
 status: decided                      # proposed | decided | superseded | reopened
 ratified: null                       # date Sean signed it, else null — a field, not a state

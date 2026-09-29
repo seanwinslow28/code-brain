@@ -11,7 +11,7 @@ engagement: pc-eng-001-16bitfit-revisit
 date: 2026-09-20
 seat: product-strategist           # the one seat that may write this file
 stage: 1                           # fixed train numbering 1–7; 0 for a one-off, an audit lane, or the breakdown
-model: claude-opus-5               # the runtime that actually ran, plus any deviation: "claude-opus-5 → codex gpt-5.6-sol high: gate FAIL"
+model: claude-opus-5-5               # the runtime that actually ran, plus any deviation: "claude-opus-5-5 → codex gpt-5.6-sol high: gate FAIL"
 grounding: full                    # full | manifest-only | none — see the ledger template's ladder
 thin_lane: []                      # topics with no manifest pointer, found mid-pass; finish at baseline, flag here
 adjacent_lanes: []                 # lanes noticed and not drafted — named, never written

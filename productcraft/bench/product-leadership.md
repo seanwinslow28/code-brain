@@ -3,7 +3,7 @@
 ```yaml
 name: product-leadership
 seat: 7 of 7 — last in the train
-model: claude-opus-5        # the memo's why-A-over-B and the stakeholder stance predictions are judgment; field forms constrain format, not reasoning (#267)
+model: claude-opus-5-5        # the memo's why-A-over-B and the stakeholder stance predictions are judgment; field forms constrain format, not reasoning (#267)
 produces: Leadership packet — stakeholder map + decision memos + operating-model doc   # templates: ../templates/leadership-packet.md, ../templates/decision-memo.md · ids <eng>.leadership + <eng>.memo-NN
 lane: ../lanes/leadership.md
 audits: Discovery packet, anchor the discovery plan (Discovery Lead)

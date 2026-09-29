@@ -3,7 +3,7 @@
 ```yaml
 name: growth-distribution
 seat: 4 of 7
-model: claude-sonnet-5      # corpus-carried lane (loops, channels, onboarding patterns); a novel loop escalates on the named triggers only, never at draft time (#267)
+model: claude-sonnet-5-5      # corpus-carried lane (loops, channels, onboarding patterns); a novel loop escalates on the named triggers only, never at draft time (#267)
 produces: Growth model & GTM plan       # template: ../templates/growth-gtm.md · id <eng>.growth
 lane: ../lanes/growth.md
 audits: Business case (Business & Economics Modeler)

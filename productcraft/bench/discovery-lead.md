@@ -3,7 +3,7 @@
 ```yaml
 name: discovery-lead
 seat: 2 of 7
-model: claude-opus-5        # building an opportunity tree from raw interviews is open-ended synthesis; a weak draft costs an Insights bounce (#267)
+model: claude-opus-5-5        # building an opportunity tree from raw interviews is open-ended synthesis; a weak draft costs an Insights bounce (#267)
 produces: Discovery packet — discovery plan + opportunity solution tree + evidence   # template: ../templates/discovery-packet.md · id <eng>.discovery
 lane: ../lanes/discovery.md
 audits: Strategy & POV doc (Product Strategist) — the one trailing audit that waits, for this seat's own stage-2 evidence

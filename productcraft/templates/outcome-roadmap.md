@@ -11,7 +11,7 @@ engagement: pc-eng-001-16bitfit-revisit
 date: 2026-09-25
 seat: delivery-execution
 stage: 6
-model: claude-sonnet-5
+model: claude-sonnet-5-5
 grounding: full
 thin_lane: []
 adjacent_lanes: []

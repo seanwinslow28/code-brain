@@ -949,7 +949,7 @@ def build(out: Path) -> Path:
         if spec["kind"] != "close":
             ext = "txt" if spec["runtime"].startswith("codex") else "jsonl"
             (out / "trace" / "logs" / f"{pid}.{ext}").write_text(
-                '{"synthetic": true, "note": "stub transcript; the kit never parses raw logs at rung 0"}\n', encoding="utf-8")
+                '{"synthetic": true, "note": "stub transcript with no model stamp; rung 0 reads only the stamps, so this pass is unverifiable there"}\n', encoding="utf-8")
         records[pid] = record_text(pid, spec, inputs, outputs)
     fill_checks(records, specs, outputs_by_pid)
     for i, spec in enumerate(specs, start=1):

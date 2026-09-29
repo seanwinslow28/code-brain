@@ -12,7 +12,7 @@ The seat artifacts stay exactly as they are. Their ids, tables and Moves grammar
 | Gate 2 / close gate passed | one per final artifact of stages 4–7, plus the gate, plus one whole-train readout |
 | an audit engagement closes | one per audit record, plus the close gate |
 
-One fresh-context Sonnet 5 pass per moment writes all of that moment's readouts (a mechanical transform of existing substance — the master skill's downshift case). It is a coordinator-commissioned document, logged in `trace/notes.md` with its transcript under `trace/logs/readout-NN.jsonl`, outside the train's pass budget.
+One fresh-context Sonnet 5.5 pass per moment writes all of that moment's readouts (a mechanical transform of existing substance — the master skill's downshift case). It is a coordinator-commissioned document, logged in `trace/notes.md` with its transcript under `trace/logs/readout-NN.jsonl`, outside the train's pass budget.
 
 ## Shape of one readout
 

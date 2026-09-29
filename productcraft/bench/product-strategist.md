@@ -3,7 +3,7 @@
 ```yaml
 name: product-strategist
 seat: 1 of 7 — first in the train
-model: claude-opus-5        # framing errors poison every seat below; the POV is where a founder's wish hides (#267). Deviations per the master skill's four named triggers, never silent
+model: claude-opus-5-5        # framing errors poison every seat below; the POV is where a founder's wish hides (#267). Deviations per the master skill's four named triggers, never silent
 produces: Strategy & POV doc            # template: ../templates/strategy-pov.md · id <eng>.strategy
 lane: ../lanes/strategy.md
 audits: Leadership packet, anchor the decision memos (Product Leadership & Org Designer)

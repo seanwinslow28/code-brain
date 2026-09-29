@@ -13,7 +13,7 @@ engagement: pc-eng-001-16bitfit-revisit
 date: 2026-09-26
 seat: product-leadership
 stage: 7
-model: claude-opus-5
+model: claude-opus-5-5
 grounding: full
 thin_lane: []
 adjacent_lanes: []
@@ -65,7 +65,7 @@ Two entity types, never mixed. Never dress an agent as a person.
 
 | Seat or skill | Baseline model | Owns | Cannot do | Reviewed by | Invocation record |
 |---|---|---|---|---|---|
-| discovery-lead | claude-opus-5 | the Discovery packet | decide, edit another seat's artifact | product-leadership (audit) | `trace/pass-NN-discovery-lead-draft.md` |
+| discovery-lead | claude-opus-5-5 | the Discovery packet | decide, edit another seat's artifact | product-leadership (audit) | `trace/pass-NN-discovery-lead-draft.md` |
 
 The `Invocation record` column points at the pass record (#272); it never narrates the run.
 

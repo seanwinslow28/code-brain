@@ -35,13 +35,14 @@ CHECK_NAMES = (
     "Each drafting stage has one draft, an audit, and its required co-signs",
     "Trials blind-labeled before their runtime is shown",
     "Every failure_code is in the taxonomy; a quote-required code quotes its text",
+    "Recorded runtime matches the raw log's model stamps",
 )
 
 _STRUCTURE_INDEX = 7   # rung-0 line 8 is the one check a studio writes for itself
 
 
 def check_names(studio: Studio = PRODUCTCRAFT) -> tuple[str, ...]:
-    """The ten line names in order, with the studio's own name on its structure line."""
+    """The eleven line names in order, with the studio's own name on its structure line."""
     names = list(CHECK_NAMES)
     names[_STRUCTURE_INDEX] = studio.structure_check_name
     return tuple(names)
@@ -81,6 +82,7 @@ def run_checks(eng: Engagement, taxonomy: Taxonomy | None = None) -> list[Check]
         structure(eng),
         _blind(eng),
         _codes(eng, taxonomy),
+        _runtime_stamps(eng),
     ]
 
 
@@ -686,4 +688,60 @@ def _codes(eng: Engagement, tax: Taxonomy) -> Check:
             )
             continue
         c.n_ok += 1
+    return c
+
+
+# --------------------------------------------------------------------------- #
+# 10 · runtime stamps (an alias is not a pin)
+# --------------------------------------------------------------------------- #
+
+_MODEL_STAMP = re.compile(r'"model"\s*:\s*"(claude-[A-Za-z0-9.\-]+)"')
+_NO_LOG = ("", "—", "-", "null", "none")
+
+
+def _runtime_stamps(eng: Engagement) -> Check:
+    """A Claude pass's `runtime:` is the model its own transcript says answered.
+
+    Ruled on #321 (2026-09-29): the Agent tool's `opus` / `sonnet` aliases moved
+    to the 5.5 generation after pc-eng-001 closed, and a record written from the
+    alias would have named a model that never ran. The transcript stamps every
+    assistant message with its model, so the record is checked against the stamp,
+    never the alias. `<synthetic>` stamps are not models. A pass with no readable
+    JSONL log, or a log with no stamp, is unverifiable and named — never passed.
+    Codex and other rows are out of scope until their logs are read the same way;
+    so are the coordinator's own passes with no log, whose model is stated.
+    """
+    c = Check(CHECK_NAMES[10])
+    no_log: list[str] = []
+    no_stamp: list[str] = []
+    out_of_scope = 0
+    for r in eng.records:
+        if not r.runtime.startswith("claude-"):
+            out_of_scope += 1
+            continue
+        log = r.raw_log.strip()
+        if r.kind in eng.studio.coordinator_kinds and log.lower() in _NO_LOG:
+            out_of_scope += 1
+            continue
+        c.n_total += 1
+        text = eng.read_text(log) if log.endswith(".jsonl") else None
+        if text is None:
+            no_log.append(r.pass_id)
+            continue
+        stamps = set(_MODEL_STAMP.findall(text))
+        if not stamps:
+            no_stamp.append(r.pass_id)
+        elif stamps == {r.runtime}:
+            c.n_ok += 1
+        else:
+            c.findings.append(
+                f"{r.pass_id}: runtime {r.runtime} but its raw log is stamped {', '.join(sorted(stamps))}")
+    c.n_unverifiable = len(no_log) + len(no_stamp)
+    if no_log:
+        c.notes.append(f"{len(no_log)} Claude pass(es) with no readable JSONL raw log: {', '.join(no_log)}")
+    if no_stamp:
+        c.notes.append(f"{len(no_stamp)} raw log(s) carry no model stamp: {', '.join(no_stamp)}")
+    if out_of_scope:
+        c.notes.append(
+            f"{out_of_scope} pass(es) not a Claude row, or the coordinator's own session with no log — out of scope")
     return c

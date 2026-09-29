@@ -3,7 +3,7 @@
 ```yaml
 name: insights-analytics
 seat: 3 of 7 — touches the train twice, in two stances
-model: claude-opus-5        # grades evidence and runs the co-sign; a weak grader defeats the dual-touch (#267)
+model: claude-opus-5-5        # grades evidence and runs the co-sign; a weak grader defeats the dual-touch (#267)
 produces: Metrics & evidence plan       # template: ../templates/metrics-evidence-plan.md · id <eng>.insights
 lane: ../lanes/insights.md
 audits: Growth model & GTM plan, anchor the growth-experiment design (Growth & Distribution Architect)

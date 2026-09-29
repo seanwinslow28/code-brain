@@ -258,6 +258,10 @@ _Avoid_: leaderboard, benchmark, score
 The registry's name for where a pass's token count came from — one value per row, mirrored in the trace kit and held equal by a test. It says where the number came from, never how good it is.
 _Avoid_: cost source, usage type
 
+**Alias probe**:
+The coordinator's one-line check at Route of which model each Agent-tool alias (`opus`, `sonnet`, `haiku`) actually launches today, written into the Route entry before the first Claude pass. An alias is not a pin: it resolves to whatever the harness ships, so a seat file's `model:` holds only if the probe agrees. Rung-0 line 11 checks the same thing after the fact, against each transcript's model stamps.
+_Avoid_: model check, version check
+
 **Promotion**:
 A trial output entering the train in place of the baseline it shadowed, by a dated owner-approved substitution once the blind label passes the trial and fails the baseline, recorded as one `promoted:` line in the trial record's notes.
 _Avoid_: swap-in, winner

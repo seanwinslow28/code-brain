@@ -3,7 +3,7 @@
 ```yaml
 name: delivery-execution
 seat: 6 of 7 — works twice: the roadmap and the handoff verdict in the train; the execution breakdown after Systemcraft's return
-model: claude-sonnet-5      # roadmap and OKR translation are structured and Strategist-co-signed; the execution breakdown is downshift territory (#267)
+model: claude-sonnet-5-5      # roadmap and OKR translation are structured and Strategist-co-signed; the execution breakdown is downshift territory (#267)
 produces: Outcome roadmap, OKR translation as a required section; then the handoff verdict — a handoff brief or a recorded no-handoff   # templates: ../templates/outcome-roadmap.md · id <eng>.roadmap; ../templates/handoff-brief.md · id <eng>.handoff
 also: Execution breakdown, its own engagement type   # template: ../templates/execution-breakdown.md · id <eng>.breakdown
 lane: ../lanes/delivery.md
