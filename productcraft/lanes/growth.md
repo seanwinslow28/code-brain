@@ -1,7 +1,7 @@
 ---
 lane: growth
 seat: growth-distribution
-updated: 2026-09-28
+updated: 2026-09-29
 ---
 # Lane manifest — Growth & Distribution
 
@@ -60,10 +60,17 @@ published — carry that year forward or do not carry the number.
 
 ## Book layer
 
-Ellis & Brown is ingested and anchors the lane; Dunford and Fitzpatrick reach in from
-their own lanes for positioning and for early-funnel qualification.
+Two books are ingested. Ellis & Brown anchors the lane once a product has users; Weinberg
+& Mares covers the step before it, picking which channel to test at all. Dunford,
+Fitzpatrick and Maurya reach in from their own lanes.
 
+- **Weinberg & Mares, *Traction* — ch. 3, 4** — [`books/traction/`](../corpus/books/traction/) — there is no working channel yet, and two or three have to be picked to test first, cheaply. Pair it with the book's `channel-index.md`, which carries each channel's test and a 2026 status.
+- **Weinberg & Mares, *Traction* — ch. 2, 5** — [`books/traction/`](../corpus/books/traction/) — a growth plan has no numeric traction goal, or channel work is competing with product work for the founder's week.
+- **Weinberg & Mares, *Traction* — ch. 15, 16** — [`books/traction/`](../corpus/books/traction/) — a free tool could be built as a lead engine, or the product has a natural sharing moment and the loop needs sizing.
+- **Weinberg & Mares, *Traction* — ch. 9, 12** — [`books/traction/`](../corpus/books/traction/) — paid or organic search is on the shortlist, or a landing page is proposed as a demand test. Read each chapter's vintage note first.
 - **Ellis & Brown, *Hacking Growth* — ch. 3, 4, 5, 7** — [`books/hacking-growth/`](../corpus/books/hacking-growth/) — choosing a growth metric, setting experiment cadence, picking acquisition channels, or diagnosing churn.
+- **Maurya, *Running Lean* — ch. 14** — [`books/running-lean/`](../corpus/books/running-lean/) — before product/market fit, choosing the one scalable channel to bet on and the test that proves it.
+- **Helmer, *7 Powers* — ch. 2, 9** — [`books/7-powers/`](../corpus/books/7-powers/) — deciding whether buying share or users now is worth it, or whether a network effect's boundary matches the market.
 - **Dunford, *Obviously Awesome* — ch. 8, 10** — [`books/obviously-awesome/`](../corpus/books/obviously-awesome/) — defining target accounts, or validating a pitch against real prospects.
 - **Fitzpatrick, *The Mom Test* — ch. 5, 6** — [`books/the-mom-test/`](../corpus/books/the-mom-test/) — early meetings end without next steps, or pipeline depends entirely on cold outreach.
 
@@ -76,6 +83,15 @@ repaired, because it cannot be told whether that is capture damage or a publishe
 The ch. 8 persona cards have transposed lifetime-value figures that invert the chapter's
 argument; only the prices and CAC there are reliable.
 
+*Traction* came through the capture clean, but it is **2015, venture-framed, and written
+before AI**: ad platforms have automated, app tracking needs consent, search answers now
+come from AI, app stores are pay-to-play, and newsletters, creators and Discord are absent.
+The `channel-index.md` status column (held, moved, broken) is the distillation's judgment,
+not the book's. It never discusses sample size and recommends continuous A/B testing, so
+its testing advice defers to Kohavi. Its own figures disagree across chapters (Mint's
+pre-launch signups, Skok's record, Dropbox's search acquisition cost against *Hacking
+Growth*'s), and one ch. 13 sentence inverts its own argument; all flagged in place.
+
 ## Reading path
 
 Corpus states are as of the `updated:` date in the header.
@@ -83,11 +99,13 @@ Corpus states are as of the `updated:` date in the header.
 | # | Title | Read this when | Format | Audio | Corpus |
 |---|---|---|---|---|---|
 | 1 | Ellis & Brown, *Hacking Growth* (2017) | before your first Growth engagement | Apple Books | Sean Ellis & Morgan Brown · 10:43 | ingested |
-| 2 | Weinberg & Mares, *Traction* (2015) | before an engagement that has no channel yet and must pick which to test first | Apple Books | not checked | pending |
+| 2 | Weinberg & Mares, *Traction* (2015) | before an engagement that has no channel yet and must pick which to test first | Apple Books | not checked | ingested |
 | 3 | Dunford, *Obviously Awesome* | — read on the strategy path | | | |
 | 4 | Ramanujam & Tacke, *Monetizing Innovation* | — read on the business path | | | |
 | 5 | Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* | — read on the insights path | | | |
 | 6 | Fitzpatrick, *The Mom Test* | — read on the discovery path | | | |
+| 7 | Maurya, *Running Lean* | — read on the business path | | | |
+| 8 | Helmer, *7 Powers* | — read on the strategy path | | | |
 
 ### Next
 

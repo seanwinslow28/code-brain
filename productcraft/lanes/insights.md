@@ -1,7 +1,7 @@
 ---
 lane: insights
 seat: insights-analytics
-updated: 2026-09-28
+updated: 2026-09-29
 ---
 # Lane manifest — Insights & Analytics
 
@@ -55,9 +55,21 @@ first for definitions and the second for whether a number can be believed.
 
 ## Book layer
 
-Kohavi is ingested, and it is the systematic treatment the free papers argue toward.
+Two books are ingested. Kohavi is the systematic treatment the free papers argue toward,
+for products with enough traffic to run a controlled test. Hubbard covers what Kohavi
+cannot: a pilot too small for any test, and a single measurer with no second reviewer.
+
+**Standing note on Hubbard.** The Rule of Five and the single-draw majority rule (the Urn of
+Mystery) assume the sample was drawn at random from the population. A hand-recruited pilot
+is not a random draw, so neither rule's stated confidence carries over to it. Use them to
+bound what random draws would say, never as the reading of the pilot itself.
 
 - **Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* — ch. 3, 6, 7, 21** — [`books/trustworthy-online-controlled-experiments/`](../corpus/books/trustworthy-online-controlled-experiments/) — defining metrics, building an OEC, or deciding whether a measured result can be trusted at all.
+- **Hubbard, *How to Measure Anything* — ch. 3, 9** — [`books/how-to-measure-anything/`](../corpus/books/how-to-measure-anything/) — a pilot of 5 to 30 users is all the data there is, and it has to be known which small-sample rules apply and what hand-picked recruitment breaks.
+- **Hubbard, *How to Measure Anything* — ch. 5** — [`books/how-to-measure-anything/`](../corpus/books/how-to-measure-anything/) — before trusting your own ranges or probabilities with no second reviewer; run the book's `calibration-kit.md`.
+- **Hubbard, *How to Measure Anything* — ch. 7** — [`books/how-to-measure-anything/`](../corpus/books/how-to-measure-anything/) — before commissioning any measurement: whether it is worth running, and how much it should cost.
+- **Hubbard, *How to Measure Anything* — ch. 10** — [`books/how-to-measure-anything/`](../corpus/books/how-to-measure-anything/) — combining a calibrated prior with a handful of observations, or sanity-checking a "significant" result against a low prior.
+- **Hubbard, *How to Measure Anything* — ch. 12** — [`books/how-to-measure-anything/`](../corpus/books/how-to-measure-anything/) — the instrument is someone's judgment (an expert, a panel, an LLM grader) and has to be validated rather than trusted.
 - **Ellis & Brown, *Hacking Growth* — ch. 2, 3, 6** — [`books/hacking-growth/`](../corpus/books/hacking-growth/) — designing user surveys, finding a behavioral threshold, or diagnosing where users drop off.
 - **Rumelt, *Good Strategy Bad Strategy* — ch. 2, 16** — [`books/good-strategy-bad-strategy/`](../corpus/books/good-strategy-bad-strategy/) — hunting the reframe or anomaly that turns a known situation into advantage.
 
@@ -74,6 +86,15 @@ equations are reconstructions or absent, and the *Hacking Growth* cohort workshe
 corrupted and contradicts its own prose — its numbers come from the narration, not the
 table.
 
+Hubbard's figures survive only as images; the load-bearing ones were read back, including
+Exhibit 9.5 (checked cell by cell and recomputed) and every appendix calibration key. Four
+flagged pages stay unresolved, and three pages the capture report did not flag lost lines
+that could not be recovered — each is named in the distillate. The multi-variable
+value-of-information method, and any calibration test beyond the appendix, need the
+book's website spreadsheets, which are not in the corpus. A few of the book's own exhibits
+contradict its prose (one survey table's counts exceed its possible maximum); flagged in
+place. Vintage is 2014: tool lists, prediction markets and its view of AI as a judge.
+
 ## Reading path
 
 Corpus states are as of the `updated:` date in the header.
@@ -81,7 +102,7 @@ Corpus states are as of the `updated:` date in the header.
 | # | Title | Read this when | Format | Audio | Corpus |
 |---|---|---|---|---|---|
 | 1 | Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* (2020) | before you sign off on any experiment design | Apple Books | — none | ingested |
-| 2 | Hubbard, *How to Measure Anything* (3rd ed., 2014) | before you read a pilot too small for any controlled test | Apple Books | not checked | pending |
+| 2 | Hubbard, *How to Measure Anything* (3rd ed., 2014) | before you read a pilot too small for any controlled test | Apple Books | not checked | ingested |
 | 3 | Knaflic, *Storytelling with Data* | when a metrics plan has to be read by people who did not build it | listen | Cole Nussbaumer Knaflic · 5:43 | not in corpus |
 | 4 | Bland & Osterwalder, *Testing Business Ideas* | — read on the discovery path | | | |
 | 5 | Ellis & Brown, *Hacking Growth* | — read on the growth path | | | |
