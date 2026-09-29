@@ -1,7 +1,7 @@
 ---
 lane: discovery
 seat: discovery-lead
-updated: 2026-09-13
+updated: 2026-09-29
 ---
 # Lane manifest — Discovery
 
@@ -11,8 +11,10 @@ in the private corpus (`../corpus/`, gitignored), so pointers resolve only on a 
 has it (degradation ladder otherwise). Follow only the pointers relevant to the task. Seats
 stop at `## Reading path`; that section is the owner's.
 
-This lane's free layer is a single hub. Every pointer below resolves to the same file, so
-when it is absent the lane degrades all at once — declare `manifest-only` and mean it.
+This lane's free layer is one hub plus one solo-founder supplement. Most pointers below
+resolve to Torres's file, so when the corpus is absent the lane degrades all at once —
+declare `manifest-only` and mean it. Cohen's essays add the one thing Torres assumes away:
+discovery run by a single person with no product trio to check them.
 
 ## The habit, and its cadence
 
@@ -31,6 +33,17 @@ when it is absent the lane degrades all at once — declare `manifest-only` and 
 - **Story-based interviewing and the ladder of evidence** — [`producttalk.md`](../corpus/canon/producttalk.md) — interviews are producing opinions instead of behavior, or a survey is offered as a substitute for talking to someone.
 - **The interview snapshot** — [`producttalk.md`](../corpus/canon/producttalk.md) — a finished interview needs to become something the team can act on this week and still recognize in six months.
 - **Recruiting, and the Zonar booking-funnel automation** — [`producttalk.md`](../corpus/canon/producttalk.md) — weekly interviewing keeps slipping because nobody is on the calendar.
+- **Finding people to interview when you have nothing** — [`jason-cohen.md`](../corpus/canon/jason-cohen.md) — there is no product, brand or audience yet, and nobody to interview.
+
+## Interviewing alone
+
+The trio is a check this lane assumes; a solo founder has to build it out of paper.
+
+- **Goals before hypotheses: what an interview series must learn** — [`jason-cohen.md`](../corpus/canon/jason-cohen.md) — interviews are about to start without a written list of what they need to learn, or the plan is to ask customers what to build.
+- **Hypotheses written down first: the pre-commitment sheet** — [`jason-cohen.md`](../corpus/canon/jason-cohen.md) — one person is interviewing with no second researcher, and needs a guard against hearing only what they hoped to hear.
+- **From hypothesis to open question** — [`jason-cohen.md`](../corpus/canon/jason-cohen.md) — the draft questions lead the witness or ask about future intent.
+- **Running the interview: surprise, segments, price, and the market guru** — [`jason-cohen.md`](../corpus/canon/jason-cohen.md) — mid-series, answers are splitting into groups, price has not come up, or interviewees keep speaking for "most people."
+- **Stop rules: boring, convergent, and ten who say they will buy** — [`jason-cohen.md`](../corpus/canon/jason-cohen.md) — after a batch of interviews, deciding whether to go on, change method, or drop the idea.
 
 ## Assumption testing
 
@@ -58,6 +71,10 @@ experiment library itself.
 - **Singer, *Shape Up* — ch. 3, 4, 5** — [`books/shape-up/`](../corpus/books/shape-up/) — narrowing a vague request into a bounded problem and roughing out a de-risked solution.
 - **Patton, *User Story Mapping* — ch. 13, 14, 15** — [`books/user-story-mapping/`](../corpus/books/user-story-mapping/) — framing opportunities, or designing the smallest test of an assumption.
 - **Bryar & Carr, *Working Backwards* — ch. 5, 10** — [`books/working-backwards/`](../corpus/books/working-backwards/) — defining a product before building it, or sizing a market by subtraction.
+- **Maurya, *Running Lean* — ch. 7, 8, 10** — [`books/running-lean/`](../corpus/books/running-lean/) — first contact with customers when there is no product, and the offer, the pitch and a pricing call-to-action have to be designed together.
+- **Maurya, *Running Lean* — ch. 9** — [`books/running-lean/`](../corpus/books/running-lean/) — the smallest product has to ship in about two months, and a concierge, Wizard-of-Oz or foot-in-the-door version is on the table.
+- **Weinberg & Mares, *Traction* — ch. 9, 18** — [`books/traction/`](../corpus/books/traction/) — a demand test is being designed before building, or the first business-customer problem conversations are being planned.
+- **Hubbard, *How to Measure Anything* — ch. 8, 11** — [`books/how-to-measure-anything/`](../corpus/books/how-to-measure-anything/) — designing a survey or an observation plan, and choosing between an existing trail, direct observation and an experiment.
 - **Ramanujam & Tacke, *Monetizing Innovation* — ch. 4, 5** — [`books/monetizing-innovation/`](../corpus/books/monetizing-innovation/) — testing what customers will actually pay before committing to a build.
 
 **The *Testing Business Ideas* triage layer is back** (recovered 2026-09-21). Evidence
@@ -68,7 +85,10 @@ deterministically and checked against a card page. They live in that book's
 `experiment-index.md`; reach for it when you are choosing between experiments, and still use
 ch. 8's three questions and four rules of thumb to frame the choice. One piece stays
 missing: the two selection maps, whose per-experiment positions on the average-time axis
-could not be read back within a bounded error. Eleven figures in Torres are prose
+could not be read back within a bounded error.
+
+*Running Lean*'s ch. 8 interview script opens under a false research pretext, and the book
+does not remark on it; drop that line when reusing the script. Eleven figures in Torres are prose
 reconstructions, flagged chapter by chapter.
 
 ## Reading path
@@ -84,6 +104,9 @@ Corpus states are as of the `updated:` date in the header.
 | 5 | Patton, *User Story Mapping* | — read on the delivery path | | | |
 | 6 | Bryar & Carr, *Working Backwards* | — read on the leadership path | | | |
 | 7 | Ramanujam & Tacke, *Monetizing Innovation* | — read on the business path | | | |
+| 8 | Maurya, *Running Lean* | — read on the business path | | | |
+| 9 | Weinberg & Mares, *Traction* | — read on the growth path | | | |
+| 10 | Hubbard, *How to Measure Anything* | — read on the insights path | | | |
 
 ### Next
 

@@ -1,7 +1,7 @@
 ---
 lane: strategy
 seat: product-strategist
-updated: 2026-09-28
+updated: 2026-09-29
 ---
 # Lane manifest — Strategy
 
@@ -36,12 +36,16 @@ the task. Seats stop at `## Reading path`; that section is the owner's.
 
 ## Book layer
 
-Both of this lane's books are ingested. Rumelt supplies the instrument you write with and
-the instrument you audit with; Dunford supplies the positioning method the free layer has
-no entry for at all.
+All three of this lane's books are ingested. Rumelt supplies the instrument you write with
+and the instrument you audit with; Dunford supplies the positioning method the free layer
+has no entry for at all; Helmer supplies the argument for why an advantage will last.
 
 - **Rumelt, *Good Strategy Bad Strategy* — ch. 3, 5** — [`books/good-strategy-bad-strategy/`](../corpus/books/good-strategy-bad-strategy/) — auditing a strategy document, or writing one from diagnosis through to coordinated action.
 - **Dunford, *Obviously Awesome* — ch. 2, 7, 9** — [`books/obviously-awesome/`](../corpus/books/obviously-awesome/) — choosing a market category, a competitive frame, or a differentiation claim.
+- **Helmer, *7 Powers* — ch. 0, 9** — [`books/7-powers/`](../corpus/books/7-powers/) — a strategy has to argue why its advantage will last, and which advantages the business can still establish at its current stage.
+- **Helmer, *7 Powers* — ch. 3** — [`books/7-powers/`](../corpus/books/7-powers/) — attacking an incumbent whose rational best response would damage its own core business.
+- **Helmer, *7 Powers* — ch. 1, 2, 4** — [`books/7-powers/`](../corpus/books/7-powers/) — a moat claim rests on scale, network effects or lock-in and needs sizing before it goes into the strategy doc.
+- **Helmer, *7 Powers* — ch. 6, 7, 8** — [`books/7-powers/`](../corpus/books/7-powers/) — someone names a person, patent, dataset or process as "our moat," or the product has traction and nothing yet stops a copy.
 - **Cagan & Jones, *EMPOWERED* — ch. 12, 37–39, 48–51, 62–69** — [`books/empowered/`](../corpus/books/empowered/) — a company has goals and a roadmap but nothing between them, or focus needs an intervention.
 - **Patton, *User Story Mapping* — ch. 2** — [`books/user-story-mapping/`](../corpus/books/user-story-mapping/) — defining an MVP by outcome rather than feature count, or slicing a release roadmap.
 - **Lombardo, McCarthy, Ryan & Connors, *Product Roadmaps Relaunched* — ch. 4, 7** — [`books/product-roadmaps-relaunched/`](../corpus/books/product-roadmaps-relaunched/) — grounding a roadmap in mission, vision and business objectives, or choosing a prioritization framework.
@@ -54,6 +58,15 @@ components plus five steps and adds the Pre-Work chapter — anything citing the
 structure will not match. EMPOWERED's strategic-context diagram is a prose reconstruction,
 and its case study is a composite the author assembled, not one real quarter.
 
+*7 Powers*' equations were all garbled in capture and are now **read back from the page
+images and transcribed** (collected in the book's `equations.md`), not reconstructed; chart
+values read from images are labelled approximate. Eight reference URLs stay clipped at the
+column edge. The book's own derivation carries typos and one symbol used in two senses,
+all flagged in place. Read its evidence for what it is: the claim that seven Powers are
+exhaustive is empirical by Helmer's own note, the stage data are unsized student papers,
+and the company snapshots are 2015–16. Its most useful line for an early venture: at
+origination only two Powers can be established, and the rest can only be designed for.
+
 ## Reading path
 
 Corpus states are as of the `updated:` date in the header.
@@ -63,7 +76,7 @@ Corpus states are as of the `updated:` date in the header.
 | 1 | Cagan, *INSPIRED* (2nd ed.) | first, before any lane — the studio's opening listen | listen | Marty Cagan · 8:46 | not in corpus |
 | 2 | Rumelt, *Good Strategy Bad Strategy* (2011) | before your first Strategist engagement | Apple Books | Sean Runnette · 11:49 | ingested |
 | 3 | Dunford, *Obviously Awesome* (2nd ed. 2026) | before an engagement whose positioning is unsettled or contested | Apple Books | April Dunford · 2:49 | ingested |
-| 4 | Helmer, *7 Powers* (2016) | before a strategy has to argue why its advantage will last | Apple Books | not checked | pending |
+| 4 | Helmer, *7 Powers* (2016) | before a strategy has to argue why its advantage will last | Apple Books | not checked | ingested |
 | 5 | Cagan & Jones, *EMPOWERED* | — read on the leadership path | | | |
 | 6 | Lombardo et al., *Product Roadmaps Relaunched* | — read on the delivery path | | | |
 | 7 | Patton, *User Story Mapping* | — read on the delivery path | | | |

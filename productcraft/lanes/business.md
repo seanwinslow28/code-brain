@@ -1,7 +1,7 @@
 ---
 lane: business
 seat: business-economics
-updated: 2026-09-28
+updated: 2026-09-29
 ---
 # Lane manifest — Business & Economics
 
@@ -37,6 +37,17 @@ the vintage with it — a threshold without a year is a defect, not a shortcut.
 - **The Cash Flow Trough: The Shape, With Numbers** — [`saas-metrics.md`](../corpus/canon/saas-metrics.md) — a growth investment is being challenged on near-term losses, or a prepay/billing-terms decision needs its cash consequence made concrete.
 - **The Operating Layer Beneath the Metrics** — [`saas-metrics.md`](../corpus/canon/saas-metrics.md) — the argument is about which segment or motion to fund, or funnel and hiring plans need to reconcile with the revenue target.
 
+## Founder time and the pre-revenue cost case
+
+Cohen's essays are the only source on this shelf that prices the founder's own hours. The
+stepwise method in the file is a reading of his arithmetic, not his own procedure, and his
+rates are 2012 judgement calls — carry the method, never the numbers.
+
+- **Founder time as a deferred, risky invoice** — [`jason-cohen.md`](../corpus/canon/jason-cohen.md) — the founder's own hours are missing from a cost case, or an old salary or consulting rate is standing in for their value.
+- **Pricing founder hours into a pre-revenue cost case** — [`jason-cohen.md`](../corpus/canon/jason-cohen.md) — building a cost case with no price or revenue yet, and needing a founder-hours line plus a buy-or-do-it-yourself filter for tasks.
+- **The Tringas counter-view: cap the hours, do not price them** — [`jason-cohen.md`](../corpus/canon/jason-cohen.md) — the venture runs alongside a day job, or early revenue per hour looks awful and someone wants to kill the idea on that basis.
+- **Price band sets the business model** — [`jason-cohen.md`](../corpus/canon/jason-cohen.md) — the cost case has not been checked against the price range the founder is betting on, or price is being "figured out later."
+
 ## Pricing and packaging
 
 - **Pricing model mix, 2024–2026** — [`kyle-poyar.md`](../corpus/canon/kyle-poyar.md) — a team is choosing what to charge on, or defending per-seat against "everyone is moving to usage."
@@ -56,10 +67,15 @@ the vintage with it — a threshold without a year is a defect, not a shortcut.
 
 ## Book layer
 
-Ramanujam & Tacke is ingested, and it supplies exactly what the free layer lacked: pricing
-*design* rather than unit-economics arithmetic.
+Two books are ingested. Ramanujam & Tacke supplies what the free layer lacked: pricing
+*design* rather than unit-economics arithmetic. Maurya supplies the case the other two
+cannot reach: viability on an assumed price, before any revenue exists.
 
 - **Ramanujam & Tacke, *Monetizing Innovation* — ch. 7, 8** — [`books/monetizing-innovation/`](../corpus/books/monetizing-innovation/) — choosing how to charge, setting a pricing strategy, or defending a price. Ch. 6 carries the bundling arithmetic the other two lean on.
+- **Maurya, *Running Lean* — ch. 3, 9** — [`books/running-lean/`](../corpus/books/running-lean/) — a viability case has no price, revenue or retention curve yet, and an assumed price has to be tested against a three-year goal; or a first price needs its floor and ceiling.
+- **Maurya, *Running Lean* — ch. 4, 6, 11** — [`books/running-lean/`](../corpus/books/running-lean/) — a three-year goal has to become quarterly traction goals for a founder with no team, or a price or lifetime assumption has changed and the model has not been re-run.
+- **Helmer, *7 Powers* — ch. 0** — [`books/7-powers/`](../corpus/books/7-powers/) — a strategy claim has to be tied to value drivers (market size, growth, share, margin above the cost of capital) in the model.
+- **Hubbard, *How to Measure Anything* — ch. 6, 7, 11** — [`books/how-to-measure-anything/`](../corpus/books/how-to-measure-anything/) — pricing the risk of a pre-revenue bet from calibrated ranges, with the risk-tolerance boundary written down before the options are judged.
 - **Grove, *High Output Management* — ch. 5** — [`books/high-output-management/`](../corpus/books/high-output-management/) — governing a decision: who decides, who is consulted, and the six questions to settle before the meeting.
 
 Two material losses. **Figure 4.2 lost its entire dollar column** — the per-feature
@@ -71,6 +87,17 @@ examples — Uber pre-IPO, LinkedIn pre-Microsoft, Optimizely pre-acquisition, E
 frameworks hold; the company outcomes are snapshots, and the SaaS pricing landscape the
 book treats as novel has since inverted.
 
+*Running Lean* has 105 figures; the 29 that carry method or numbers (every worked estimate
+and traction roadmap, the canvases, the dashboards) were read from the images, the rest
+left image-only. Its own arithmetic does not always hold: a printed formula uses the wrong
+price, one figure's breakdown does not sum to its total, several customer counts are
+misprinted, and the running case changes its unit of revenue three times without re-running
+the estimate the book tells readers to re-run. All are flagged in place, none repaired. Its
+SaaS gates (LTV over 3× CAC, payback under 12 months, margin over 80%) do not hold for an
+AI-heavy product, and the book says nothing about AI. **One live tension for this seat to
+name, not settle:** Maurya says never ask willingness to pay; *Monetizing Innovation*'s
+method is built on asking it.
+
 ## Reading path
 
 Corpus states are as of the `updated:` date in the header.
@@ -78,9 +105,11 @@ Corpus states are as of the `updated:` date in the header.
 | # | Title | Read this when | Format | Audio | Corpus |
 |---|---|---|---|---|---|
 | 1 | Ramanujam & Tacke, *Monetizing Innovation* (2016) | before an engagement where price is still an open question | Apple Books | Darren Stephens · 7:28 | ingested |
-| 2 | Maurya, *Running Lean* (3rd ed., 2022) | before a cost case with no price, revenue or retention curve yet | EPUB | not checked | pending |
+| 2 | Maurya, *Running Lean* (3rd ed., 2022) | before a cost case with no price, revenue or retention curve yet | EPUB | not checked | ingested |
 | 3 | Bryar & Carr, *Working Backwards* | — read on the leadership path | | | |
 | 4 | Grove, *High Output Management* | — read on the leadership path | | | |
+| 5 | Helmer, *7 Powers* | — read on the strategy path | | | |
+| 6 | Hubbard, *How to Measure Anything* | — read on the insights path | | | |
 
 ### Next
 

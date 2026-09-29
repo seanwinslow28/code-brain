@@ -1,7 +1,7 @@
 ---
 lane: delivery
 seat: delivery-execution
-updated: 2026-09-28
+updated: 2026-09-29
 ---
 # Lane manifest — Delivery & Execution
 
@@ -68,6 +68,8 @@ named — story mapping, and the theme-based roadmap artifact.
 - **Singer, *Shape Up* — ch. 8, 11, 12, 13, 14** — [`books/shape-up/`](../corpus/books/shape-up/) — sizing cycles, slicing work into scopes, reporting progress, or cutting scope to a deadline.
 - **Patton, *User Story Mapping* — ch. 4, 11, 16, 17** — [`books/user-story-mapping/`](../corpus/books/user-story-mapping/) — sizing, splitting, sequencing or planning work into buildable, risk-aware slices.
 - **Lombardo, McCarthy, Ryan & Connors, *Product Roadmaps Relaunched* — ch. 2, 6, 10** — [`books/product-roadmaps-relaunched/`](../corpus/books/product-roadmaps-relaunched/) — composing the roadmap artifact, signalling confidence and stage, or absorbing mid-flight change.
+- **Maurya, *Running Lean* — ch. 6, 11** — [`books/running-lean/`](../corpus/books/running-lean/) — a founder with no team needs a cadence: 90-day cycles whose traction goal is written as an OKR, the review agenda, and the pivot, persevere or pause call.
+- **Weinberg & Mares, *Traction* — ch. 5** — [`books/traction/`](../corpus/books/traction/) — a founder's backlog has to be cut to the milestones one traction goal actually requires.
 - **Grove, *High Output Management* — ch. 1, 2, 6** — [`books/high-output-management/`](../corpus/books/high-output-management/) — bottleneck scheduling, indicator design and forecasting, and the planning process that became OKRs.
 - **Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* — ch. 4, 12, 15** — [`books/trustworthy-online-controlled-experiments/`](../corpus/books/trustworthy-online-controlled-experiments/) — planning a staged rollout, release safety rings, or platform maturity investment.
 - **Hughes Johnson, *Scaling People* — ch. 2, 4** — [`books/scaling-people/`](../corpus/books/scaling-people/) — setting goals and cadence, structuring teams, or unblocking cross-team dependencies.
@@ -102,6 +104,7 @@ Corpus states are as of the `updated:` date in the header.
 | 10 | Bland & Osterwalder, *Testing Business Ideas* | — read on the discovery path | | | |
 | 11 | Ellis & Brown, *Hacking Growth* | — read on the growth path | | | |
 | 12 | Cagan & Jones, *EMPOWERED* | — read on the leadership path | | | |
+| 13 | Weinberg & Mares, *Traction* | — read on the growth path | | | |
 
 ### Next
 
