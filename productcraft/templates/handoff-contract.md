@@ -29,6 +29,8 @@ Systemcraft's seats read the copies in full, so its Design Strategist writes the
 | Audit | A material finding lands in a Systemcraft-owned lane | The closing seat, at Close | *Audit / improve an existing system* |
 | One-off, support a role | Never. A one-off that surfaces a Systemcraft question stops and retypes | — | — |
 
+**A layer that already has a design crosses as an audit** (ruled by Sean 2026-09-30 at the Open of Productcraft's second engagement, build map [#281](https://github.com/seanwinslow28/code-brain/issues/281)). When the first slice's Systemcraft-owned layer was already designed by a Systemcraft engagement, the full train's brief does not ask for a new design. It crosses with `receive_as: audit` — *reconcile the existing design*: Systemcraft's audit route on that engagement's artifacts, checked against the train's six frozen copies. The ask names the prior engagement by id, and each question says which product decision the existing design has to be checked against. Everything else in this contract applies unchanged: same trigger, seat, gate, intake check and states.
+
 The decision to hand off is a ledger entry with a one-line why, on the seat that files it (`hands_off_to: eng-NNN`). **A no-handoff verdict is written too** — the same entry reads "no handoff: no Systemcraft-owned layer in the first slice" with `hands_off_to: none` — so silence is never ambiguous, and the Leadership packet's stakeholder map states Systemcraft absent rather than omitting the row.
 
 ## 3. Checks — the gate on the way out, the intake check on arrival
