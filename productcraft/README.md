@@ -35,7 +35,7 @@ Everything that shows *how the studio works* is tracked here: [bench/](bench/), 
 
 ## The handoff to Systemcraft
 
-Productcraft owns the product decision; [Systemcraft](../systemcraft/README.md) owns the AI system. When the first shipping slice holds a layer Systemcraft owns, the Delivery seat crosses a typed brief plus frozen, hashed copies of the six design artifacts above Leadership. The raw evidence, the audits, and the reasoning stay behind. The receiving seat checks the brief fresh and answers with one of five typed states (accepted, input required, rejected, returned, or returned partial), recorded on both sides. When Systemcraft's design is done, the return lands on Delivery, which breaks it into epics, stories, and a first sprint. When no such layer exists, Delivery writes a no-handoff verdict instead ([the contract](templates/handoff-contract.md)).
+Productcraft owns the product decision; [Systemcraft](../systemcraft/README.md) owns the AI system. When the first shipping slice holds a layer Systemcraft owns, the Delivery seat crosses a typed brief plus frozen, hashed copies of the six design artifacts above Leadership. The raw evidence, the audits, and the reasoning stay behind, and so do each artifact's own process notes, stripped from the copies by a shared script before they are hashed. The receiving seat checks the brief fresh and answers with one of five typed states (accepted, input required, rejected, returned, or returned partial), recorded on both sides. When Systemcraft's design is done, the return lands on Delivery, which breaks it into epics, stories, and a first sprint. When no such layer exists, Delivery writes a no-handoff verdict instead ([the contract](../craftwork/handoff-contract.md)).
 
 ## Proof: the first engagement
 

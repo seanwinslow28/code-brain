@@ -1,6 +1,6 @@
 # Handoff brief template
 
-The outbound packet of [the Systemcraft handoff contract](handoff-contract.md). Owned by the **Delivery & Execution Lead**, written right after its OKR section is co-signed at stage 6 and before Leadership runs (or by the closing seat of an audit engagement). A typed packet of references: the six frozen artifact copies travel *beside* it in `handoff/outbound/artifacts/`, never inside it. The Codex red-team gate fires on this file before it crosses; Systemcraft's Design Strategist issues the crossing state on arrival.
+The outbound packet of [the handoff contract](../../craftwork/handoff-contract.md) under Productcraft's [binding for Systemcraft](handoff-binding-systemcraft.md). Owned by the **Delivery & Execution Lead**, written right after its OKR section is co-signed at stage 6 and before Leadership runs (or by the closing seat of an audit engagement). A typed packet of references: the six frozen artifact copies travel *beside* it in `handoff/outbound/artifacts/`, never inside it. The Codex red-team gate fires on this file before it crosses; Systemcraft's Design Strategist issues the crossing state on arrival.
 
 Filled briefs are **private** (`ledger/engagements/<eng-id>/handoff/outbound/brief.md`); this template is public machinery. Brevity law applies: every section reads in a breath. The brief carries no reasoning — the why lives in the ledger entry that files it.
 
@@ -55,7 +55,7 @@ Raw evidence pointers Systemcraft may follow on this disk but does not receive: 
 
 ## Filing
 
-1. Freeze the six copies: write each into `handoff/outbound/artifacts/<source-id>--<slug>.md` with `frozen_from`, `sha256`, `frozen_at` in its frontmatter; one line each in `manifest.md`.
+1. Freeze the six copies with the shared kit, never by hand: `python3 craftwork/trace/freeze.py copy --binding productcraft/templates/handoff-binding-systemcraft.md --out <eng>/handoff/outbound/artifacts <eng>/artifacts/strategy-pov.md=pc-eng-NNN.strategy …` (all six). It strips the process parts the binding names, writes `<source-id>--<slug>.md` stamped with `frozen_from`, `sha256` (the stripped copy), `source_sha256`, `frozen_at` and `stripped`, and prints the table that is `manifest.md`. Run `freeze.py show` first to see what each copy loses.
 2. Write the ledger entry that decides the handoff (`hands_off_to: eng-NNN` once Systemcraft assigns the id; `none` on a no-handoff verdict, which still gets its entry).
 3. Run the Codex gate on this file; record the verdict in `gate:` and in the entry's `## Checks`.
 4. Copy `brief.md`, `manifest.md` and `artifacts/` into Systemcraft's engagement `handoff/inbound/`; open `crossing.md` on both sides with `crossed · <date> · delivery-execution · <one line>`.
@@ -64,9 +64,9 @@ Raw evidence pointers Systemcraft may follow on this disk but does not receive: 
 ## Red-team checklist (Gate 2 anchor; runs on the vendor that did not last write the brief)
 
 - **Product decisions in disguise** — an ask in `## The ask` that a Productcraft seat owns (pricing, positioning, an outcome); the brief may not export its own decisions.
-- **Hash drift** — a frozen copy whose `sha256` does not match the bytes in `artifacts/`, or a referenced artifact at a revision the train has since staled.
+- **Hash drift** — a frozen copy that fails `freeze.py verify`, or a referenced artifact at a revision the train has since staled (`verify <copy>=<artifact>` reports a moved source).
 - **Constraints without a source** — a `## Constraints` line that no section of a referenced artifact states (first slice from the roadmap, metrics from the Insights plan, envelope from the business case, non-goals from the strategy).
-- **Reasoning that crossed** — ledger text, a transcript, a check record, or the drafting conversation inside the brief or a frozen copy.
+- **Reasoning that crossed** — ledger text, a transcript, a check record, the drafting conversation, or a process note the binding's strip list missed, inside the brief or a frozen copy. The repair for a missed note is a new line in the binding, then a re-freeze.
 - **Raw evidence that crossed** — anything under `## Stays behind` also present in `artifacts/`.
 - **A return date with no variance path** — `return_by` set with no line saying what happens if it slips.
 - **The silent layer** — the roadmap's first slice names a Systemcraft-owned layer the ask does not cover, or the ask covers a layer the slice does not contain.

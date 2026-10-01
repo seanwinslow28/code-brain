@@ -10,6 +10,7 @@ The evals-and-trace kit every -craft team reads, in [craftwork/](../README.md)'s
 | Viewer renderer | [render.py](render.py) → `trace/eval.html`, to [DESIGN.md](DESIGN.md) | Sean, reading and labeling |
 | Cases template | [cases-template.md](cases-template.md) → an engagement's `trace/cases.md` | the writer pass, once a train has run |
 | Entry-id helper | [nextid.py](nextid.py) | the coordinator, before writing a ledger entry |
+| Handoff freezer | [freeze.py](freeze.py): strips the process parts a pair's binding names from each crossing artifact, then hashes the copy ([handoff contract § 6](../handoff-contract.md)) | the sending seat at a handoff or return; the receiving seat's intake check runs `verify` |
 | Shared failure codes | [taxonomy.md](taxonomy.md) — the process-waste family; each studio's own modes are in its own file | Sean, when a label carries a code; `check.py` reads every code table in both files; the viewer counts rows per mode |
 | Registry numbers | [registry.py](registry.py) → the runtime × seat tables pasted into [craftwork/templates/runtime-registry.md](../../craftwork/templates/runtime-registry.md) § Numbers | the coordinator at Close, and #287's trials; counts only, never a percentage |
 
@@ -122,6 +123,10 @@ The kit's tests run through **Productcraft's profile**, the first studio the kit
 ## Registry numbers
 
 What each runtime has done on real work lives in the registry's § Numbers as **counts** — labeled passes as "3 of 4", the rung-0 clean count, medians over measured passes, trials and promotions — and never as a number typed by hand: `python3 craftwork/trace/registry.py productcraft/ledger/engagements/pc-eng-*` regenerates both tables (per runtime, per runtime × seat with its family) and the coordinator replaces the section at Close. The generator runs rung 0 in memory to learn which passes a finding names, counts a meter as measured only from a registered source, and reads a promotion from one `promoted:` line in the trial record's `## Notes` (#272 decision 9, built on [#286](https://github.com/seanwinslow28/code-brain/issues/286)). No percentage at any count.
+
+## Freezing a handoff copy
+
+A handoff crosses artifacts, never reasoning, so the copies leave their process parts at home ([the handoff contract](../handoff-contract.md) § 6, built on [#326](https://github.com/seanwinslow28/code-brain/issues/326)). The pair's binding names those parts in a fenced `strip` block; `freeze.py` removes exactly what it names and refuses a binding without one. `show` lists what a copy would lose and writes nothing. `copy` writes `<source-id>--<slug>.md`, stamped with the stripped copy's hash and the source's, and prints the manifest. `verify` re-hashes a copy without its stamp lines, and with `<copy>=<artifact>` also reports a source that has moved since the freeze. Copies frozen verbatim before the rule (three stamps) verify unchanged. The library is `tracekit/freeze.py`; the tests are `tests/test_freeze.py`.
 
 ## Shared home
 

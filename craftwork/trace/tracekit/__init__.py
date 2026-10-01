@@ -60,9 +60,16 @@ its profile sets `shared_taxonomy=False`; a studio's own seat modes stay in its
 own file. The CLIs take `--studio <file>`. Productcraft's two engagements check
 and render with the results they had at 0.8.1.
 
+0.10.0 adds the handoff freezer (#326, ruled on #282 decision 6): `freeze.py` strips
+the process parts a pair's binding names from each crossing artifact (sections by
+heading, repair tags on headings, named paragraphs, frontmatter keys), hashes what
+is left, and stamps the copy with that hash and the source's. Nothing is stripped
+by guess: a binding with no `strip` block is refused. `verify` re-hashes a copy
+without its stamps, so copies frozen verbatim before the rule still verify.
+
 The content machine (#291) shares this code rather than forking it, through its
 own profile.
 """
 
 KIT_NAME = "craftwork/trace"
-KIT_VERSION = "0.9.0"
+KIT_VERSION = "0.10.0"

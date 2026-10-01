@@ -67,6 +67,8 @@ Items are the ids the artifacts already use (`O2`, `OC-1a`, `KR-2`; ranges `E1�
 
 **Meter line** — the last line of the file: `meter: <runtime> · <tokens as reported> · <wall-clock>` or `meter: UNMEASURED`. Never an estimate.
 
+**Process notes** — a repair note, a loopback, an audit disposition, the corpus a pass opened: anything that records how the artifact got here rather than what it says. Write it under a heading or with an opening the [Systemcraft handoff binding](handoff-binding-systemcraft.md)'s strip list names (`**Repair note …` at the top of a revision, `## Loopbacks`, `## Audit dispositions`, `Corpus opened …`). A handoff strips only what its binding names, so a process note in any other form crosses to Systemcraft as if it were content ([craftwork build 3](https://github.com/seanwinslow28/code-brain/issues/326)).
+
 ## The red-team checklist, on every template
 
 Each template ends with a **Red-team checklist**: the attacks the gate runs on that artifact, each naming the section where it lands. The protocol is shared law at [craftwork/templates/red-team-protocol.md](../../craftwork/templates/red-team-protocol.md); Productcraft's schedule is the master skill's (Gate 1 on the Strategy doc after stage 3, Gate 2 on the brief, the close gate on the whole train). The whole-train attacks live in [gate-findings.md](gate-findings.md). An attack with no named home in a template is a defect in this folder, not in the gate.

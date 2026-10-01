@@ -52,4 +52,4 @@ Named conditions that reopen this decision (a cost threshold, a model release, a
 
 ## Cross-studio references
 
-Only ids cross; each studio writes its own side, never the other's ledger ([the handoff contract](../../productcraft/templates/handoff-contract.md), ratified 2026-09-11). Systemcraft writes `originates_from` on the brief and every entry of an engagement opened from a handoff, and `supersedes_external` on the entry that overturns one of the sender's assumptions; the sender flips its own entry to `superseded` when it reads the return. The sender's side (`hands_off_to`, `informed_by`) is written by the sender.
+Only ids cross; each studio writes its own side, never the other's ledger ([the handoff contract](../../craftwork/handoff-contract.md), ratified 2026-09-11). Systemcraft writes `originates_from` on the brief and every entry of an engagement opened from a handoff, and `supersedes_external` on the entry that overturns one of the sender's assumptions; the sender flips its own entry to `superseded` when it reads the return. The sender's side (`hands_off_to`, `informed_by`) is written by the sender.

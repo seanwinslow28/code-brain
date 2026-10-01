@@ -9,14 +9,15 @@ A -craft team is a specialist bench of at least three seats that plans, executes
 | Path | What it is |
 |---|---|
 | [law.md](law.md) | The shared law, one section each: name the canon · the audit shape and the three-seat floor · the standing success measure (D+14) · the availability ladder · the self-targeted modifier · model delegation · the alias probe at Route · checks converge (the repair cap and stopping rule) |
+| [handoff-contract.md](handoff-contract.md) | The law every crossing between two teams shares: the typed brief, frozen copies stripped of their process parts and hashed, the five crossing states, `crossing.md` in both ledgers, the mirror return, ids as the only thing that crosses. Each sending team keeps one short binding per pair |
 | [templates/red-team-protocol.md](templates/red-team-protocol.md) | The adversarial gate: posture, what a gate may demand, typed verdicts, IMPLEMENTATION HOLD, the never-silently-skips fallback. Each team keeps its own gate schedule |
 | [templates/close-digest.md](templates/close-digest.md) | The shape of every Close digest to Sean, and the question protocol for every studio↔Sean question |
 | [templates/status-vocabulary.md](templates/status-vocabulary.md) | Reader-facing law: which record is authoritative, how proofs and statuses render, cost wording |
 | [templates/ledger-entry.md](templates/ledger-entry.md) | The decision-ledger entry schema, with `## From the canon` and the cross-studio id fields |
 | [templates/runtime-registry.md](templates/runtime-registry.md) | Every runtime a pass may run on (one row per harness × provider route), its standing, and the trial protocol by which a new one earns its way in |
-| [trace/](trace/README.md) | The trace kit: the pass-record, labels and cases templates, the rung-0 checker, the HTML viewer and its DESIGN.md, the registry numbers, the next-id helper, and the shared process-waste failure codes. It holds no studio: each team keeps a `trace/studio.py` profile and its own failure modes, and the kit finds the profile by walking up from the engagement |
+| [trace/](trace/README.md) | The trace kit: the pass-record, labels and cases templates, the rung-0 checker, the HTML viewer and its DESIGN.md, the registry numbers, the next-id helper, `freeze.py` (the handoff's strip-then-hash), and the shared process-waste failure codes. It holds no studio: each team keeps a `trace/studio.py` profile and its own failure modes, and the kit finds the profile by walking up from the engagement |
 
-Still to arrive, each on its own build ticket: the generic handoff contract with its strip-then-hash script ([craftwork build 3](https://github.com/seanwinslow28/code-brain/issues/326)), and the `/craftwork` recipe skill that builds a new team on this home ([craftwork build 5](https://github.com/seanwinslow28/code-brain/issues/328)).
+Still to arrive on its own build ticket: the `/craftwork` recipe skill that builds a new team on this home ([craftwork build 5](https://github.com/seanwinslow28/code-brain/issues/328)).
 
 ## What craftwork deliberately does not encode
 
@@ -44,6 +45,7 @@ Every file that moved into this folder, with the path it left. Old links to thes
 | `productcraft/trace/render.py` | `craftwork/trace/render.py` | 2026-10-01, #325 |
 | `productcraft/trace/registry.py` | `craftwork/trace/registry.py` | 2026-10-01, #325 |
 | `productcraft/trace/nextid.py` | `craftwork/trace/nextid.py` | 2026-10-01, #325 |
+| `productcraft/templates/handoff-contract.md` | `craftwork/handoff-contract.md` | 2026-10-01, #326 (rewritten as the generic law; the Productcraft → Systemcraft specifics went to `productcraft/templates/handoff-binding-systemcraft.md`) |
 
 Two kit files stayed at their old paths with new content, so neither has a row. `productcraft/trace/taxonomy.md` kept Productcraft's seat failure modes, and its process-waste family moved into [trace/taxonomy.md](trace/taxonomy.md). `productcraft/trace/README.md` now describes only what Productcraft keeps. A closed record that names either one reads it as machinery that changed since its pass, which is unverifiable, never a failure.
 
