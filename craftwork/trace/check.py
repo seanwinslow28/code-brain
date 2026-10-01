@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Rung-0 checker — the first Close-checklist trace line (#272 decision 8, built on #290).
 
-    python3 productcraft/trace/check.py productcraft/ledger/engagements/<eng-id>
+    python3 craftwork/trace/check.py productcraft/ledger/engagements/<eng-id>
 
 Prints one line per deterministic check, PASS or FAIL with its count, then
 the findings under a failing check and the notes under any check. Exit 0
@@ -11,7 +11,9 @@ ledger at run time and writes nothing.
 
 Options: --json for a machine-readable list; --repo <path> to resolve
 studio-prefixed input paths (productcraft/…, systemcraft/…, .claude/…)
-against a repo root other than the one found by walking up.
+against a repo root other than the one found by walking up; --studio <file>
+for a studio profile other than the nearest <team>/trace/studio.py above the
+engagement (then $TRACEKIT_STUDIO). No profile found is exit 2.
 """
 from __future__ import annotations
 
@@ -24,6 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from tracekit.checker import format_report, run_checks  # noqa: E402
 from tracekit.engagement import load_engagement  # noqa: E402
+from tracekit.studio import StudioNotFound, load_profile  # noqa: E402
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -31,12 +34,19 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("engagement", help="the engagement folder (or its trace/ subfolder)")
     ap.add_argument("--json", action="store_true", help="emit the checks as JSON instead of the report")
     ap.add_argument("--repo", help="repo root for studio-prefixed input paths")
+    ap.add_argument("--studio", help="a studio profile file (default: the nearest <team>/trace/studio.py above "
+                                     "the engagement, then $TRACEKIT_STUDIO)")
     a = ap.parse_args(argv)
     path = Path(a.engagement)
     if not path.is_dir():
         print(f"no engagement folder at {path}", file=sys.stderr)
         return 2
-    eng = load_engagement(path, repo=Path(a.repo) if a.repo else None)
+    try:
+        eng = load_engagement(path, repo=Path(a.repo) if a.repo else None,
+                              studio=load_profile(a.studio) if a.studio else None)
+    except StudioNotFound as e:
+        print(e, file=sys.stderr)
+        return 2
     if not eng.records and not any(e.startswith("pass-") for e in eng.errors):
         print(f"no engagement records under {eng.trace_dir} (expected trace/pass-NN-<seat>-<kind>.md)", file=sys.stderr)
         return 2

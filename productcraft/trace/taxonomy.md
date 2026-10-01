@@ -1,29 +1,14 @@
-# taxonomy — rung 1 of the ladder
+# taxonomy — rung 1 of the ladder, Productcraft
 
-The tracked vocabulary the labels file's `failure_code` column draws from. One file per studio ([README](README.md), *Shared home*); this is Productcraft's. Shapes of failure only — no engagement content, no private text, nothing a recruiter should not read.
+The tracked vocabulary the labels file's `failure_code` column draws from. This is Productcraft's file: the seat failure modes its own labels earned. The families every studio shares, today the **process-waste** family, live in the shared kit's [craftwork/trace/taxonomy.md](../../craftwork/trace/taxonomy.md), and `check.py` reads both ([studio.py](studio.py) names this file). Shapes of failure only — no engagement content, no private text, nothing a recruiter should not read.
 
 **Rung 1 is open, on a thin base.** The ladder is deterministic checks first, a taxonomy after about thirty labels, a judge only for a mode that recurs with 30–50 labels per class validated on TPR/TNR ([#272](https://github.com/seanwinslow28/code-brain/issues/272)). The reading happened on 2026-09-21: pc-eng-001's 33 label rows carry verdicts, and the two seat failure modes below were grouped and counted from their critiques ([#299](https://github.com/seanwinslow28/code-brain/issues/299)). Thirty-three labels is the floor for *starting* a taxonomy, not for trusting one, and five fails is a thin base for "recurring" — so two shapes are codes, two more are sighted and kept off the table until a second engagement's labels say whether they recur.
 
-The first family landed ahead of the reading, because it was earned by an investigation rather than by labels: the **process-waste** family, ratified on [#296](https://github.com/seanwinslow28/code-brain/issues/296) clause 8 and landed on [#298](https://github.com/seanwinslow28/code-brain/issues/298). It exists because a lone `manufactured` code with zero instances invites every unwelcome finding to be filed under it; the failure modes the first train actually produced are the other three.
+The process-waste family landed ahead of the reading, because it was earned by an investigation rather than by labels ([#296](https://github.com/seanwinslow28/code-brain/issues/296) clause 8, landed on [#298](https://github.com/seanwinslow28/code-brain/issues/298)). It sat in this file until the kit moved to `craftwork/` on [#325](https://github.com/seanwinslow28/code-brain/issues/325). It is shared now, so its four codes, its quote rule for `manufactured` and its placement rule are in the shared file, not here.
 
 ## The codes
 
-A `failure_code` in an engagement's `trace/labels.md` must be one of these or one of the seat failure modes below, exactly as spelled — `check.py` reads every code table in this file. It enforces it — a code not in this table is free text and a finding (line 10 of rung 0). A code marked **quote required** is a finding unless the row's critique quotes the text it indicts, so the claim can be checked by someone other than its author.
-
-| code | family | a label with this code says | quote |
-|---|---|---|---|
-| `manufactured` | process-waste | The finding's own named evidence does not support it — the check produced a defect rather than found one | **required** |
-| `stale-restatement` | process-waste | The finding restates something already repaired, or reads a superseded state as current | — |
-| `overstated-scope` | process-waste | The finding is real but describes more of the artifact than it actually reaches | — |
-| `kit-induced` | process-waste | The seat did not err: a template, a checklist line or a kit rule made correct work read as a defect | — |
-
-**`manufactured` is the serious one and the rare one.** Zero instances in pc-eng-001 across 20 material findings, both gates and two re-checks ([#296](https://github.com/seanwinslow28/code-brain/issues/296) (a)). A row carrying it is a claim that a check invented a defect, which is why it must quote the unsupported text and why it can never be a bare code. A finding you merely disagree with is not manufactured; a finding whose severity you would grade lower is not manufactured either — that is the severity grading, which held.
-
-## Where a process-waste code goes, and where it does not
-
-The column labels **a pass**, not a finding. A check pass whose material findings were overwhelmingly process waste is a failing pass, coded here. A pass with one waste row among sound findings is a `pass` with the waste named in the critique — the code marks what the pass *was*, not every row inside it.
-
-Process waste is a finding against the studio, never against the seat that wrote the artifact. `kit-induced` in particular is a ticket on `productcraft/templates/` or on this kit; two of the first train's check findings were the kit's fault and closed as kit 0.2.0 ([#297](https://github.com/seanwinslow28/code-brain/issues/297)).
+A `failure_code` in an engagement's `trace/labels.md` must be a seat failure mode below or a code in the [shared file](../../craftwork/trace/taxonomy.md), exactly as spelled. `check.py` reads every code table in both and enforces it: a code in neither is free text and a finding (line 10 of rung 0).
 
 ## Seat failure modes
 

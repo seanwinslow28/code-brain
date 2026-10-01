@@ -78,4 +78,4 @@ meter: <runtime> · <tokens> · <wall-clock>
 - **The steel-man** — a competing design that reaches the same outcome cheaper, and no artifact rules it out.
 - **The quiet failure** — the six-months-on scenario with no metric that would reveal it.
 - **Reasoning that crossed** — a brief or frozen copy carrying ledger text, transcripts, or the drafting conversation.
-- **Process waste** — a series that ran past its stopping rule; a verification pass that re-audited whole text; a finding recounted per appearance; a defect the studio's own template or kit caused. Coded in the labels file from the process-waste family, not graded as a seat's failure ([trace/taxonomy.md](../trace/taxonomy.md)).
+- **Process waste** — a series that ran past its stopping rule; a verification pass that re-audited whole text; a finding recounted per appearance; a defect the studio's own template or kit caused. Coded in the labels file from the process-waste family, not graded as a seat's failure ([craftwork/trace/taxonomy.md](../../craftwork/trace/taxonomy.md)).

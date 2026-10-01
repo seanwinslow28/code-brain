@@ -52,7 +52,7 @@ Seat slugs, as used in `seat:` and `auditor:`: `product-strategist`, `discovery-
 
 ## The two closing sections, on every artifact
 
-**`## Moves`** — what this pass did to the upstream material, one line each, from the fixed vocabulary **kept / added / split / merged / dropped**, each line naming the upstream item and its source artifact; a split names every source. The Strategist's origin draft writes "origin draft, no upstream" and lists what it leaned on. Moves are claims until a replay confirms them (#272). The lines are machine-read by the trace kit's rung-0 checker ([productcraft/trace/](../trace/README.md), #290), so they follow one grammar — an em dash after the op, ` from ` before the source:
+**`## Moves`** — what this pass did to the upstream material, one line each, from the fixed vocabulary **kept / added / split / merged / dropped**, each line naming the upstream item and its source artifact; a split names every source. The Strategist's origin draft writes "origin draft, no upstream" and lists what it leaned on. Moves are claims until a replay confirms them (#272). The lines are machine-read by the trace kit's rung-0 checker ([craftwork/trace/](../../craftwork/trace/README.md), #290), so they follow one grammar — an em dash after the op, ` from ` before the source:
 
 ```markdown
 - kept — O1 from pc-eng-001.strategy

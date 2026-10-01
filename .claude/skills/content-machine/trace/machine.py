@@ -1,12 +1,13 @@
 """The content machine's studio profile for the shared trace kit (#291, designed on #261 / #272).
 
-The kit lives at `productcraft/trace/` (the first copy, #290); this module is the
+The kit lives at `craftwork/trace/` (built as Productcraft's on #290, moved to the shared home
+on #325); this module is the
 one thing the machine writes for itself — its stages, kinds, seats, the shape of a
 rep id in a `## Moves` line, and rung-0 line 8: *each shape ran in the clean
 context, was gated, and reached the pick*. Everything else — the record grammar,
 the hash chain, the labels file, the viewer — is imported, never copied.
 
-Importing this module is the whole setup: it puts `productcraft/trace/` on
+Importing this module is the whole setup: it puts `craftwork/trace/` on
 `sys.path` when `tracekit` is not already importable, builds the profile, and
 registers the structure check. `check.py` and `render.py` beside it are the two
 Close-ritual commands; `tests/deck_synth.py` builds the invented run they are tested on.
@@ -20,7 +21,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[3]                       # trace → content-machine → skills → .claude → repo
-KIT_DIR = REPO / "productcraft" / "trace"
+KIT_DIR = REPO / "craftwork" / "trace"
 
 
 def bootstrap() -> Path:
@@ -31,7 +32,7 @@ def bootstrap() -> Path:
         if not (KIT_DIR / "tracekit").is_dir():
             raise SystemExit(
                 f"the shared trace kit is not at {KIT_DIR} — the content machine imports it from "
-                f"productcraft/trace/ rather than carrying a copy (#291)"
+                f"craftwork/trace/ rather than carrying a copy (#291)"
             )
         sys.path.insert(0, str(KIT_DIR))
     return KIT_DIR
@@ -132,6 +133,9 @@ CONTENT_MACHINE = Studio(
     corpus_path_re=None,
     id_re=REP_ID,
     taxonomy_path=HERE / "taxonomy.md",
+    # the kit's shared process-waste family is not adopted here: taxonomy.md says it may be, verbatim,
+    # when a gate produces one, and is not pre-declared (#325 made the family opt-out)
+    shared_taxonomy=False,
     withheld_required="the drafting conversation",
     brief_file="run.md",
     checks_dir="gates",

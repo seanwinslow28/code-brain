@@ -14,8 +14,9 @@ A -craft team is a specialist bench of at least three seats that plans, executes
 | [templates/status-vocabulary.md](templates/status-vocabulary.md) | Reader-facing law: which record is authoritative, how proofs and statuses render, cost wording |
 | [templates/ledger-entry.md](templates/ledger-entry.md) | The decision-ledger entry schema, with `## From the canon` and the cross-studio id fields |
 | [templates/runtime-registry.md](templates/runtime-registry.md) | Every runtime a pass may run on (one row per harness × provider route), its standing, and the trial protocol by which a new one earns its way in |
+| [trace/](trace/README.md) | The trace kit: the pass-record, labels and cases templates, the rung-0 checker, the HTML viewer and its DESIGN.md, the registry numbers, the next-id helper, and the shared process-waste failure codes. It holds no studio: each team keeps a `trace/studio.py` profile and its own failure modes, and the kit finds the profile by walking up from the engagement |
 
-Still to arrive, each on its own build ticket: the trace kit at `trace/` ([craftwork build 2](https://github.com/seanwinslow28/code-brain/issues/325)), the generic handoff contract with its strip-then-hash script ([craftwork build 3](https://github.com/seanwinslow28/code-brain/issues/326)), and the `/craftwork` recipe skill that builds a new team on this home ([craftwork build 5](https://github.com/seanwinslow28/code-brain/issues/328)).
+Still to arrive, each on its own build ticket: the generic handoff contract with its strip-then-hash script ([craftwork build 3](https://github.com/seanwinslow28/code-brain/issues/326)), and the `/craftwork` recipe skill that builds a new team on this home ([craftwork build 5](https://github.com/seanwinslow28/code-brain/issues/328)).
 
 ## What craftwork deliberately does not encode
 
@@ -34,5 +35,16 @@ Every file that moved into this folder, with the path it left. Old links to thes
 | `systemcraft/templates/status-vocabulary.md` | `craftwork/templates/status-vocabulary.md` | 2026-10-01, #324 |
 | `productcraft/templates/ledger-entry.md` | `craftwork/templates/ledger-entry.md` | 2026-10-01, #324 |
 | `productcraft/templates/runtime-registry.md` | `craftwork/templates/runtime-registry.md` | 2026-10-01, #324 |
+| `productcraft/trace/record-template.md` | `craftwork/trace/record-template.md` | 2026-10-01, #325 |
+| `productcraft/trace/labels-template.md` | `craftwork/trace/labels-template.md` | 2026-10-01, #325 |
+| `productcraft/trace/cases-template.md` | `craftwork/trace/cases-template.md` | 2026-10-01, #325 |
+| `productcraft/trace/DESIGN.md` | `craftwork/trace/DESIGN.md` | 2026-10-01, #325 |
+| `productcraft/trace/PRODUCT.md` | `craftwork/trace/PRODUCT.md` | 2026-10-01, #325 |
+| `productcraft/trace/check.py` | `craftwork/trace/check.py` | 2026-10-01, #325 (with `render.py`, `registry.py`, `nextid.py`, `tracekit/`, `fonts/` and `tests/` beside it) |
+| `productcraft/trace/render.py` | `craftwork/trace/render.py` | 2026-10-01, #325 |
+| `productcraft/trace/registry.py` | `craftwork/trace/registry.py` | 2026-10-01, #325 |
+| `productcraft/trace/nextid.py` | `craftwork/trace/nextid.py` | 2026-10-01, #325 |
+
+Two kit files stayed at their old paths with new content, so neither has a row. `productcraft/trace/taxonomy.md` kept Productcraft's seat failure modes, and its process-waste family moved into [trace/taxonomy.md](trace/taxonomy.md). `productcraft/trace/README.md` now describes only what Productcraft keeps. A closed record that names either one reads it as machinery that changed since its pass, which is unverifiable, never a failure.
 
 Text that moved out of a master skill or `CLAUDE.md` into [law.md](law.md) is named there, section by section. Those files stay where they are, so nothing in this table follows them.

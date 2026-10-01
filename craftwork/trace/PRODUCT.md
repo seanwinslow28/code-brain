@@ -2,7 +2,7 @@
 
 <!-- impeccable:product-schema 1 -->
 
-Scope: the eval viewer that `productcraft/trace/` renders, one self-contained HTML file per engagement. This record covers that family of pages only, not the studio. Facts marked *(inferred)* were taken from the #292 brief and the #272 resolution rather than confirmed in an interview; the two labeling and page-shape facts were confirmed by Sean on 2026-09-11.
+Scope: the eval viewer that `craftwork/trace/` renders (built as Productcraft's, shared since #325), one self-contained HTML file per engagement. This record covers that family of pages only, not the studio. Facts marked *(inferred)* were taken from the #292 brief and the #272 resolution rather than confirmed in an interview; the two labeling and page-shape facts were confirmed by Sean on 2026-09-11.
 
 ## Platform
 

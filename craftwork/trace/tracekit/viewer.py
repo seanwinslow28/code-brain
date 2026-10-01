@@ -25,23 +25,16 @@ from .cases import ASSIST_BLURB, Case, CasesDoc, Source, load_cases
 from .checker import Check, run_checks
 from .labels import decided
 from .engagement import Engagement, Record, load_engagement, normalize_meter
-from .studio import PRODUCTCRAFT, PRODUCTCRAFT_CHECK_IMPLICATIONS, Studio
-from .taxonomy import Taxonomy, load_taxonomy
+from .studio import Studio
+from .taxonomy import Taxonomy, taxonomy_for
 
-__all__ = ["render", "render_html", "STAGES", "SEAT_NAMES", "REVIEW_PROMPTS", "run_line", "stage_name", "stage_label", "seat_name"]
+__all__ = ["render", "render_html", "run_line", "stage_name", "stage_label", "seat_name"]
 
-# Productcraft's names, mirrored from the default studio profile (tracekit/studio.py); the renderer
-# reads `eng.studio`, so another studio's engagement renders with its own stages and seats.
-STAGES = PRODUCTCRAFT.stages
-SEAT_NAMES = PRODUCTCRAFT.seat_names
+# the renderer reads `eng.studio` for stages, seats, review prompts and check implications, so each
+# studio's engagement renders with its own; nothing studio-shaped is held here (kit 0.9.0, #325)
 FONTS_DIR = Path(__file__).resolve().parents[1] / "fonts"
 HIDDEN = "hidden with the runtime"
 
-# the plan's versioned review prompts, one per kind of run (eval-learning-plan.md §2)
-REVIEW_PROMPTS_VERSION = PRODUCTCRAFT.review_prompts_version
-REVIEW_PROMPTS = PRODUCTCRAFT.review_prompts
-# one sentence per rung-0 check, in CHECK_NAMES order: what a finding there means for the reading
-CHECK_IMPLICATIONS = PRODUCTCRAFT_CHECK_IMPLICATIONS
 SEVERITIES = ("MATERIAL", "NOTE", "CRITICAL", "LOOPBACK", "BLOCKER")
 
 
@@ -49,15 +42,15 @@ def esc(s: object) -> str:
     return _html.escape("" if s is None else str(s), quote=True)
 
 
-def stage_name(n: int, studio: Studio = PRODUCTCRAFT) -> str:
+def stage_name(n: int, studio: Studio) -> str:
     return studio.stage_name(n)
 
 
-def stage_label(n: int, studio: Studio = PRODUCTCRAFT) -> str:
+def stage_label(n: int, studio: Studio) -> str:
     return studio.stage_label(n)
 
 
-def seat_name(slug: str, studio: Studio = PRODUCTCRAFT) -> str:
+def seat_name(slug: str, studio: Studio) -> str:
     return studio.seat_name(slug)
 
 
@@ -89,7 +82,7 @@ def run_no(pass_id: str) -> str:
     return str(int(digits)) if digits else str(pass_id)
 
 
-def run_line(pass_id: str, seat: str, kind: str, studio: Studio = PRODUCTCRAFT) -> str:
+def run_line(pass_id: str, seat: str, kind: str, studio: Studio) -> str:
     """`Run 10 · Discovery audit` — the plain-language name for a pass (plan §2)."""
     who = seat_name(seat, studio)
     what = "" if who.lower().endswith(kind.lower()) else f" {kind}"
@@ -214,8 +207,9 @@ def owner_dispositions(eng: Engagement) -> dict[str, int]:
 # --------------------------------------------------------------------------- #
 
 
-def render(path: Path | str, out: Optional[Path] = None, repo: Optional[Path] = None) -> Path:
-    eng = load_engagement(path, repo=repo)
+def render(path: Path | str, out: Optional[Path] = None, repo: Optional[Path] = None,
+           studio: Optional[Studio] = None) -> Path:
+    eng = load_engagement(path, repo=repo, studio=studio)
     target = Path(out) if out else eng.trace_dir / "eval.html"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(render_html(eng), encoding="utf-8")
@@ -225,7 +219,7 @@ def render(path: Path | str, out: Optional[Path] = None, repo: Optional[Path] = 
 def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_on: Optional[str] = None,
                 taxonomy: Optional[Taxonomy] = None) -> str:
     S = eng.studio
-    tax = taxonomy if taxonomy is not None else (load_taxonomy(S.taxonomy_path) if S.taxonomy_path is not None else load_taxonomy())
+    tax = taxonomy if taxonomy is not None else taxonomy_for(S)
     checks = checks if checks is not None else run_checks(eng, tax)
     rendered_on = rendered_on or _dt.date.today().isoformat()
     P = eng.records
@@ -591,7 +585,7 @@ def _judging_html(eng: Engagement, checks: list[Check], clean: int, n_checks: in
 # --------------------------------------------------------------------------- #
 
 
-def _rung_html(checks: list[Check], studio: Studio = PRODUCTCRAFT) -> str:
+def _rung_html(checks: list[Check], studio: Studio) -> str:
     items = []
     for i, c in enumerate(checks):
         state = "failed" if not c.ok else ("unverifiable in part" if c.n_unverifiable else "verified")
@@ -659,7 +653,7 @@ def _guided_empty(reason: str) -> str:
 <h2>Guided reading</h2>
 <div class="guided empty">
   <p>{reason}</p>
-  <p class="sub">Teaching content lives in <code>trace/cases.md</code> beside the records — one case per pass and finding, each quoting its source with the hash that source carried when the case was written. This page never writes a story of its own: no file, no cases. The schema is <code>productcraft/trace/cases-template.md</code>.</p>
+  <p class="sub">Teaching content lives in <code>trace/cases.md</code> beside the records — one case per pass and finding, each quoting its source with the hash that source carried when the case was written. This page never writes a story of its own: no file, no cases. The schema is <code>craftwork/trace/cases-template.md</code>.</p>
 </div>
 """
 
@@ -798,7 +792,7 @@ def _practice_html(case: Case) -> str:
 </div>"""
 
 
-def _chapter_html(doc: CasesDoc, case: Case, n: int, rec: Optional[Record], studio: Studio = PRODUCTCRAFT) -> str:
+def _chapter_html(doc: CasesDoc, case: Case, n: int, rec: Optional[Record], studio: Studio) -> str:
     run = run_line(case.pass_id, rec.seat if rec else "", rec.kind if rec else "", studio) if rec else f"Run {run_no(case.pass_id)}"
     finding = f" · finding {esc(case.finding)}" if case.finding else ""
     evidence = "".join(_source_html(s) for s in case.sources) or "<p class='sub'>No source is named for this case.</p>"

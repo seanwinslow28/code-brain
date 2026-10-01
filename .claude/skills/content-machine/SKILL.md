@@ -462,7 +462,7 @@ a transcript or block among them, every slot actually opened), was gated at the 
 reached the pick.** A self-contained local HTML per run renders the records with the last-good ×
 first-failing transition matrix; it is never a hosted artifact, because it carries his drafts.
 
-The code is the Productcraft kit's, imported from `productcraft/trace/` through a studio profile —
+The code is the shared trace kit's, imported from `craftwork/trace/` through a studio profile —
 this machine's stages, kinds and seats live in [`trace/machine.py`](trace/machine.py) and nothing is
 forked. Templates, the seat and kind tables and the Moves grammar: [`trace/README.md`](trace/README.md).
 The orchestrating session writes the records (launch fields before a stage fires, completion fields

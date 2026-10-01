@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Viewer renderer — the second Close-checklist trace line (#272 decision 8, built on #290).
 
-    python3 productcraft/trace/render.py productcraft/ledger/engagements/<eng-id>
+    python3 craftwork/trace/render.py productcraft/ledger/engagements/<eng-id>
 
 Renders one self-contained HTML into the engagement's trace/ folder
-(`trace/eval.html`, or --out <path>), to productcraft/trace/DESIGN.md. Runs
+(`trace/eval.html`, or --out <path>), to craftwork/trace/DESIGN.md. Runs
 the rung-0 checks first so the page shows them; a failing check never blocks
 the render, because the page is how Sean sees what failed. Local file only,
 never a hosted artifact. Stdlib only; writes nothing else.
@@ -19,6 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from tracekit.checker import run_checks  # noqa: E402
 from tracekit.engagement import load_engagement  # noqa: E402
+from tracekit.studio import StudioNotFound, load_profile  # noqa: E402
 from tracekit.labels import decided  # noqa: E402
 from tracekit.viewer import render_html  # noqa: E402
 
@@ -28,12 +29,19 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("engagement", help="the engagement folder (or its trace/ subfolder)")
     ap.add_argument("--out", help="write the HTML here instead of <engagement>/trace/eval.html")
     ap.add_argument("--repo", help="repo root for studio-prefixed input paths")
+    ap.add_argument("--studio", help="a studio profile file (default: the nearest <team>/trace/studio.py above "
+                                     "the engagement, then $TRACEKIT_STUDIO)")
     a = ap.parse_args(argv)
     path = Path(a.engagement)
     if not path.is_dir():
         print(f"no engagement folder at {path}", file=sys.stderr)
         return 2
-    eng = load_engagement(path, repo=Path(a.repo) if a.repo else None)
+    try:
+        eng = load_engagement(path, repo=Path(a.repo) if a.repo else None,
+                              studio=load_profile(a.studio) if a.studio else None)
+    except StudioNotFound as e:
+        print(e, file=sys.stderr)
+        return 2
     checks = run_checks(eng)
     target = Path(a.out) if a.out else eng.trace_dir / "eval.html"
     target.parent.mkdir(parents=True, exist_ok=True)

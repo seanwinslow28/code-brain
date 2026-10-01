@@ -1,115 +1,21 @@
-# trace — the Productcraft trace kit
+# trace — Productcraft's side of the trace kit
 
-The public pieces the studio's evals-and-trace design needs before its first engagement opens, designed on [#272](https://github.com/seanwinslow28/code-brain/issues/272) (record, labels, ladder, blind trials) and [#292](https://github.com/seanwinslow28/code-brain/issues/292) (the viewer's [DESIGN.md](DESIGN.md)), built on [#290](https://github.com/seanwinslow28/code-brain/issues/290) (2026-09-13). Husain's order, local by law: log full traces → one expert reads them in a purpose-built viewer → binary pass/fail with a written critique → taxonomy → code checks → judges only for persistent failure modes. Nothing here ships a payload anywhere.
+The trace kit is shared. Its code, templates, viewer and tests live in [craftwork/trace/](../../craftwork/trace/README.md), the home every -craft team inherits from. They moved there from this folder on [#325](https://github.com/seanwinslow28/code-brain/issues/325) (kit 0.9.0, 2026-10-01). This folder keeps only what is Productcraft's own:
 
-| Piece | File | Who uses it |
-|---|---|---|
-| Record template | [record-template.md](record-template.md) | the coordinator, one file per invocation |
-| Labels-file template | [labels-template.md](labels-template.md) | Sean, one file per engagement |
-| Rung-0 checker | [check.py](check.py) | Close, and any time between |
-| Viewer renderer | [render.py](render.py) → `trace/eval.html`, to [DESIGN.md](DESIGN.md) | Sean, reading and labeling |
-| Cases template | [cases-template.md](cases-template.md) → an engagement's `trace/cases.md` | the writer pass, once a train has run |
-| Entry-id helper | [nextid.py](nextid.py) | the coordinator, before writing a ledger entry |
-| Failure-code taxonomy | [taxonomy.md](taxonomy.md) | Sean, when a label carries a code; `check.py` reads every code table in it; the viewer counts rows per mode |
-| Registry numbers | [registry.py](registry.py) → the runtime × seat tables pasted into [craftwork/templates/runtime-registry.md](../../craftwork/templates/runtime-registry.md) § Numbers | the coordinator at Close, and #287's trials; counts only, never a percentage |
+| File | What it is |
+|---|---|
+| [studio.py](studio.py) | Productcraft's **profile**: the seven-stage train, the record kinds, the gate seat, the repo path prefixes, the corpus citation shape, the review prompts, and rung-0 line 8 (*each drafting stage has one draft, an audit, and its required co-signs*), registered when the kit loads the file |
+| [taxonomy.md](taxonomy.md) | Productcraft's **seat failure modes**, ratified by Sean on [#299](https://github.com/seanwinslow28/code-brain/issues/299) from pc-eng-001's labels. The shared process-waste family is the kit's [taxonomy.md](../../craftwork/trace/taxonomy.md), and the checker reads both |
+| [samples/](samples/README.md) | The invented Callboard engagement the kit's tests simulate, committed with its render, and the #292 prototype render Sean ratified |
 
-Everything runs on the system `python3` with nothing installed: no model, no network, no third-party import. Templates hold no private content; the scripts read the private ledger only at run time and write only `eval.html`.
-
-## Where things live
-
-Inside each engagement folder of the private ledger (`productcraft/ledger/engagements/<eng-id>/`, layout per #268), the kit owns one subfolder:
-
-```
-<eng-id>/
-├── brief.md                        # Open: the header below, then the one-paragraph brief
-├── artifacts/  audits/  dNN-*.md   # what the seats wrote — record paths are relative to this folder
-├── readout/                        # the human versions of final, past-gate artifacts — never a pass input
-└── trace/
-    ├── pass-NN-<seat>-<kind>.md    # one immutable record per invocation
-    ├── labels.md                   # Sean's verdicts, apart from the facts
-    ├── cases.md                     # the guided-reading content, apart from the records
-    ├── notes.md                    # process notes; the viewer's third growth slot
-    ├── logs/                       # raw transcripts the records index (subagent JSONL, codex logs)
-    ├── trials/                     # a trial's artifact, beside the train, never in artifacts/
-    └── eval.html                   # the rendered viewer — local file, never hosted
-```
-
-The `trace/` subfolder is a #290 call: #272 said "in the engagement folder", and twenty-six pass files at the ledger root would bury the decision entries the ledger exists for. Both commands accept the engagement folder or its `trace/` subfolder.
-
-**The brief header the kit reads.** `brief.md` opens with frontmatter the coordinator writes at Open: `id` (`pc-eng-NNN`), `name`, `type` (`full-train` | `audit` | `execution-breakdown` | `one-off` | `role-support`), `opened`, `closed` (null until Close), `pass_budget`, and `synthetic: true` only on invented engagements (the viewer shows a badge; a real engagement shows nothing, never "REAL"). The stage-structure check asserts the full train's shape only when `type` says full train.
-
-## The Close ritual — three lines, adopted verbatim by the master skill
+The kit finds `studio.py` by walking up from the engagement folder, so the Close lines need no flag:
 
 ```bash
-python3 productcraft/trace/check.py productcraft/ledger/engagements/<eng-id>
+python3 craftwork/trace/check.py productcraft/ledger/engagements/<eng-id>
 ```
 
 ```bash
-python3 productcraft/trace/render.py productcraft/ledger/engagements/<eng-id>
+python3 craftwork/trace/render.py productcraft/ledger/engagements/<eng-id>
 ```
 
-Then confirm every pass has a row with a verdict in `trace/labels.md`. The checker exits 0 when every line passes, 1 when any fails (each finding names the pass and the thing), 2 when the path is not an engagement. `--json` emits the same checks as data. The renderer never refuses to render on a failing check: the page is how the failure gets seen.
-
-## Rung 0 — what the checker asserts, and what it cannot see
-
-Ten deterministic lines, in this order:
-
-1. **Records parse and carry every required field** — the YAML subset parses; every field in the template is present; `kind` and `stage` are in range; `withheld` names the drafting conversation.
-2. **Every pass has a record** — the numbering has no gap; every id referenced by `checks`, `triggered_by`, `shadow_of` or the labels file has a record; each filename matches its record.
-3. **Every pass has a label row** — and every row names a real pass. Rows still waiting for a verdict are counted in a note.
-4. **Input hashes match disk or a recorded prior revision** — each input's sha256 matches the file now, or matches a hash an earlier pass recorded as its output for that path *and* the disk holds the latest recorded revision. Outputs are checked the same way. A file edited outside a pass fails here — with one carve-out, below.
-5. **Cited corpus files appear in the transcript's file reads** — every `corpus/…` path an output artifact or ledger entry cites is in the record's `## Corpus read`, **or in that of an earlier pass which wrote the same artifact**: a repair inherits the citations of the revision it overwrote, and charging it with those reads would be a false finding. Reads travel along one artifact's revision chain, never sideways. `grounding: full` with no corpus read, or `grounding: none` with one of this pass's own, is a finding.
-6. **Every move names an existing upstream item; splits are subsets** — each `kept` / `split` / `merged` / `dropped` item is found in an input readable at its recorded hash (ids like `O2`, `OC-1a`, `KR-2`; ranges like `E1–E5` expand; prose items are phrase-matched); a split's children are new and appear in the artifact. Malformed lines and unknown ops are findings. `added` lines are new by definition.
-7. **Meter present or UNMEASURED** — `meter_source` is one value of the [runtime registry](../../craftwork/templates/runtime-registry.md)'s vocabulary (one per registry row, mirrored as `METER_SOURCES` and held equal by a test); a measured meter carries whole token counts in one of two forms, the split `input` + `output` pair or a single `total` (which is what the Agent tool's usage field and the Codex footer each actually report; every other row reports the pair); `UNMEASURED` is honest and listed, and so is a total that was never split.
-8. **Each drafting stage has one draft, an audit, and its required co-signs** — per stage reached: exactly one `draft` by the stage's seat, at least one `audit` by the fixed auditor, a `co-sign` by the co-signing seat at stages 2 and 6. Full trains only.
-9. **Trials blind-labeled before their runtime is shown** — a trial's inputs are hash-identical to its baseline's; while either lacks a verdict, the rendered page's rows for both hide runtime, launch form and log path (the check reads the pair's own rows in `eval.html`, since gates may share a runtime).
-10. **Every `failure_code` is in the taxonomy; a quote-required code quotes its text** — a code in `labels.md` must appear in [taxonomy.md](taxonomy.md), so the column can never be free text, and `manufactured` is a finding unless the row's critique quotes the text it indicts. A blank column is the normal state and passes with a note (#296 clause 8, landed #298).
-11. **Recorded runtime matches the raw log's model stamps** — a Claude pass's `runtime:` must equal the model every assistant message in its own JSONL raw log is stamped with; a different or second model is a finding naming both. An alias is not a pin: the Agent tool's `opus` / `sonnet` moved to the 5.5 generation after the first train closed, and a record written from the alias would name a model that never ran (#321). `<synthetic>` stamps are ignored; a pass with no JSONL log or no stamp is unverifiable, named; Codex and the other rows are out of scope until their logs are read the same way, and so are the coordinator's own passes with no log.
-
-**Shared machinery is provenance, not a chain link.** A seat's inputs include the studio's own files — its seat contract, a lane manifest, an artifact template — which live in the repo, outside the engagement, and keep improving after a train closes. The ticket that fixes a template is doing its job, not tampering with a record, so a repo-path input (`productcraft/…`, `systemcraft/…`, `craftwork/…`, `.claude/…`) that **no pass in this engagement wrote** is counted *unverifiable* and named in a note when its hash has moved, exactly as an overwritten revision's Moves are. The recorded hash is never rewritten to match. Everything the engagement itself wrote — including a repo path some pass recorded as an output — stays strict, which is where the guarantee matters. The limit, stated plainly: this cannot tell a template edited *between* two passes of a live train from one edited a month after Close; mid-train, that belongs in the engagement's `## Notes`. **A file that moved** (kit 0.8.1, #324) is followed through [craftwork/README.md](../../craftwork/README.md) § Moved here: the record keeps the old path, the loader hashes the file where it now lives, and the paths followed are named in a note. A moved path with no row in that table still fails as missing.
-
-**Ledger entries ride the chain.** A drafting pass lists each entry it wrote as a `- path:` block with its hash, with the `- id:` beside it — an entry with no hash is outside the chain, so an edit to it is invisible. When the coordinator marks an older entry `status: superseded`, that edit is an **output of the superseding pass**, recorded there with the new hash; otherwise the entry reads as edited outside any pass and fails line 4, correctly.
-
-**What rung 0 cannot see.** Artifacts are redrafted in place (#274), so a superseded revision is no longer on disk. The checker names this honestly rather than passing or failing it: a pass whose artifact was later overwritten has its Moves reported as no longer on disk; a move whose only possible home is an unreadable revision is counted *unverifiable*, never verified. A replay over the raw transcript is a later rung (#272 decision 4), not day one. Apart from line 11's model stamps, the checker does not read transcripts: `## Corpus read` is written by the coordinator from the transcript's file reads, and the checker trusts the record.
-
-## The next entry id
-
-Ids are permanent and bare (#268), so a gap in the `dNN` numbering is harmless — but reserving a block ahead of writing it is how two passes end up claiming one id, which is what the first engagement did. The helper hands out the next free one and shows its working:
-
-```bash
-python3 productcraft/trace/nextid.py productcraft/ledger/engagements/<eng-id>
-```
-
-An id is **claimed** by a file on disk *or* by a pass record naming it among its outputs, so a reserved-but-unwritten id is never handed out twice. The report names the gaps (left alone, never reused) and separately the ids a record reserved but no file fills — at Close, each of those is either a gap or an entry someone forgot to write. `--bare` prints the id alone, for a shell variable. Read-only: it writes nothing.
-
-## The viewer
-
-One self-contained HTML per engagement, to [DESIGN.md](DESIGN.md) (APPROVED 2026-09-11, the renderer's authority — if the two disagree, DESIGN.md is the intent and the renderer is the bug). Masthead → prose reading line → labeling counter → the first-failing-stage matrix beside the fails with their critiques and the rung-0 checks → the train → one folded row per pass → three growth slots → footer. Fonts embedded from [fonts/](fonts/); every string from a record, label or artifact is escaped; no `<link>`, no `<script src>`, no URLs. Labels drafted on the page live in the browser and leave through **Copy label rows**; the file is the record. **The blind rule:** a shadow pair's runtime, launch form, meter source and log path are not in the HTML at all until both rows carry a verdict in the labels file — the reveal happens on the next render, never on the page.
-
-## Guided reading
-
-The page teaches as it is read, to phase 3 of the eval learning plan (adopted 2026-09-20, recorded in [DESIGN.md §14](DESIGN.md)). Above the counts it states the four things a reader is judging, kept apart — record checks, the seats' findings, your own labels, the owner decisions that are yours alone — with the versioned review prompt for each kind of run. Below them sits **guided reading**: one chapter per case, with decreasing help, each leading with a plain `Run NN · <Seat> <kind>` line, quoting its source with the line it sits on, and offering a question, a note and a bookmark.
-
-That teaching content is **not** in the renderer. It lives in `trace/cases.md` beside the records, written by hand in a **writer pass** after a train has run, to [cases-template.md](cases-template.md): one case per pass and finding, each source pinned to the sha256 it carried at writing time. The renderer reads, checks and qualifies it, and composes nothing. No file renders an honest empty section; a source whose hash has moved renders "the source changed since this story was written" instead of a stale quote; an excerpt that is not in its file is printed as an error. Practice answers live in the browser under a key of their own and never touch `labels.md` — the page records which help was opened before each answer, so an assisted answer is never mistaken for a blind one.
-
-## Tests and the synthetic sample
-
-Everything is tested on an invented engagement, never on ledger content. `pc-eng-000` "Callboard" (a fictional casting tool for community theatre, the same invention #292's sample used) is built by [tests/synth.py](tests/synth.py), which *simulates* the train — it hashes each pass's inputs from the folder as it stands and lets repairs overwrite artifacts in place — so the records' hash chain is real and the checker is exercised on superseded revisions, bounce loops and a blind pair. It refuses to write under any `ledger/` path.
-
-```bash
-cd /Users/seanwinslow/Code-Brain/code-brain && agents-sdk/.venv/bin/python3 -m pytest productcraft/trace/tests -q
-```
-
-```bash
-cd productcraft/trace && python3 tests/synth.py samples/synthetic-engagement && python3 check.py samples/synthetic-engagement && python3 render.py samples/synthetic-engagement
-```
-
-[samples/synthetic-engagement/](samples/synthetic-engagement/) is that folder, committed with its rendered `trace/eval.html` so the page can be opened from a fresh clone. The #292 prototype render Sean ratified stays untouched at [samples/pc-eng-000-callboard/](samples/pc-eng-000-callboard/).
-
-## Registry numbers
-
-What each runtime has done on real work lives in the registry's § Numbers as **counts** — labeled passes as "3 of 4", the rung-0 clean count, medians over measured passes, trials and promotions — and never as a number typed by hand: `python3 productcraft/trace/registry.py productcraft/ledger/engagements/pc-eng-*` regenerates both tables (per runtime, per runtime × seat with its family) and the coordinator replaces the section at Close. The generator runs rung 0 in memory to learn which passes a finding names, counts a meter as measured only from a registered source, and reads a promotion from one `promoted:` line in the trial record's `## Notes` (#272 decision 9, built on [#286](https://github.com/seanwinslow28/code-brain/issues/286)). No percentage at any count.
-
-## Shared home
-
-This is the **first copy** (#272 decision 8), and since kit **0.6.0** (#291, 2026-09-22) it is **studio-agnostic**: a `Studio` profile ([tracekit/studio.py](tracekit/studio.py)) holds the one set of things two studios disagree on — the numbered stages, the kinds, which kinds own `## Moves`, the gate seats, the repo path prefixes, the item-id shape in a Moves line, the taxonomy file, the header file and one structure check (rung-0 line 8, registered by key in `tracekit.checker.STRUCTURE_CHECKS`) — and the loader, checker and viewer read it from the engagement. `PRODUCTCRAFT` is the default profile, so every command and test in this folder is unchanged. The content machine's kit ([`.claude/skills/content-machine/trace/`](../../.claude/skills/content-machine/trace/README.md)) imports `tracekit` from here through its own profile (`machine.py`: stages 0 Oracle → 6 Lessons, kinds `sweep` … `lesson`, rep ids like `Rep 7e`, line 8 *each shape ran in the clean context, was gated, and reached the pick*) and forks nothing. `craftwork` extracts the shared home later. Rung 1's file is here — [taxonomy.md](taxonomy.md), a tracked file per studio holding shapes of failure only. Its **process-waste** family was earned by [#296](https://github.com/seanwinslow28/code-brain/issues/296)'s investigation rather than by labels; its **seat failure modes** opened on [#299](https://github.com/seanwinslow28/code-brain/issues/299) from the first engagement's 33 labels — two modes coded, two shapes sighted and held off the table, every count carrying the labels' assisted provenance, the names Sean's to ratify. The viewer's *Failure taxonomy* slot fills from the labels file, one line per mode with its count. Rung 2 (a judge per failure mode, validated on TPR/TNR) lands beside this README when it is earned.
+Everything else about the kit — the record layout inside an engagement, the rung-0 lines, the viewer, the registry numbers, the next-id helper — is in [craftwork/trace/README.md](../../craftwork/trace/README.md).

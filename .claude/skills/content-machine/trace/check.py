@@ -6,7 +6,7 @@
 Prints one line per deterministic check, PASS or FAIL with its count, the
 findings under a failing check and the notes under any check. Exit 0 when every
 check passes, 1 when any fails, 2 when the path is not a run folder. No model,
-no network, stdlib only; imports the shared kit from productcraft/trace/. Reads
+no network, stdlib only; imports the shared kit from craftwork/trace/. Reads
 the private run folder at run time and writes nothing.
 
 Options: --json for a machine-readable list; --repo <path> to resolve

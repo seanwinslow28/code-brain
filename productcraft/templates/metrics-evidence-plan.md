@@ -61,7 +61,7 @@ What is looked at, by whom, how often, and the decision each view feeds. The ope
 
 ## Moves
 
-<!-- MACHINE-READ. The rung-0 checker (productcraft/trace/check.py) parses this section line by line
+<!-- MACHINE-READ. The rung-0 checker (craftwork/trace/check.py) parses this section line by line
      against the pass's recorded inputs. Move lines only, one per line, from the five-op grammar in
      artifact-header.md § Moves — or the single `origin draft, no upstream` line. A sentence of prose
      here is a malformed line and a finding, not a note: put the note in the record's ## Notes. -->

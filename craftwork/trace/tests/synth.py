@@ -10,7 +10,7 @@ pass's writes (a repair overwrites its artifact in place, as #274 rules), so
 the hash chain in the records is real and the checker can be exercised on
 superseded revisions, blind pairs and bounce loops.
 
-Run from productcraft/trace/:  python3 tests/synth.py <out-dir>
+Run from craftwork/trace/:  python3 tests/synth.py <out-dir>
 It refuses to write anywhere under a `ledger/` path.
 
 Used by tests (into tmp_path) and to regenerate samples/synthetic-engagement/.

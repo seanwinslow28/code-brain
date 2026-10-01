@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+from reference import PRODUCTCRAFT
 from synth import build
 from tracekit.engagement import load_engagement, resolve_path, sha256_path
 
@@ -109,7 +110,8 @@ def test_resolve_path_prefers_the_engagement_then_the_repo(tmp_path):
     (repo / "productcraft" / "templates").mkdir(parents=True)
     (repo / "productcraft" / "templates" / "t.md").write_text("t")
     assert resolve_path(root, repo, "artifacts/x.md") == root / "artifacts" / "x.md"
-    assert resolve_path(root, repo, "productcraft/templates/t.md") == repo / "productcraft" / "templates" / "t.md"
+    assert resolve_path(root, repo, "productcraft/templates/t.md", PRODUCTCRAFT.repo_prefixes) == repo / "productcraft" / "templates" / "t.md"
+    assert resolve_path(root, repo, "productcraft/templates/t.md") is None   # the kit's own prefixes name no studio
     assert resolve_path(root, repo, "nowhere.md") is None
 
 

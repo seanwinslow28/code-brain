@@ -1,4 +1,4 @@
-"""tracekit — the Productcraft trace kit (build map #264, ticket #290).
+"""tracekit — the shared trace kit every -craft team reads (built as Productcraft's on #290, shared on #325).
 
 Designed on #272 and #292: the pass-record template, the labels-file template,
 the rung-0 checker, the viewer renderer, and the cases template the viewer's
@@ -33,9 +33,8 @@ meter-source vocabulary grows to one value per registry row, with a drift test.
 holds the one set of things the two studios disagree on — stages, kinds, the
 kinds that own `## Moves`, gate seats, repo path prefixes, item-id shape, the
 taxonomy file, one structure check — and the loader, checker and viewer read it
-from the engagement. `PRODUCTCRAFT` is the default profile, so nothing that
-called the kit before changes meaning; the content machine's profile lives
-beside the machine and imports `tracekit` from here.
+from the engagement. The content machine's profile lives beside the machine and
+imports `tracekit` from here.
 
 0.8.0 checks the runtime against the transcript (#321): the Agent tool's `opus` and
 `sonnet` aliases moved to the 5.5 generation after the first train closed, and a
@@ -50,10 +49,20 @@ lives. Same bytes still match; changed bytes are machinery that moved since the 
 unverifiable as before; a path with no row still fails as missing. The paths
 followed are named in a note.
 
-First copy. The content machine's kit (#291) shares this code rather than
-forking it; `craftwork` is the shared home, and this kit moves there on its own
-ticket (#325).
+0.9.0 moves the kit to `craftwork/trace/` (#325), the shared home every -craft
+team inherits from, and takes Productcraft's shape out of it. No profile lives in
+the kit any more: `resolve_studio` takes the one passed in, else the nearest
+`<team>/trace/studio.py` above the engagement (Productcraft's sits at
+`productcraft/trace/studio.py`, with its stage-structure check), else the file
+`$TRACEKIT_STUDIO` names, and otherwise refuses. The taxonomy splits in two: the
+process-waste family is the kit's `taxonomy.md`, shared by every studio unless
+its profile sets `shared_taxonomy=False`; a studio's own seat modes stay in its
+own file. The CLIs take `--studio <file>`. Productcraft's two engagements check
+and render with the results they had at 0.8.1.
+
+The content machine (#291) shares this code rather than forking it, through its
+own profile.
 """
 
-KIT_NAME = "productcraft/trace"
-KIT_VERSION = "0.8.1"
+KIT_NAME = "craftwork/trace"
+KIT_VERSION = "0.9.0"

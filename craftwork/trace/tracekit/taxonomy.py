@@ -3,8 +3,16 @@
 One file per studio (#272 decision 7's ladder; the process-waste codes ratified on
 #296 clause 8, landed on #298; the seat failure modes opened from the first
 engagement's labels on #299). Studio-agnostic: the parser knows the table's shape, never which
-codes a studio has. The default path is the kit's own folder, so the content
-machine's copy (#291) passes its own file rather than inheriting this one.
+codes a studio has.
+
+Two files make a studio's vocabulary (kit 0.9.0, #325). The kit's own
+`taxonomy.md` holds the families every studio shares — today the process-waste
+family, earned by an investigation of the studio's checks rather than by any one
+studio's labels. Each studio's file holds its own seat failure modes, earned from
+its own labels (Productcraft's two live in `productcraft/trace/taxonomy.md`).
+`taxonomy_for` reads the shared file first and the studio's second, so a studio
+row that repeats a shared code wins. A profile with `shared_taxonomy=False` reads
+its own file alone — the content machine's, which has not adopted the family.
 
 A code row may be marked quote-required, which makes the code a claim the reader
 can check: the label's critique has to quote the text it indicts.
@@ -16,9 +24,11 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
-__all__ = ["Code", "Taxonomy", "DEFAULT_TAXONOMY_PATH", "parse_taxonomy", "load_taxonomy", "critique_quotes"]
+__all__ = ["Code", "Taxonomy", "SHARED_TAXONOMY_PATH", "DEFAULT_TAXONOMY_PATH", "parse_taxonomy", "load_taxonomy",
+           "taxonomy_for", "critique_quotes"]
 
-DEFAULT_TAXONOMY_PATH = Path(__file__).resolve().parent.parent / "taxonomy.md"
+SHARED_TAXONOMY_PATH = Path(__file__).resolve().parent.parent / "taxonomy.md"   # craftwork/trace/taxonomy.md
+DEFAULT_TAXONOMY_PATH = SHARED_TAXONOMY_PATH
 
 _HEADER = ("code", "family", "a label with this code says", "quote")
 _CODE = re.compile(r"`([a-z][a-z0-9-]*)`")
@@ -94,6 +104,21 @@ def load_taxonomy(path: Optional[Path] = None) -> Taxonomy:
     if not p.is_file():
         return Taxonomy({}, p)
     return parse_taxonomy(p.read_text(encoding="utf-8"), p)
+
+
+def taxonomy_for(studio) -> Taxonomy:
+    """A studio's whole vocabulary: the shared families (unless it opts out), then its own file.
+
+    The result's `path` is the studio's own file when it has one, since that is the
+    file a reader opens to see the studio's modes; the shared file otherwise.
+    """
+    codes: dict[str, Code] = {}
+    if getattr(studio, "shared_taxonomy", True):
+        codes.update(load_taxonomy(SHARED_TAXONOMY_PATH).codes)
+    own = getattr(studio, "taxonomy_path", None)
+    if own is not None:
+        codes.update(load_taxonomy(own).codes)
+    return Taxonomy(codes, Path(own) if own is not None else SHARED_TAXONOMY_PATH)
 
 
 def critique_quotes(critique: str) -> bool:

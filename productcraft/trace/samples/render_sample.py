@@ -6,7 +6,7 @@ hand-built prototype that produced samples/pc-eng-000-callboard/eval.html so
 Sean had a page to react to. Everything in SYNTH is invented: a fictional
 engagement, fictional seats' output, fictional meters. No ledger content.
 
-Run:  python3 samples/render_sample.py   (from productcraft/trace/)
+Run:  python3 productcraft/trace/samples/render_sample.py   (fonts read from the kit at craftwork/trace/fonts/)
 """
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ import json
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-TRACE = HERE.parent
+TRACE = HERE.parents[2] / "craftwork" / "trace"   # the kit's fonts moved there on #325
 OUT = HERE / "pc-eng-000-callboard" / "eval.html"
 
 STAGES = {

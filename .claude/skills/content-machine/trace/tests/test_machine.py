@@ -212,9 +212,17 @@ def test_a_record_on_a_stage_the_machine_lacks_fails_line_1(run_dir):
 # ---- the viewer on the machine's names -----------------------------------------------
 
 
+def test_the_machine_reads_its_own_taxonomy_alone():
+    # #325 shared the kit's process-waste family; the machine has not adopted it
+    from tracekit.taxonomy import taxonomy_for
+    from machine import CONTENT_MACHINE
+    assert CONTENT_MACHINE.shared_taxonomy is False
+    assert "manufactured" not in taxonomy_for(CONTENT_MACHINE).codes
+
+
 def test_render_uses_the_machines_stages_and_names(run_dir):
     html = render_html(load(run_dir), rendered_on="2026-10-06")
-    assert "Content Machine" in html and "productcraft/trace" in html          # the studio, and the kit it imports
+    assert "Content Machine" in html and "craftwork/trace" in html             # the studio, and the kit it imports
     for label in ("0 Oracle", "3 Shape", "4 Gates", "6 Lessons"):
         assert label in html
     assert "Strategist" not in html and "Leadership" not in html
@@ -241,9 +249,9 @@ def test_check_cli(run_dir):
     r = run("check.py", str(run_dir))
     assert r.returncode == 0, r.stderr
     assert "PASS  Each shape ran in the clean context, was gated, and reached the pick  3 of 3" in r.stdout
-    assert r.stdout.count("PASS") == 10
+    assert r.stdout.count("PASS") == len(CHECK_NAMES)
     data = json.loads(run("check.py", str(run_dir), "--json").stdout)
-    assert len(data) == 10 and all(c["ok"] for c in data)
+    assert len(data) == len(CHECK_NAMES) and all(c["ok"] for c in data)
 
 
 def test_check_cli_exits_one_on_a_finding_and_two_off_a_run(run_dir, tmp_path):

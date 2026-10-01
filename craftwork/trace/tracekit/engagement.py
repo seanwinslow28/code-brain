@@ -13,8 +13,9 @@ Layout the kit reads (private ledger, `ledger/engagements/<eng-id>/`):
 
 Paths inside a record resolve against the engagement folder first; a path
 that starts with a studio or `.claude/` prefix resolves against the repo
-root (found by walking up to a directory holding both CLAUDE.md and
-productcraft/, or given explicitly).
+root (found by walking up to a directory holding CLAUDE.md and one of the
+studio's root markers, or given explicitly). The studio itself is resolved per
+engagement (`tracekit.studio.resolve_studio`): its shape never lives in the kit.
 """
 from __future__ import annotations
 
@@ -27,19 +28,14 @@ from typing import Any, Optional
 from .frontmatter import FrontmatterError, split_frontmatter
 from .labels import Label, LabelsError, parse_labels
 from .moves import MovesSection, parse_moves
-from .studio import PRODUCTCRAFT, Studio
+from .studio import Studio, resolve_studio
 
 __all__ = [
-    "KINDS", "COORDINATOR_KINDS", "METER_SOURCES", "REPO_PREFIXES", "normalize_meter", "meter_is_measured", "REQUIRED_FIELDS", "STAGE_SEATS", "FIXED_AUDITORS", "REQUIRED_COSIGNS",
+    "METER_SOURCES", "REPO_PREFIXES", "normalize_meter", "meter_is_measured", "REQUIRED_FIELDS",
     "InputRef", "OutputRef", "CheckRef", "Record", "Engagement",
-    "load_engagement", "resolve_path", "sha256_path", "find_repo_root", "Studio", "PRODUCTCRAFT",
+    "load_engagement", "resolve_path", "sha256_path", "find_repo_root", "Studio",
 ]
 
-# Productcraft's vocabulary, mirrored from the default studio profile (tracekit/studio.py) for callers
-# that predate profiles; a loader reads its studio, never these.
-KINDS = PRODUCTCRAFT.kinds
-# the coordinator's own passes: no seat fires, so there is no drafting conversation to withhold
-COORDINATOR_KINDS = PRODUCTCRAFT.coordinator_kinds
 # one value per runtime-registry row (craftwork/templates/runtime-registry.md § Meter-source vocabulary);
 # a test fails if the two drift. A value names where the number came from, never how good it is.
 METER_SOURCES = (
@@ -57,21 +53,8 @@ REQUIRED_FIELDS = (
     "wall_clock_s", "meter_source", "inputs", "withheld", "outputs", "raw_log", "checks",
     "triggered_by", "shadow_of",
 )
-# the fixed train (#266, #273): stage → drafting seat
-STAGE_SEATS = {
-    1: "product-strategist", 2: "discovery-lead", 3: "insights-analytics", 4: "growth-distribution",
-    5: "business-economics", 6: "delivery-execution", 7: "product-leadership",
-}
-# the two closed audit cycles (artifact-header.md): stage → the seat that audits it
-FIXED_AUDITORS = {
-    1: "discovery-lead", 2: "product-leadership", 3: "delivery-execution", 4: "insights-analytics",
-    5: "growth-distribution", 6: "business-economics", 7: "product-strategist",
-}
-# the co-sign touches that produce a pass (#266): stage → co-signing seat
-REQUIRED_COSIGNS = {2: "insights-analytics", 6: "product-strategist"}
-
-REPO_PREFIXES = PRODUCTCRAFT.repo_prefixes
-_REPO_PREFIXES = REPO_PREFIXES   # the old private name, kept for callers inside this module
+# the prefixes every studio shares; a profile names its own (Productcraft adds productcraft/ and systemcraft/)
+REPO_PREFIXES = ("craftwork/", ".claude/")
 
 
 @dataclass(frozen=True)
@@ -121,7 +104,7 @@ class Record:
     notes: str = ""
     raw: dict[str, Any] = field(default_factory=dict)
     errors: list[str] = field(default_factory=list)
-    forward_kinds: tuple[str, ...] = PRODUCTCRAFT.forward_kinds   # set by the loader from its studio
+    forward_kinds: tuple[str, ...] = ("draft", "repair", "trial")   # set by the loader from its studio
 
     @property
     def artifact_outputs(self) -> list[OutputRef]:
@@ -137,7 +120,7 @@ class Engagement:
     root: Path
     trace_dir: Path
     repo: Optional[Path]
-    studio: Studio = PRODUCTCRAFT
+    studio: Optional[Studio] = None   # set by the loader; every check and the viewer read it
     brief: dict[str, Any] = field(default_factory=dict)
     records: list[Record] = field(default_factory=list)
     labels: dict[str, Label] = field(default_factory=dict)
@@ -296,7 +279,7 @@ def meter_is_measured(meter: Optional[dict[str, Any]]) -> bool:
 # --------------------------------------------------------------------------- #
 
 
-def find_repo_root(start: Path, markers: tuple[str, ...] = PRODUCTCRAFT.root_markers) -> Optional[Path]:
+def find_repo_root(start: Path, markers: tuple[str, ...] = Studio.root_markers) -> Optional[Path]:
     for p in [start] + list(start.parents):
         if (p / "CLAUDE.md").is_file() and any((p / m).is_dir() for m in markers):
             return p
@@ -334,7 +317,7 @@ def recorded_moves(repo: Optional[Path]) -> dict[str, str]:
 
 
 def resolve_path(root: Path, repo: Optional[Path], rel: str,
-                 prefixes: tuple[str, ...] = PRODUCTCRAFT.repo_prefixes) -> Optional[Path]:
+                 prefixes: tuple[str, ...] = REPO_PREFIXES) -> Optional[Path]:
     rel = rel.strip()
     if not rel or rel in ("—", "-", "none"):
         return None
@@ -388,7 +371,7 @@ def _as_str(v: Any) -> str:
     return "" if v is None else str(v)
 
 
-def _record_from(fm: dict[str, Any], body: str, file: Path, studio: Studio = PRODUCTCRAFT) -> Record:
+def _record_from(fm: dict[str, Any], body: str, file: Path, studio: Studio) -> Record:
     r = Record(pass_id=_as_str(fm.get("pass")), file=file, raw=fm, forward_kinds=studio.forward_kinds)
     stage_numbers = studio.all_stage_numbers
     for key in REQUIRED_FIELDS:
@@ -466,8 +449,8 @@ def _locate(path: Path) -> tuple[Path, Path]:
 
 
 def load_engagement(path: Path | str, repo: Optional[Path] = None, studio: Optional[Studio] = None) -> Engagement:
-    studio = studio or PRODUCTCRAFT
     root, trace_dir = _locate(Path(path))
+    studio = resolve_studio(root, studio)
     eng = Engagement(root=root, trace_dir=trace_dir, repo=repo or find_repo_root(root, studio.root_markers), studio=studio)
     record_name = studio.record_name_re()
     brief = root / studio.brief_file

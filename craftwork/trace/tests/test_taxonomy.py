@@ -9,12 +9,14 @@ from pathlib import Path
 
 import pytest
 
+from reference import PRODUCTCRAFT
 from synth import build
 from tracekit.checker import CHECK_NAMES, run_checks
 from tracekit.engagement import load_engagement
 from tracekit.labels import Label
 from tracekit.taxonomy import (
-    DEFAULT_TAXONOMY_PATH, Taxonomy, critique_quotes, load_taxonomy, parse_taxonomy,
+    DEFAULT_TAXONOMY_PATH, SHARED_TAXONOMY_PATH, Taxonomy, critique_quotes, load_taxonomy, parse_taxonomy,
+    taxonomy_for,
 )
 
 @pytest.fixture
@@ -39,19 +41,20 @@ PROCESS_WASTE = {"manufactured", "stale-restatement", "overstated-scope", "kit-i
 SEAT_MODES = {"unobservable-measure", "overclaimed-pointer"}
 
 
-def test_the_studios_own_taxonomy_carries_the_process_waste_family():
+def test_the_shared_file_carries_the_process_waste_family_alone():
+    # #325: the family every studio shares moved out of Productcraft's file into the kit's
     tax = load_taxonomy()
     assert tax.open
-    assert PROCESS_WASTE <= set(tax.codes)
+    assert set(tax.codes) == PROCESS_WASTE
     assert all(tax.codes[c].family == "process-waste" for c in PROCESS_WASTE)
 
 
-def test_the_seat_failure_modes_opened_from_the_first_engagements_labels():
-    # #299: two modes from pc-eng-001's 33 labels, in their own table under their own heading
-    tax = load_taxonomy()
-    assert SEAT_MODES <= set(tax.codes)
-    assert all(tax.codes[c].family == "seat" for c in SEAT_MODES)
-    assert set(tax.codes) == PROCESS_WASTE | SEAT_MODES
+def test_the_seat_failure_modes_stay_in_productcrafts_own_file():
+    # #299: two modes from pc-eng-001's 33 labels, kept in the studio's file when the kit moved (#325)
+    own = load_taxonomy(PRODUCTCRAFT.taxonomy_path)
+    assert set(own.codes) == SEAT_MODES
+    assert all(own.codes[c].family == "seat" for c in SEAT_MODES)
+    assert set(taxonomy_for(PRODUCTCRAFT).codes) == PROCESS_WASTE | SEAT_MODES
 
 
 def test_every_code_table_in_the_file_is_read_not_only_the_first():
@@ -66,13 +69,13 @@ def test_every_code_table_in_the_file_is_read_not_only_the_first():
 
 
 def test_only_manufactured_requires_a_quote():
-    tax = load_taxonomy()
+    tax = taxonomy_for(PRODUCTCRAFT)
     assert tax.codes["manufactured"].quote_required
     assert not any(c.quote_required for k, c in tax.codes.items() if k != "manufactured")
 
 
-def test_the_default_path_is_the_kits_own_folder():
-    assert DEFAULT_TAXONOMY_PATH == Path(__file__).resolve().parents[1] / "taxonomy.md"
+def test_the_default_path_is_the_kits_own_shared_file():
+    assert DEFAULT_TAXONOMY_PATH == SHARED_TAXONOMY_PATH == Path(__file__).resolve().parents[1] / "taxonomy.md"
     assert DEFAULT_TAXONOMY_PATH.is_file()
 
 

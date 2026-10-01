@@ -14,13 +14,10 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from .labels import decided
-from .engagement import (
-    FIXED_AUDITORS, METER_SOURCES, REPO_PREFIXES as _REPO_PREFIXES, REQUIRED_COSIGNS, STAGE_SEATS,
-    Engagement, Record, normalize_meter, sha256_path,
-)
+from .engagement import METER_SOURCES, Engagement, Record, normalize_meter, sha256_path
 from .moves import extract_ids
-from .studio import PRODUCTCRAFT, Studio
-from .taxonomy import Taxonomy, critique_quotes, load_taxonomy
+from .studio import Studio
+from .taxonomy import Taxonomy, critique_quotes, taxonomy_for
 
 __all__ = ["CHECK_NAMES", "STRUCTURE_CHECKS", "check_names", "Check", "run_checks", "format_report", "row_block"]
 
@@ -41,7 +38,7 @@ CHECK_NAMES = (
 _STRUCTURE_INDEX = 7   # rung-0 line 8 is the one check a studio writes for itself
 
 
-def check_names(studio: Studio = PRODUCTCRAFT) -> tuple[str, ...]:
+def check_names(studio: Studio) -> tuple[str, ...]:
     """The eleven line names in order, with the studio's own name on its structure line."""
     names = list(CHECK_NAMES)
     names[_STRUCTURE_INDEX] = studio.structure_check_name
@@ -69,7 +66,7 @@ class Check:
 def run_checks(eng: Engagement, taxonomy: Taxonomy | None = None) -> list[Check]:
     studio = eng.studio
     if taxonomy is None:
-        taxonomy = load_taxonomy(studio.taxonomy_path) if studio.taxonomy_path is not None else load_taxonomy()
+        taxonomy = taxonomy_for(studio)
     structure = STRUCTURE_CHECKS.get(studio.key, _no_structure_check)
     return [
         _records_parse(eng),
@@ -534,56 +531,10 @@ def _meter(eng: Engagement) -> Check:
 # 7 · stage structure
 # --------------------------------------------------------------------------- #
 
-
-def _stages(eng: Engagement) -> Check:
-    """Productcraft's structure line: the fixed train's draft / audit / co-sign shape per stage."""
-    c = Check(PRODUCTCRAFT.structure_check_name)
-    names = eng.studio.stage_name
-    etype = str(eng.brief.get("type") or "").lower()
-    if etype and etype not in ("full-train", "full train"):
-        c.notes.append(f"engagement type is {etype}: not a full train, the stage structure is not asserted")
-        return c
-    if not etype:
-        c.notes.append("brief.md names no type; asserting the full-train structure")
-    stages = sorted({r.stage for r in eng.records if 1 <= r.stage <= 7})
-    c.n_total = len(stages)
-    for s in stages:
-        ok = True
-        rs = [r for r in eng.records if r.stage == s]
-        drafts = [r for r in rs if r.kind == "draft"]
-        if len(drafts) != 1:
-            c.findings.append(f"stage {s} {names(s)}: {len(drafts)} drafts, expected exactly one (repairs are `kind: repair`)")
-            ok = False
-        elif drafts[0].seat != STAGE_SEATS[s]:
-            c.findings.append(f"stage {s}: draft by {drafts[0].seat}; the drafting seat is {STAGE_SEATS[s]}")
-            ok = False
-        audits = [r for r in rs if r.kind == "audit"]
-        if not audits:
-            c.findings.append(f"stage {s} {names(s)}: no audit pass (the fixed auditor is {FIXED_AUDITORS[s]})")
-            ok = False
-        for a in audits:
-            if a.seat != FIXED_AUDITORS[s]:
-                c.findings.append(f"stage {s}: audit by {a.seat}; the fixed auditor is {FIXED_AUDITORS[s]}")
-                ok = False
-        if s in REQUIRED_COSIGNS:
-            cosigns = [r for r in rs if r.kind == "co-sign"]
-            if not cosigns:
-                c.findings.append(f"stage {s}: no co-sign pass (required from {REQUIRED_COSIGNS[s]})")
-                ok = False
-            for cs in cosigns:
-                if cs.seat != REQUIRED_COSIGNS[s]:
-                    c.findings.append(f"stage {s}: co-sign by {cs.seat}; the co-signing seat is {REQUIRED_COSIGNS[s]}")
-                    ok = False
-        c.n_ok += 1 if ok else 0
-    missing = [s for s in range(1, 8) if s not in stages]
-    if missing:
-        c.notes.append(f"stages not yet reached: {', '.join(str(s) for s in missing)}")
-    return c
-
-
-# the one rung-0 line a studio writes for itself, keyed by `Studio.key`; the content machine's
-# profile registers its own at import (`.claude/skills/content-machine/trace/machine.py`)
-STRUCTURE_CHECKS: dict[str, "callable"] = {PRODUCTCRAFT.key: _stages}
+# the one rung-0 line a studio writes for itself, keyed by `Studio.key`. Every studio's check lives in its
+# own profile and registers here when the profile loads: Productcraft's in `productcraft/trace/studio.py`,
+# the content machine's in its `machine.py`. A studio with none gets an honest note on line 8.
+STRUCTURE_CHECKS: dict[str, "callable"] = {}
 
 
 # --------------------------------------------------------------------------- #
