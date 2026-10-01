@@ -43,9 +43,17 @@ record written from the alias names a model that never ran. An eleventh rung-0
 line reads each Claude pass's raw log for its model stamps and fails a record
 whose `runtime:` disagrees; a pass with no log or no stamp is unverifiable, named.
 
+0.8.1 follows a recorded move (#324): shared law moved into `craftwork/`, and a
+closed record keeps the path its seat read. When a repo path is gone, the loader
+looks it up in `craftwork/README.md` § Moved here and hashes the file where it now
+lives. Same bytes still match; changed bytes are machinery that moved since the pass,
+unverifiable as before; a path with no row still fails as missing. The paths
+followed are named in a note.
+
 First copy. The content machine's kit (#291) shares this code rather than
-forking it; `craftwork` extracts the shared home later.
+forking it; `craftwork` is the shared home, and this kit moves there on its own
+ticket (#325).
 """
 
 KIT_NAME = "productcraft/trace"
-KIT_VERSION = "0.8.0"
+KIT_VERSION = "0.8.1"

@@ -391,3 +391,60 @@ def test_a_repo_path_the_engagement_itself_wrote_stays_in_the_chain(eng_in_repo)
     assert not c.ok
     assert c.n_unverifiable == 0
     assert any("productcraft/templates/strategy-pov.md" in f for f in c.findings)
+
+
+# --------------------------------------------------------------------------- #
+# #324 · shared law moved into craftwork/ — closed records follow the recorded move
+# --------------------------------------------------------------------------- #
+
+MOVES_README = """# craftwork
+
+## Moved here
+
+| From | To | Moved |
+|---|---|---|
+| `systemcraft/templates/red-team-protocol.md` | `craftwork/templates/red-team-protocol.md` | 2026-10-01, #324 |
+
+## Next section
+"""
+
+
+@pytest.fixture
+def eng_with_moved_law(tmp_path) -> Path:
+    """A repo where a template a gate read has since moved into craftwork/, bytes unchanged."""
+    (tmp_path / "CLAUDE.md").write_text("# fake repo root\n")
+    (tmp_path / "productcraft").mkdir()
+    tpl = tmp_path / "craftwork" / "templates"
+    tpl.mkdir(parents=True)
+    (tpl / "red-team-protocol.md").write_text("# Red-team protocol\n\nposture\n")
+    (tmp_path / "craftwork" / "README.md").write_text(MOVES_README)
+    return build(tmp_path / "pc-eng-000-callboard")
+
+
+def _protocol_sha(eng_dir: Path) -> str:
+    import hashlib
+    return hashlib.sha256((eng_dir.parent / "craftwork" / "templates" / "red-team-protocol.md").read_bytes()).hexdigest()
+
+
+def test_a_moved_template_with_the_same_bytes_still_matches(eng_with_moved_law):
+    add_input(eng_with_moved_law, "pass-01", "systemcraft/templates/red-team-protocol.md", _protocol_sha(eng_with_moved_law))
+    c = results(eng_with_moved_law)[HASHES]
+    assert c.ok, c.findings
+    assert c.n_unverifiable == 0
+    assert any("followed a recorded move" in n and "craftwork/templates/red-team-protocol.md" in n for n in c.notes)
+
+
+def test_a_moved_template_that_changed_since_is_unverifiable_not_missing(eng_with_moved_law):
+    add_input(eng_with_moved_law, "pass-01", "systemcraft/templates/red-team-protocol.md", "ab" * 32)
+    c = results(eng_with_moved_law)[HASHES]
+    assert c.ok, c.findings
+    assert c.n_unverifiable == 1
+    assert any("shared repo machinery" in n for n in c.notes)
+
+
+def test_a_move_missing_from_the_table_is_still_a_finding(eng_with_moved_law):
+    """The table is the only thing the kit follows: no row, no resolution."""
+    add_input(eng_with_moved_law, "pass-01", "systemcraft/templates/close-digest.md", "ab" * 32)
+    c = results(eng_with_moved_law)[HASHES]
+    assert not c.ok
+    assert any("close-digest.md is missing on disk" in f for f in c.findings)

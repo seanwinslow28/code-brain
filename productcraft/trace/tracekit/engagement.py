@@ -40,7 +40,7 @@ __all__ = [
 KINDS = PRODUCTCRAFT.kinds
 # the coordinator's own passes: no seat fires, so there is no drafting conversation to withhold
 COORDINATOR_KINDS = PRODUCTCRAFT.coordinator_kinds
-# one value per runtime-registry row (productcraft/templates/runtime-registry.md § Meter-source vocabulary);
+# one value per runtime-registry row (craftwork/templates/runtime-registry.md § Meter-source vocabulary);
 # a test fails if the two drift. A value names where the number came from, never how good it is.
 METER_SOURCES = (
     "Agent-tool usage",            # Claude Code, Agent tool: one total
@@ -176,6 +176,13 @@ class Engagement:
             self._texts[rel] = text
         return self._texts[rel]
 
+    def moved_to(self, rel: str) -> Optional[str]:
+        """The new repo path when `rel` resolves only through a recorded move (#324), else None."""
+        if self.repo is None or (self.root / rel).exists() or (self.repo / rel).exists():
+            return None
+        moved = recorded_moves(self.repo).get(rel)
+        return moved if moved is not None and self.resolve(rel) is not None else None
+
     def hash_of(self, rel: str) -> Optional[str]:
         """sha256 of a path in the engagement (or repo) as it stands now, cached; None if absent."""
         if rel not in self._hashes:
@@ -296,6 +303,36 @@ def find_repo_root(start: Path, markers: tuple[str, ...] = PRODUCTCRAFT.root_mar
     return None
 
 
+MOVES_TABLE = Path("craftwork") / "README.md"   # the shared home's § Moved here (#324)
+_MOVES_CACHE: dict[Path, dict[str, str]] = {}
+
+
+def recorded_moves(repo: Optional[Path]) -> dict[str, str]:
+    """Old repo path → new repo path, read from the shared home's § Moved here table (#324).
+
+    Shared law moved into `craftwork/` after trains had already closed, and their records keep
+    the path each seat actually read. Following the recorded move finds the file, so a closed
+    engagement stays checkable. Then the ordinary rule applies: same bytes match, changed bytes
+    are machinery that moved since the pass, which is unverifiable. A path missing from the table
+    still fails as missing.
+    """
+    if repo is None:
+        return {}
+    if repo not in _MOVES_CACHE:
+        moves: dict[str, str] = {}
+        table = repo / MOVES_TABLE
+        if table.is_file():
+            m = re.search(r"^## Moved here\s*$(.*?)(?=^## |\Z)", table.read_text(encoding="utf-8"), re.M | re.S)
+            for line in (m.group(1).splitlines() if m else []):
+                cells = [c.strip() for c in line.strip().strip("|").split("|")]
+                if len(cells) >= 2:
+                    old, new = (re.fullmatch(r"`([^`]+)`", c) for c in cells[:2])
+                    if old and new:
+                        moves[old.group(1)] = new.group(1)
+        _MOVES_CACHE[repo] = moves
+    return _MOVES_CACHE[repo]
+
+
 def resolve_path(root: Path, repo: Optional[Path], rel: str,
                  prefixes: tuple[str, ...] = PRODUCTCRAFT.repo_prefixes) -> Optional[Path]:
     rel = rel.strip()
@@ -308,6 +345,9 @@ def resolve_path(root: Path, repo: Optional[Path], rel: str,
         candidate = repo / rel
         if candidate.exists():
             return candidate
+        moved = recorded_moves(repo).get(rel)
+        if moved is not None and (repo / moved).exists():
+            return repo / moved
     return None
 
 

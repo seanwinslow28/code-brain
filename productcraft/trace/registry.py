@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Registry numbers — the runtime × seat table for `templates/runtime-registry.md` § Numbers (#286).
+"""Registry numbers — the runtime × seat table for `craftwork/templates/runtime-registry.md` § Numbers (#286).
 
     python3 productcraft/trace/registry.py productcraft/ledger/engagements/pc-eng-001-* [more engagement folders]
     python3 productcraft/trace/registry.py <eng-folder>... --json

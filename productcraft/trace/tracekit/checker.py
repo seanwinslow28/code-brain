@@ -224,10 +224,14 @@ def _hashes(eng: Engagement) -> Check:
                 last[o.path] = (o.sha256, r.pass_id)
     machinery = _machinery_paths(eng)
     moved: dict[str, set[str]] = {}
+    relocated: dict[str, str] = {}            # old path → new path, followed through craftwork's § Moved here
     superseded = 0
     for r in eng.records:
         for i in r.inputs:
             c.n_total += 1
+            new_path = eng.moved_to(i.path)
+            if new_path is not None:
+                relocated[i.path] = new_path
             disk = eng.hash_of(i.path)
             if disk is None:
                 c.findings.append(f"{r.pass_id}: input {i.path} is missing on disk")
@@ -266,6 +270,11 @@ def _hashes(eng: Engagement) -> Check:
                 )
     if superseded:
         c.notes.append(f"{superseded} input(s) matched a superseded revision an earlier pass recorded as its output")
+    if relocated:
+        c.notes.append(
+            f"{len(relocated)} input path(s) followed a recorded move (craftwork/README.md § Moved here): "
+            + ", ".join(f"{old} → {new}" for old, new in sorted(relocated.items()))
+        )
     if moved:
         c.notes.append(
             f"{c.n_unverifiable} input(s) are shared repo machinery that has moved since the pass "

@@ -2,7 +2,7 @@
 
 The one contract between Productcraft and Systemcraft. Productcraft frames the problem and the business case; Systemcraft designs and proves the system; Productcraft reads the design back and turns it into buildable work. Ratified 2026-09-11 on the build map's [The Systemcraft handoff contract](https://github.com/seanwinslow28/code-brain/issues/271) ticket (six decisions). This is the law; the two packets that cross are [handoff-brief.md](handoff-brief.md) (outbound) and Systemcraft's [handoff-return.md](../../systemcraft/templates/handoff-return.md) (inbound). Every later -craft team that hands to Systemcraft inherits this file; only the prefix and the seat names change.
 
-**One rule above the rest:** typed artifacts and references cross; reasoning never does. Neither studio reads or writes inside the other's ledger. Each side writes only its own cross-reference fields ([ledger-entry.md](ledger-entry.md), Cross-studio references).
+**One rule above the rest:** typed artifacts and references cross; reasoning never does. Neither studio reads or writes inside the other's ledger. Each side writes only its own cross-reference fields ([ledger-entry.md](../../craftwork/templates/ledger-entry.md), Cross-studio references).
 
 ## 1. What crosses — the brief plus frozen copies
 

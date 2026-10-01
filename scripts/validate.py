@@ -50,8 +50,11 @@ EXPECTED_DOMAINS = [
 # `productcraft` is the product leadership studio (2026-09-09, map GitHub
 # #264) — second studio on the Systemcraft method, same split: corpus/,
 # ledger/, and books/ are gitignored local-only; tracked machinery is scanned.
+# `craftwork` is the shared home every -craft team inherits its law and
+# machinery from (2026-10-01, #324): public machinery only, nothing private.
 ADDITIONAL_WORKSPACES_TO_SCAN = [
     "claude-mastery",
+    "craftwork",
     "productcraft",
     "systemcraft",
     "the-block",

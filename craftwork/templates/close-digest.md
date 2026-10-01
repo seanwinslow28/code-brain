@@ -1,5 +1,7 @@
 # Close digest template
 
+*Shared law since 2026-10-01 ([craftwork build 1](https://github.com/seanwinslow28/code-brain/issues/324)): moved from `systemcraft/templates/`, text unchanged. Every -craft team's Close digest to Sean takes this shape.*
+
 *Ratified 2026-08-29 (eng-003.d54). The Close surface Sean reads is generated from the record, never replaced by it — seat artifacts, manifests, and findings stay behind appendix links. The digest states the record's length (days of operating history) whenever it asks Sean to ratify law.*
 
 ```text
@@ -25,7 +27,7 @@ APPENDIX LINKS
 Seat artifacts, entries, gate findings, proof records, context manifests.
 ```
 
-Rules: every decision row reads `Choose A over B because <one-breath reason>`; evidence and outcome never share a cell; every studio handle is defined at first use (e.g., `P0-equivalent (must-handle before dependent work proceeds)`); statuses render per `status-vocabulary.md`.
+Rules: every decision row reads `Choose A over B because <one-breath reason>`; evidence and outcome never share a cell; every studio handle is defined at first use (e.g., `P0-equivalent (must-handle before dependent work proceeds)`); statuses render per [status-vocabulary.md](status-vocabulary.md).
 
 **Ratification-batch shape:** one coherent consent batch, one question. An exception stops the batch and becomes its own A/B question with a recommendation — never a tour of every entry. **Rule ratification is asked separately from implementation authority**: ratifying a law is never authorization to build or modify tracked machinery.
 

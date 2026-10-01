@@ -6,9 +6,7 @@ Public machinery; filled artifacts are private (`ledger/engagements/<eng-id>/art
 
 - [artifact-header.md](artifact-header.md) — the shared frontmatter (`status`, fixed `auditor`, `cosign`, `grounding`, `thin_lane`, `revision` / `stale_from`), who writes which field, the status lifecycle, the artifact-id table.
 - [seat-preamble.md](seat-preamble.md) — the standing behavior every seat invocation carries; prepended verbatim to every dispatch (#273).
-- [ledger-entry.md](ledger-entry.md) — the decision-ledger entry with the canon line (#268).
 - [handoff-contract.md](handoff-contract.md) — the Systemcraft handoff, both directions (#271).
-- [runtime-registry.md](runtime-registry.md) — every -craft team's table of runtimes: one row per harness and provider route with its launch form, sandbox, meter source, tier steps and standing; the trial protocol by which a new runtime earns its way in; the numbers, regenerated at Close, never typed by hand (#286).
 
 **The seven seat artifacts, in train order**
 
@@ -33,4 +31,4 @@ Public machinery; filled artifacts are private (`ledger/engagements/<eng-id>/art
 - [readout.md](readout.md) — the human version of a final, past-gate artifact; derivative, lives in the private ledger at `readout/`, never hashed as a pass input and never a trigger for a repair (ruled 2026-09-14 at pc-eng-001's Gate 1). The master skill's Gate and Close steps say when each one is written.
 - [readout-glossary.md](readout-glossary.md) — the standing language bridge every readout copies its terms from, so a term is never defined two ways.
 
-Systemcraft's [red-team-protocol](../../systemcraft/templates/red-team-protocol.md), [close-digest](../../systemcraft/templates/close-digest.md) and [status-vocabulary](../../systemcraft/templates/status-vocabulary.md) are inherited by link until `craftwork` extracts them.
+**Shared law, inherited by link from [craftwork/](../../craftwork/README.md)** (moved there 2026-10-01, [#324](https://github.com/seanwinslow28/code-brain/issues/324)): the [ledger-entry schema](../../craftwork/templates/ledger-entry.md) with the canon line (#268), the [runtime registry](../../craftwork/templates/runtime-registry.md) (#286), the [red-team protocol](../../craftwork/templates/red-team-protocol.md), the [close digest](../../craftwork/templates/close-digest.md) and the [status vocabulary](../../craftwork/templates/status-vocabulary.md).

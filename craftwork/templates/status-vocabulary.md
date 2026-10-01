@@ -1,5 +1,7 @@
 # Status vocabulary — reader-facing law
 
+*Shared law since 2026-10-01 ([craftwork build 1](https://github.com/seanwinslow28/code-brain/issues/324)): moved from `systemcraft/templates/`; the one change is the gate-verdict row, which now names each team's own gate types.*
+
 *Ratified 2026-08-29 (eng-003.d50–d52). The rule this file exists to enforce: **a proof that a count is right is not proof that the counted thing is right**, and a summary may never outrun the record it summarizes.*
 
 ## Authority and derived surfaces (d50)
@@ -32,7 +34,7 @@ Never render bare `PASS`, `FAIL`, `Close`, `REVIEW`, `UNPROVEN`, `$0`, or a lone
 | Required provenance absent/invalid | `PROVENANCE FAIL — CLAIM MUST NOT BE USED` | `warning`, waiver into PASS |
 | No retained observation | `UNMEASURED — NO RETAINED OBSERVATION` | `0`, `$0`, blank, `N/A` |
 | Claim lacks evidence | `UNPROVEN — <specific claim>` + the event that could prove it | `TBD`, naked `UNPROVEN` |
-| Any gate verdict | `<PRD \| DESIGN \| LAUNCH \| AUDIT> <PASS \| PASS WITH ACCEPTANCES \| FAIL> — QUALITY VERDICT ONLY` + scope + authority | bare `PASS`; one gate type quoted as another |
+| Any gate verdict | `<gate type> <PASS \| PASS WITH ACCEPTANCES \| FAIL> — QUALITY VERDICT ONLY` + scope + authority, the gate type from the team's own schedule (Systemcraft: PRD / DESIGN / LAUNCH / AUDIT; Productcraft: STRATEGY / HANDOFF / TRAIN / AUDIT) | bare `PASS`; one gate type quoted as another |
 
 ## Cost wording (d52)
 

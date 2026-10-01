@@ -11,7 +11,7 @@ from tracekit.engagement import METER_SOURCES, load_engagement
 from tracekit.registry import numbers_for, render_markdown
 
 TRACE = Path(__file__).resolve().parents[1]
-REGISTRY = TRACE.parent / "templates" / "runtime-registry.md"
+REGISTRY = TRACE.parents[1] / "craftwork" / "templates" / "runtime-registry.md"   # shared law since #324
 
 
 @pytest.fixture

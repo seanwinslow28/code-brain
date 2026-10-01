@@ -1,6 +1,6 @@
 """Registry numbers — the runtime × seat table the runtime registry reads (#272 decision 9, built on #286).
 
-The registry (`productcraft/templates/runtime-registry.md`) carries one row per
+The registry (`craftwork/templates/runtime-registry.md`) carries one row per
 runtime route and, under § Numbers, what each runtime has actually done on real
 work. Those numbers are never typed by hand: this module derives them from the
 pass records and the labels file of one or more engagements, in the shapes the

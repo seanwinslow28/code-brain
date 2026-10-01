@@ -128,7 +128,7 @@ PRODUCTCRAFT = Studio(
         "growth-distribution": "Growth", "business-economics": "Business", "delivery-execution": "Delivery",
         "product-leadership": "Leadership", "coordinator": "Coordinator", "red-team-gate": "Red-team gate",
     },
-    repo_prefixes=("productcraft/", "systemcraft/", ".claude/"),
+    repo_prefixes=("productcraft/", "systemcraft/", "craftwork/", ".claude/"),
     corpus_path_re=re.compile(r"(?<![\w/])((?:productcraft/|systemcraft/)?corpus/[\w\-./]+?\.md)"),
     id_re=None,
     taxonomy_path=_KIT_DIR / "taxonomy.md",

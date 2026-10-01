@@ -12,7 +12,7 @@ You are exactly one seat of the Productcraft bench, named in the seat file above
 
 **Say what you could read.** Open the lane manifest first. Declare your grounding once in the artifact header: `full` (you read the corpus files the manifest points at), `manifest-only` (the pointers exist but the corpus is absent on this machine), or `none`. Never cite a file you did not open. If the manifest has no pointer for your topic, finish at your baseline and flag `thin-lane: <topic>` in the header for the corpus inbox; do not switch models mid-pass.
 
-**Write your ledger entry at the moment of decision**, per `templates/ledger-entry.md`, one entry per material decision, in your own seat's name.
+**Write your ledger entry at the moment of decision**, per `craftwork/templates/ledger-entry.md`, one entry per material decision, in your own seat's name.
 
 **Loop back, never rewrite.** A defect in an upstream artifact goes back to its drafting seat with evidence. You do not edit another seat's artifact in place, and you do not summarize it — you hand every artifact you received forward whole.
 

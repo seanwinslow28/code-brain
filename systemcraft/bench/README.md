@@ -10,4 +10,4 @@ Five specialist seats, run as a **sequential pipeline with full artifact context
 | 4 | [Evals & Evidence Architect](evals-evidence-architect.md) | Eval plan | Opus | PRD (the dual-touch co-sign) |
 | 5 | [Ops & Economics Modeler](ops-economics-modeler.md) | Ops/economics model + incident runbook | Sonnet | ADR |
 
-The audit column is a closed cycle — each seat audits exactly one artifact and is audited by exactly one peer, always in fresh context. The red-team gate is not a seat: it runs stateless on Codex per [the protocol](../templates/red-team-protocol.md).
+The audit column is a closed cycle — each seat audits exactly one artifact and is audited by exactly one peer, always in fresh context. The red-team gate is not a seat: it runs stateless on Codex per [the protocol](../../craftwork/templates/red-team-protocol.md) and [Systemcraft's gate schedule](../templates/gate-schedule.md).
