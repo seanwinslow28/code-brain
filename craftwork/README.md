@@ -49,4 +49,6 @@ Every file that moved into this folder, with the path it left. Old links to thes
 
 Two kit files stayed at their old paths with new content, so neither has a row. `productcraft/trace/taxonomy.md` kept Productcraft's seat failure modes, and its process-waste family moved into [trace/taxonomy.md](trace/taxonomy.md). `productcraft/trace/README.md` now describes only what Productcraft keeps. A closed record that names either one reads it as machinery that changed since its pass, which is unverifiable, never a failure.
 
+One file was retired rather than moved, so it has no row either: `systemcraft/templates/ledger-entry.md`, Systemcraft's older entry schema, deleted when Systemcraft adopted [templates/ledger-entry.md](templates/ledger-entry.md) on 2026-10-01 ([#327](https://github.com/seanwinslow28/code-brain/issues/327)). No traced engagement ever read it: Systemcraft traces from eng-005 on.
+
 Text that moved out of a master skill or `CLAUDE.md` into [law.md](law.md) is named there, section by section. Those files stay where they are, so nothing in this table follows them.

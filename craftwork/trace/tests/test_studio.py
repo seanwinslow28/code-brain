@@ -156,3 +156,106 @@ def test_repo_root_is_found_by_either_marker(tmp_path):
     assert find_repo_root(tmp_path / "a" / "b", markers=(".claude",)) == tmp_path            # walks up through the parents
     assert find_repo_root(tmp_path, markers=(".claude",)) == tmp_path
     assert find_repo_root(tmp_path) == tmp_path                                            # the default accepts .claude too
+
+
+# --------------------------------------------------------------------------- #
+# Systemcraft's profile (craftwork build 4, #327): a second real studio the kit reads
+# --------------------------------------------------------------------------- #
+
+SC_PROFILE = REPO / "systemcraft" / "trace" / "studio.py"
+
+
+def _sc_record(root: Path, n: int, seat: str, kind: str, stage: int, inputs: list[str], outputs: list[str]) -> None:
+    import hashlib
+
+    def h(p: str) -> str:
+        return hashlib.sha256((root / p).read_bytes()).hexdigest()
+
+    ins = "".join(f"  - path: {p}\n    sha256: {h(p)}\n" for p in inputs)
+    outs = "".join(f"  - path: {p}\n    sha256: {h(p)}\n" for p in outputs)
+    moves = f"{outputs[0]} § Moves" if kind in ("draft", "repair") else "none — this kind hands no artifact forward"
+    (root / "trace" / f"pass-{n:02d}-{seat}-{kind}.md").write_text(
+        f"---\npass: pass-{n:02d}\nseat: {seat}\nkind: {kind}\nstage: {stage}\nruntime: claude-opus-5-5\n"
+        f"launch: \"Agent tool, fresh context\"\neffort: —\nlaunched: 2026-10-06T08:{n:02d}:00-04:00\n"
+        f"completed: 2026-10-06T08:{n:02d}:30-04:00\nwall_clock_s: 30\nmeter: null\nmeter_source: UNMEASURED\n"
+        f"inputs:\n{ins}withheld:\n  - the drafting conversation\noutputs:\n{outs}raw_log: —\nchecks: []\n"
+        f"triggered_by: null\nshadow_of: null\n---\n\n## Corpus read\n\nnone\n\n## Moves\n\n{moves}\n\n## Notes\n\nnone\n")
+
+
+def _sc_engagement(tmp_path: Path, etype: str, passes: list[tuple]) -> Path:
+    """A minimal Systemcraft engagement: open-brief.md with the kit's header, artifacts beside their checks."""
+    root = tmp_path / "eng-900-toy"
+    (root / "trace").mkdir(parents=True)
+    (root / "artifacts").mkdir()
+    (root / "open-brief.md").write_text(
+        f"---\nid: eng-900\nname: Toy reconcile\ntype: {etype}\nopened: 2026-10-06\nclosed: null\npass_budget: 9\n---\n\nA toy.\n")
+    (root / "artifacts" / "prd.md").write_text("# PRD\n\nS1 holds.\n\n## Moves\n\norigin draft, no upstream — leaned on: the brief\n")
+    (root / "artifacts" / "adr-01.md").write_text("# ADR-01\n\nS1 drives it.\n\n## Moves\n\n- kept — S1 from eng-900.prd\n")
+    (root / "artifacts" / "cosign-evals.md").write_text("# Co-sign\n\nS1 is testable.\n")
+    (root / "artifacts" / "audit-adr.md").write_text("# Audit\n\nADR-01 is priced.\n")
+    (root / "artifacts" / "audit-stray.md").write_text("# Audit\n\nOut of lane.\n")
+    rows = []
+    for i, (seat, kind, stage, ins, outs) in enumerate(passes, start=1):
+        _sc_record(root, i, seat, kind, stage, ["open-brief.md", *ins], outs)
+        rows.append(f"| pass-{i:02d} | pass | | fine | |")
+    (root / "trace" / "labels.md").write_text(
+        "| pass | verdict | first_failing_stage | critique | failure_code |\n|---|---|---|---|---|\n" + "\n".join(rows) + "\n")
+    return root
+
+
+SC_DESIGN = [
+    ("design-strategist", "draft", 1, [], ["artifacts/prd.md"]),
+    ("evals-evidence-architect", "co-sign", 1, ["artifacts/prd.md"], ["artifacts/cosign-evals.md"]),
+    ("architecture-advisor", "draft", 2, ["artifacts/prd.md"], ["artifacts/adr-01.md"]),
+    ("ops-economics-modeler", "audit", 2, ["artifacts/adr-01.md"], ["artifacts/audit-adr.md"]),
+]
+
+
+def test_systemcraft_profile_lives_with_systemcraft():
+    sc = load_profile(SC_PROFILE)
+    assert sc.key == "systemcraft" and sc.all_stage_numbers == [0, 1, 2, 3, 4, 5]
+    assert sc.brief_file == "open-brief.md" and sc.checks_dir == "artifacts" and "intake" in sc.kinds
+    assert check_names(sc) == CHECK_NAMES[:7] + (sc.structure_check_name,) + CHECK_NAMES[8:]
+    assert STRUCTURE_CHECKS["systemcraft"].__name__ == "_stages"
+    assert find_profile(REPO / "systemcraft" / "ledger" / "engagements" / "eng-005-anything") == SC_PROFILE
+    assert taxonomy_for(sc).path == sc.taxonomy_path and "manufactured" in taxonomy_for(sc).codes   # shared family, no own modes yet
+
+
+def test_a_systemcraft_design_engagement_checks_clean(tmp_path):
+    eng = load_engagement(_sc_engagement(tmp_path, "design", SC_DESIGN), studio=load_profile(SC_PROFILE))
+    by = {c.name: c for c in run_checks(eng)}
+    assert all(c.ok for c in by.values()), {n: c.findings for n, c in by.items() if c.findings}
+    line8 = by[eng.studio.structure_check_name]
+    assert line8.count == "2 of 2" and "stages not yet reached: 3, 4, 5" in line8.notes
+
+
+def test_systemcraft_line_8_wants_the_cosign_on_the_prd_and_the_fixed_auditor(tmp_path):
+    passes = [SC_DESIGN[0], ("evals-evidence-architect", "audit", 1, ["artifacts/prd.md"], ["artifacts/cosign-evals.md"]),
+              SC_DESIGN[2], ("design-strategist", "audit", 2, ["artifacts/adr-01.md"], ["artifacts/audit-adr.md"])]
+    eng = load_engagement(_sc_engagement(tmp_path, "design", passes), studio=load_profile(SC_PROFILE))
+    line8 = {c.name: c for c in run_checks(eng)}[eng.studio.structure_check_name]
+    assert any("stage 1 Strategist: no co-sign pass" in f for f in line8.findings)       # the dual-touch law
+    assert any("audit by design-strategist; the fixed auditor is ops-economics-modeler" in f for f in line8.findings)
+
+
+def test_systemcraft_audit_engagement_flags_a_pass_outside_its_seats_lane(tmp_path):
+    passes = [("architecture-advisor", "audit", 2, ["artifacts/adr-01.md"], ["artifacts/audit-adr.md"]),
+              ("interaction-trust-designer", "audit", 2, ["artifacts/adr-01.md"], ["artifacts/audit-stray.md"])]
+    eng = load_engagement(_sc_engagement(tmp_path, "audit", passes), studio=load_profile(SC_PROFILE))
+    line8 = {c.name: c for c in run_checks(eng)}[eng.studio.structure_check_name]
+    assert line8.findings == ["pass-02: interaction-trust-designer at stage 2 Architecture, a lane it neither owns "
+                              "nor audits (architecture-advisor owns it, ops-economics-modeler audits it)"]
+
+
+def test_systemcraft_cli_finds_its_profile_by_the_walk(tmp_path, monkeypatch):
+    import shutil, subprocess, sys
+    monkeypatch.delenv(PROFILE_ENV)
+    team = tmp_path / "systemcraft"
+    (team / "trace").mkdir(parents=True)
+    shutil.copy(SC_PROFILE, team / "trace" / "studio.py")
+    (team / "trace" / "taxonomy.md").write_text("# none\n")
+    eng = _sc_engagement(team / "ledger" / "engagements", "design", SC_DESIGN)
+    trace = Path(studio_mod.__file__).parents[1]
+    r = subprocess.run([sys.executable, "check.py", str(eng)], capture_output=True, text=True, cwd=trace,
+                       env={**__import__("os").environ, "PYTHONPATH": str(trace)})
+    assert r.returncode == 0, r.stdout + r.stderr

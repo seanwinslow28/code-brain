@@ -22,8 +22,8 @@ The audit column is a closed cycle: every artifact gets exactly one adversarial 
 
 - **Engagements run a five-phase lifecycle** — Open → Route → Run → Gate → Close — with routing by engagement type: a new design takes the full train, an audit fields every seat whose lane the target has, a one-off takes one seat that must name what it didn't cover.
 - **Every seat states why-A-over-B** on every material choice, in one breath. Depth is generated on demand, never stored — the brevity law.
-- **Models are assigned per seat and deviations are never silent**: each seat file carries its baseline; the orchestrator may escalate or downshift per task against named triggers, always with a stated why.
-- **Decisions land in a ledger** — one file per material decision, seven short sections, accreting per engagement ([entry template](templates/ledger-entry.md); the shared schema every -craft team moves to is [craftwork's](../craftwork/templates/ledger-entry.md)). The ledger is the studio's memory and message bus.
+- **Models are assigned per seat and deviations are never silent**: each seat file names the runtime it actually launches; the orchestrator may escalate or downshift one pass at a time against the four named triggers of the [shared delegation law](../craftwork/law.md#model-delegation), always with a stated why.
+- **Decisions land in a ledger** — one file per material decision, seven short sections, accreting per engagement ([the shared entry template](../craftwork/templates/ledger-entry.md), every -craft team's, with a `## From the canon` line naming what each choice leaned on; Systemcraft adopted it on 2026-10-01). The ledger is the studio's memory and message bus.
 - **A red team that is a protocol, not a person** ([the protocol](../craftwork/templates/red-team-protocol.md), shared law; [Systemcraft's gate schedule](templates/gate-schedule.md)): milestone gates run stateless on a different vendor's model, briefed to break the work, with FAIL → redraft one model tier up. A gate that can fail silently is not a gate, so an unavailable red team triggers a labeled fallback and a re-run ticket — never a skip.
 
 ## Public machinery, private brain

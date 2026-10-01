@@ -12,7 +12,7 @@ id: eng-001.prd
 engagement: eng-001-fleet-knowledge-loop-audit
 date: 2026-08-24
 seat: design-strategist
-model: opus                          # baseline, or "opus→fable: <why>"
+model: claude-opus-5-5                # the runtime that actually ran, plus any deviation: "claude-opus-5-5 → codex gpt-5.6-sol high: gate FAIL"
 status: draft                        # draft | co-signed | audited | final
 evals_cosign: pending                # pending | co-signed <date> — blocks "done"
 auditor: evals-evidence-architect    # fixed by the audit cycle
@@ -56,4 +56,14 @@ What this deliberately does not do. A missing non-goal is a scope-creep vector �
 
 Could any success metric reward hurting users (the "assumed resolution" class)?
 State the check even when the answer is no.
+
+## Moves
+
+<!-- MACHINE-READ by the shared trace kit's rung-0 checker (craftwork/trace/README.md, line 6). Move lines only,
+     one per line: kept / added / split / merged / dropped — an em dash after the op, ` from ` before the source;
+     a split names every source. Process notes go in the pass record's ## Notes, never here. Stripped from a handoff copy. -->
+
+origin draft, no upstream — leaned on: <ledger ids, open-brief sections>
+
+meter: <runtime> · <tokens as reported> · <wall-clock>
 ```

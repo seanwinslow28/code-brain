@@ -10,7 +10,7 @@ id: eng-001.adr-01                   # one ADR per decision; number them
 engagement: eng-001-fleet-knowledge-loop-audit
 date: 2026-08-24
 seat: architecture-advisor
-model: opus
+model: claude-opus-5-5                # the runtime that actually ran, plus any deviation: "claude-opus-5-5 → codex gpt-5.6-sol high: gate FAIL"
 status: draft                        # draft | audited | final
 auditor: ops-economics-modeler       # fixed by the audit cycle
 ---
@@ -44,4 +44,14 @@ and what got simpler. Complexity must serve the product, not the résumé.
 ## Revisit when
 
 Named conditions that reopen this decision (a cost threshold, a model release, a scale mark).
+
+## Moves
+
+<!-- MACHINE-READ by the shared trace kit's rung-0 checker (craftwork/trace/README.md, line 6). Move lines only,
+     one per line: kept / added / split / merged / dropped — an em dash after the op, ` from ` before the source;
+     a split names every source. Process notes go in the pass record's ## Notes, never here. Stripped from a handoff copy. -->
+
+- kept — <item> from <upstream artifact id>
+
+meter: <runtime> · <tokens as reported> · <wall-clock>
 ```

@@ -61,7 +61,7 @@ Only on `returned-partial`: the lane deferred, why, and its rule-8 ticket.
 
 ## What is stripped from the copies
 
-The process parts of Systemcraft's five artifacts, read from eng-004's set on 2026-10-01: the sections that route findings between seats or record audit, version and Sean-ruling history; the disposition sections a repair round adds; the `[Δ g2 — …]` repair tags on headings (the heading stays, the tag goes); the co-sign trail and contributor list in the frontmatter; and the toolbelt and end-of-pass lines. Implementation holds, ticket seeds and the model card stay: they are what Productcraft's Delivery seat builds from. Systemcraft's adoption of the shared law ([craftwork build 4](https://github.com/seanwinslow28/code-brain/issues/327)) may add lines here. The rule first applies to eng-005's return (due 2026-12-04).
+The process parts of Systemcraft's five artifacts, read from eng-004's set on 2026-10-01: the sections that route findings between seats or record audit, version and Sean-ruling history; the disposition sections a repair round adds; the `[Δ g2 — …]` repair tags on headings (the heading stays, the tag goes); the co-sign trail and contributor list in the frontmatter; and the toolbelt and end-of-pass lines. Implementation holds, ticket seeds and the model card stay: they are what Productcraft's Delivery seat builds from. Systemcraft's adoption of the shared law ([craftwork build 4](https://github.com/seanwinslow28/code-brain/issues/327), 2026-10-01) added the `## Moves` section and closing `meter:` line to every Systemcraft template; both were already on the list, so the list did not change. The rule first applies to eng-005's return (due 2026-12-04).
 
 ```strip
 heading: ## Routed to other seats

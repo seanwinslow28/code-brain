@@ -27,7 +27,7 @@ Every command finds an engagement's profile in this order:
 3. the file `$TRACEKIT_STUDIO` names;
 4. otherwise the command refuses with exit 2. It never guesses a studio.
 
-The content machine keeps its profile beside the machine (`machine.py`, in its own repo) and passes it explicitly. Systemcraft's profile arrives with its adoption of the shared law ([craftwork build 4](https://github.com/seanwinslow28/code-brain/issues/327)).
+The content machine keeps its profile beside the machine (`machine.py`, in its own repo) and passes it explicitly. Systemcraft's is [systemcraft/trace/studio.py](../../systemcraft/trace/studio.py), written with its adoption of the shared law ([craftwork build 4](https://github.com/seanwinslow28/code-brain/issues/327)); it reads the brief header from `open-brief.md` and finds check records in `artifacts/`, and Systemcraft traces from eng-005 on.
 
 ## Where things live
 
@@ -52,7 +52,7 @@ The `trace/` subfolder is a #290 call: #272 said "in the engagement folder", and
 
 **The brief header the kit reads.** `brief.md` (the profile names the file) opens with frontmatter the coordinator writes at Open: `id` (`pc-eng-NNN` in Productcraft), `name`, `type` (`full-train` | `audit` | `execution-breakdown` | `one-off` | `role-support`), `opened`, `closed` (null until Close), `pass_budget`, and `synthetic: true` only on invented engagements (the viewer shows a badge; a real engagement shows nothing, never "REAL"). The stage-structure check asserts the full train's shape only when `type` says full train.
 
-## The Close ritual — three lines, adopted verbatim by Productcraft's master skill
+## The Close ritual — three lines, adopted verbatim by both studios' master skills
 
 ```bash
 python3 craftwork/trace/check.py productcraft/ledger/engagements/<eng-id>

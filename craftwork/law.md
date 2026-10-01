@@ -2,7 +2,7 @@
 
 The law below holds for every -craft team (Systemcraft, Productcraft, and every team built after them). It lives here once. A team's `CLAUDE.md` and master skill link to a section and may **add** to it (a stricter rule, a studio binding), never restate or contradict it. Moved here on the Productcraft build map's [craftwork build 1](https://github.com/seanwinslow28/code-brain/issues/324) ticket (2026-10-01), per the [Method extraction: craftwork](https://github.com/seanwinslow28/code-brain/issues/282) ruling. Each section names where its text came from and when it was ratified.
 
-**Adoption.** Productcraft runs on all of it. Systemcraft adopts it in full at [craftwork build 4](https://github.com/seanwinslow28/code-brain/issues/327), before eng-005's first seat runs. Until that ticket closes, the one place Systemcraft's own master skill still differs is its § Model deviations (Fable at the top of its ladder, five draft-time triggers), and there Systemcraft's skill governs Systemcraft's passes. Every other section already holds for both studios, because its text came from Systemcraft.
+**Adoption.** Both studios run on all of it. Productcraft did from the move; Systemcraft adopted it in full on 2026-10-01 at [craftwork build 4](https://github.com/seanwinslow28/code-brain/issues/327), before eng-005's first seat ran, retiring its own model-deviation ladder and its older ledger-entry template.
 
 Shared machinery sits beside this file in [templates/](templates/): the red-team protocol, the close digest, the status vocabulary, the ledger-entry schema and the runtime registry. See [README.md](README.md).
 

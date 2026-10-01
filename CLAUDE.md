@@ -215,7 +215,7 @@ life-systems/                         # DOMAIN 3 — personal systems
 └── (existing reference/)
 
 claude-mastery/      # cross-cutting Claude Code meta-reference (stays at root)
-systemcraft/         # AI PM system design studio — public machinery (bench, templates, README);
+systemcraft/         # AI PM system design studio — public machinery (bench, templates, trace profile, README);
                      # corpus/ + ledger/ gitignored local-only. Build map: GitHub issue #142
 craftwork/           # Shared home every -craft studio inherits from (2026-10-01, #324): law.md + handoff-contract.md (#326) + shared templates
                      # (red-team protocol, close digest, status vocabulary, ledger-entry schema, runtime registry)

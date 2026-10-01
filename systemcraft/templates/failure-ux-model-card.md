@@ -10,7 +10,7 @@ id: eng-001.trust
 engagement: eng-001-fleet-knowledge-loop-audit
 date: 2026-08-24
 seat: interaction-trust-designer
-model: sonnet
+model: claude-sonnet-5-5                # the runtime that actually ran, plus any deviation: "claude-sonnet-5-5 → codex gpt-5.6-sol high: gate FAIL"
 status: draft                        # draft | audited | final
 auditor: design-strategist           # fixed by the audit cycle
 ---
@@ -53,4 +53,14 @@ What it must not be used for. As load-bearing as intended use.
 ## Known limitations
 
 Where it's weak, measured or honestly suspected — in words a user can act on, not hedges.
+
+## Moves
+
+<!-- MACHINE-READ by the shared trace kit's rung-0 checker (craftwork/trace/README.md, line 6). Move lines only,
+     one per line: kept / added / split / merged / dropped — an em dash after the op, ` from ` before the source;
+     a split names every source. Process notes go in the pass record's ## Notes, never here. Stripped from a handoff copy. -->
+
+- kept — <item> from <upstream artifact id>
+
+meter: <runtime> · <tokens as reported> · <wall-clock>
 ```

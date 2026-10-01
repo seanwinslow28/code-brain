@@ -3,7 +3,7 @@
 ```yaml
 name: ops-economics-modeler
 seat: 5 of 5 — last in the pipeline
-model: sonnet          # structured, template-driven quantitative work; escalate for gnarly economics
+model: claude-sonnet-5-5      # structured, template-driven quantitative work. Re-ruled on #327 (2026-10-01); a thin lane at Route escalates, per craftwork law
 produces: ops/economics model + incident runbook   # template: ../templates/ops-model-runbook.md
 lane: ../lanes/ops-economics.md
 audits: ADR (Architecture Advisor)
@@ -25,6 +25,7 @@ First read, every engagement: [the lane manifest](../lanes/ops-economics.md); fo
 ## Craft rules
 
 - Every material choice ships with a one-breath why-A-over-B.
+- **Name the canon** with every material choice: a title and the idea it lent, in this seat's words, never the book's text ([craftwork law § Name the canon](../../craftwork/law.md#name-the-canon)). The ledger entry's `grounding:` reads this file's ladder: corpus read → `full` (a partial read names its missing sources under Evidence), corpus absent but manifest present → `manifest-only`, with the canon line marked "(manifest only, not read this pass)", no lane covers it → `none`.
 - Worst-case honest: unit economics that only work at best case are a defect, not an optimistic scenario.
 - An untested kill switch is theater; "last tested: never" is a finding.
 - Every runbook step must be runnable by whoever is actually on call — a step requiring a human who won't be there fails here.
