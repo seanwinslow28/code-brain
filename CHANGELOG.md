@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Open-model and harness trials — the first trial round, the count floor and the cash cap (2026-10-03)
+
+Resolves [Open-model and harness trials](https://github.com/seanwinslow28/code-brain/issues/287), the last decision ticket on the Productcraft build map, by grilling (13 rulings by Sean). It plans; the trials run inside Systemcraft's eng-005.
+
+- **The registry (`craftwork/templates/runtime-registry.md`) gains its two missing numbers.** The count floor for `baseline-eligible` is 10 labeled passes in one seat family, every one rung-0 clean, at least 8 `pass`. The cash cap is $15 per OpenRouter trial, backstopped by a dedicated `craft-trials` key with a $30 credit limit (`OPENROUTER_TRIALS_API_KEY`); a capped-out trial is recorded incomplete, never a fail.
+- **New section, § First trial round:** four shadow trials on eng-005 (GLM-5.3 → Design Strategist and Kimi K3 → Ops & Economics on Codex → OpenRouter; MiMo-V2.6-Pro → Architecture and local Qwen3.8-27B → Trust Designer on Pi), a fifth on Productcraft's next execution breakdown under a rule set in advance, a 35% bluff-rate filter for evidence-grading seats, and a scoreboard fixed before anything runs (pleasantly surprised = 2 of 4 at match or better, one of them local or under $5).
+- **Kit 0.11.0:** Systemcraft's five seats map to families, two of them new (`architecture`, `trust design`); a test fails when any bench seat file in either studio would read `other`. Kit tests 221 → 222.
+- **`craftwork/trace/ollama/Modelfile.qwen3.8-27b-64k`:** the local challenger with the 64K context Codex and Pi need, rebuilt from the library tag with one command.
+- **Moved off this map:** DeepSeek V4 Pro (benched for coding-heavy teams), Hermes, the first `claude -p` pass and the per-team practice itself go to [Runtime trials per craft team](https://github.com/seanwinslow28/code-brain/issues/329); Jev's shadow guard stays with Devcraft, whose charter does not wait for these results.
+
+
 ### craftwork build 5 — the `/craftwork` recipe skill and its public surfaces (2026-10-01)
 
 Resolves [craftwork build 5](https://github.com/seanwinslow28/code-brain/issues/328) on the Productcraft build map, the last of five build tickets from the [Method extraction: craftwork](https://github.com/seanwinslow28/code-brain/issues/282) ruling (decisions 1, 8–12 and the naming rule). It describes the shared home as it landed on builds 1–4, not as it was planned.

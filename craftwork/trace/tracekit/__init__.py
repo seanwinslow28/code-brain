@@ -67,9 +67,15 @@ is left, and stamps the copy with that hash and the source's. Nothing is strippe
 by guess: a binding with no `strip` block is refused. `verify` re-hashes a copy
 without its stamps, so copies frozen verbatim before the rule still verify.
 
+0.11.0 maps Systemcraft's five seats to families (#287): Design Strategist to framing,
+Evals & Evidence Architect to evidence grading, Ops & Economics Modeler to
+quantitative, and two new families, architecture and trust design, so that no model
+earns one seat on another's work. A test fails when any bench seat file in either
+studio would read `other`.
+
 The content machine (#291) shares this code rather than forking it, through its
 own profile.
 """
 
 KIT_NAME = "craftwork/trace"
-KIT_VERSION = "0.10.0"
+KIT_VERSION = "0.11.0"

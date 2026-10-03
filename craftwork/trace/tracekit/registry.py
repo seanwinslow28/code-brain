@@ -39,6 +39,13 @@ SEAT_FAMILIES = {
     "business-economics": "quantitative",
     "growth-distribution": "growth",
     "delivery-execution": "delivery breakdown",
+    # Systemcraft (#287, 2026-10-03): three seats share Productcraft's families; architecture and
+    # trust design are families of their own, so a model never earns one seat on another's work
+    "design-strategist": "framing",
+    "architecture-advisor": "architecture",
+    "evals-evidence-architect": "evidence grading",
+    "interaction-trust-designer": "trust design",
+    "ops-economics-modeler": "quantitative",
     "red-team-gate": "gate",
     "coordinator": "coordination",
 }

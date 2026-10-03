@@ -88,6 +88,16 @@ def test_rung0_clean_drops_a_pass_a_finding_names(eng_dir):
     assert after["claude-opus-5"].measured == before["claude-opus-5"].measured - 1
 
 
+def test_every_bench_seat_has_a_family():
+    """A seat file with no family reads `other` in the registry numbers (#287); both studios' benches are covered."""
+    from tracekit.registry import family_of
+    repo = TRACE.parents[1]
+    seats = [p.stem for studio in ("productcraft", "systemcraft")
+             for p in (repo / studio / "bench").glob("*.md") if p.name != "README.md"]
+    assert seats, "no bench seat files found"
+    assert {s: family_of(s) for s in seats if family_of(s) == "other"} == {}
+
+
 def test_per_seat_cells_carry_a_family(eng_dir):
     _, cells = by_runtime(eng_dir)
     assert cells[("codex gpt-5.6-sol high", "red-team-gate")].family == "gate"

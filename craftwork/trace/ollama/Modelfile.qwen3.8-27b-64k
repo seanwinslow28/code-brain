@@ -1,0 +1,7 @@
+# qwen3.8-27b-64k: Qwen3.8-27B (Q4_K_M, Ollama library tag qwen3.8:27b) with a 64K context window,
+# the floor Codex (`--oss`) and Pi need for a seat pass. The first trial round's local challenger
+# (#287, trial 4 on registry row 6). Rebuild on any Ollama host:
+#   ollama pull qwen3.8:27b && ollama create qwen3.8-27b-64k -f craftwork/trace/ollama/Modelfile.qwen3.8-27b-64k
+# Sampling parameters are the library model's own; this file changes the context length only.
+FROM qwen3.8:27b
+PARAMETER num_ctx 65536
