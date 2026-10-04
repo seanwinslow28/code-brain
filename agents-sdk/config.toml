@@ -335,22 +335,19 @@ models = ["phi4-mini-reasoning", "phi4-mini", "nomic-embed-text", "gemma4:e4b"]
 # 2026-05-26 (Topic 20 follow-up migration): switched runtime LM Studio MLX
 # → Ollama. qwen3.6:35b-a3b on MBP-Ollama beats qwen3-14b on every
 # dimension (85% vs 50% schema, 5/5 vs 0/5 needle, 30 vs 27.9 tok/s).
-# LM Studio remains installed + bound on :1234 as a co-resident runtime;
-# this entry now points at the Ollama port. See
+# This entry now points at the Ollama port. See
 # vault/20_projects/research/2026-05-26-topic-20-mbp-ollama-runtime-comparison.md.
 host = "seans-macbook-pro.local"
 port = 11434
 tier = 2
 runtime = "ollama"
 always_on = false
-# 2026-05-26: list reflects Ollama-served tags after the LM Studio → Ollama
-# runtime swap. Use the -32k variants (custom modelfiles built via
-# scripts/build_mbp_ollama_variants.sh) because the base tags use Ollama's
-# default 4K context which is too small for production synth / scoring
-# workloads. LM Studio's qwen3-14b still loads on :1234 as a co-resident
-# fallback runtime — but routes via that path would need a separate
-# machine entry (out of scope today).
-models = ["qwen3.6_35b-a3b-32k", "qwen3-coder_30b-32k", "qwen3.5_27b-32k"]
+# 2026-09-21: storage cleanup retained the active fleet model; unused
+# Qwen3.5, Qwen3-Coder, and LM Studio Qwen3-14B downloads were removed.
+# Keep the custom -32k tag for production synthesis / scoring context.
+# Removed benchmark models can be downloaded and rebuilt via
+# scripts/build_mbp_ollama_variants.sh when needed.
+models = ["qwen3.6_35b-a3b-32k"]
 
 [routing.machines.alienware]
 host = "192.168.68.201"
@@ -391,7 +388,8 @@ financial_analysis = { model = "phi4-mini-reasoning", machine = "mac_mini" }
 # completed and no production agent calls router.route("code_review")
 # today (only test fixtures + the gemma4 benchmark which has its own
 # overrides). Re-add when Topic 21 ships the native-template rebench for
-# qwen3-coder:30b — that model is retained on MBP-Ollama (-32k variant).
+# qwen3-coder:30b — re-download and rebuild its -32k variant first;
+# the unused model was removed during the 2026-09-21 storage cleanup.
 heavy_synthesis = { model = "qwen3.6_35b-a3b-32k", machine = "macbook_pro" }
 vault_synthesis = { model = "qwen3.6_35b-a3b-32k", machine = "macbook_pro" }  # Phase 6 D.2 — model resolved at runtime via this key. 2026-05-26: qwen3-14b @ LM Studio → qwen3.6_35b-a3b-32k @ MBP-Ollama (Topic 20 follow-up)
 # BT5 C3 (2026-07-05) — knowledge_lint's Tier-2 semantic scan (LLM contradiction

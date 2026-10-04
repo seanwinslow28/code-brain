@@ -72,6 +72,42 @@
         "/Users/seanwinslow/Code-Brain/seanwinslow.com/motion-review/task10/console"
       ],
       "port": 8133
+    },
+    {
+      "name": "eval-page",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8134",
+        "-d",
+        "/private/tmp/claude-501/-Users-seanwinslow-Code-Brain-code-brain/469fb960-c386-4e25-afeb-fb1f56f2973f/scratchpad"
+      ],
+      "port": 8134
+    },
+    {
+      "name": "trace-kit-sample",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8135",
+        "-d",
+        "/Users/seanwinslow/Code-Brain/code-brain/productcraft/trace/samples/synthetic-engagement/trace"
+      ],
+      "port": 8135
+    },
+    {
+      "name": "pp-lab",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8136",
+        "-d",
+        "/Users/seanwinslow/Code-Brain/pencil-and-prompt-lab"
+      ],
+      "port": 8136
     }
   ]
 }

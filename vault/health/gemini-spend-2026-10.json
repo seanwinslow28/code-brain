@@ -1,0 +1,14 @@
+[
+  {
+    "interaction_id": "v1_Chd5VHJCYXNIOURKRzVzT0lQaW9uRHdRRRIXeVRyQmFzSDlESkc1c09JUGlvbkR3UUU",
+    "agent_id": "deep-research-preview-04-2026",
+    "tier": "dr",
+    "cost_predicted_usd": 2.8,
+    "cost_actual_usd": null,
+    "cost_usd": 2.8,
+    "wall_seconds": 444,
+    "query": "As of October 2026, what does current evidence show about designing a self-improving personal knowledge system (a 'second brain') that both its human owner and AI agents read from and write to? Prioritize sources published in 2025 and 2026, and forward-looking work about 2027 and beyond; treat anything older than 2025 as background only and label it as such. Answer five sub-questions: (1) Capture: which low-friction capture methods (voice dictation, meeting transcripts, daily spoken journals, inbox triage by agents) measurably lead to notes being reused later, versus piling up unread? (2) Structure: which folder and linking schemes stay navigable by both a human and LLM agents at thousands of notes, e.g. LLM-maintained wikis with raw/wiki/outputs layers, Zettelkasten or evergreen notes reinterpreted for agents, single instruction files such as AGENTS.md describing the vault; what breaks at scale and why? (3) Resurfacing: which mechanisms (spaced resurfacing, agent-generated connections, scheduled synthesis) produce measured reuse or new ideas, rather than unread digests? (4) Self-improvement loops: how do current systems let agents observe the owner's corrections and update their own instructions, memory, or skills, and what documented failure modes exist (memory poisoning, drift, stale facts, self-reinforcing errors) with their mitigations? (5) Model-agnosticism: how do 2026 systems stay usable as frontier models and agent harnesses change every few months (plain markdown, MCP, open standards)? For every claim, distinguish measured evidence (studies, evaluations, documented production deployments) from practitioner opinion and vendor marketing. Exclude product listicles and app roundups.",
+    "created": "2026-10-03T17:33:57.367742Z",
+    "output_path": "/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-10-03-as-of-october-2026-what-does-current-evidence-show-about-des.md"
+  }
+]
